@@ -1,0 +1,34 @@
+.dashboard_data {
+  width: 100%;
+  display: flex;
+  margin-bottom: 0;
+}
+.dashboard_data > div {
+    width: 100%;
+  display: flex;
+  margin-bottom: 0;
+    padding: 10px 0 10px 10px;
+}
+.dashboard_data > div>div {
+  min-width: 35px;
+}
+.list_item {
+  position: relative;
+  padding: 0 0 0 20px !important;
+}
+.nav_link {
+  cursor: pointer;
+  padding: 0 !important;
+  margin-bottom: 25px;
+}
+.page_title {
+  margin: 0 !important;
+}
+.dashboard_data span {
+  color: #fff;
+  font-size: 22px;
+  font-weight: 600;
+}
+.dashboard_data svg {
+  fill: #fff;
+}
