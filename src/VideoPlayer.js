@@ -67,22 +67,21 @@ function VideoPlayer (prop) {
   const [song, setSong] = useState();
   const [totalSeconds, setTotalSeconds] = useState(0);
 
-  const music = prop.musicData
+  const music = prop.musicData?.length > 0
     ? prop.musicData[prop.musicIndex]["song_url"]
     : "";
 
   function playNextSong () {
     // prop.timeData(0)
-    for (let i = prop.musicIndex + 1; i < prop.musicData.length; i++) {
-      console.log("object")
+    for (let i = prop.musicIndex + 1; i <= prop.musicData.length; i++) {
       prop.handleSong(prop.musicData, i);
       prop.TotleTimeAndImage(prop.musicData, i);
       break;
       // }
     }
-    if (prop.musicIndex === prop.musicData.length - 1) {
-      prop.setAllImageCount(prop.totalCount);
-    }
+    // if (prop.musicIndex === prop.musicData.length - 1) {
+    //   prop.setAllImageCount(prop.totalCount);
+    // }
   }
 console.log(music, prop.musicData, prop.musicIndex, "+++++VIDEO+++++++")
   const classes = useStyles();
@@ -90,7 +89,7 @@ console.log(music, prop.musicData, prop.musicIndex, "+++++VIDEO+++++++")
     <div>
       <Grid container spacing={2} style={{ display: 'block', position: 'relative' }}>
         <Grid item xs={12} md={12} className={classes.videoCard} >
-          {prop.musicData ? (
+          {prop.musicData?.length > 0 ? (
             <ReactPlayer
               controls
               url={music}
