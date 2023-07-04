@@ -1546,6 +1546,7 @@ function MusicWheel (props) {
                   setNordIndex111(0);
                   setAllPlaySongsDuration("00:00");
                   setSongsData([]);
+                  props.setData([]);
                   props.setPlaySongposition(0);
                   setImageTypeActive(0);
                   props.setAllImageCount(0);
@@ -1698,7 +1699,7 @@ function MusicWheel (props) {
               ? songsData.map((val, ind) => (
                 <tr
                   key={"songs" + ind}
-                  onClick={() => handleClickSong(songsData, ind)}
+                  onClick={() => {handleClickSong(songsData, ind); props.setIndex(ind); props.setPlaySongposition(ind + 1);}}
                   className={styles.liststyle}
                 >
                   <td>{val["song_title"]}</td>

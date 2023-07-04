@@ -116,14 +116,15 @@ function LandingPage() {
 
 // ***********Handle song start here **************
   function handleSong(songsData, ind) {
+    if(ind >= songsData.length) return false;
     // setTimeout( setAllSongsDuration(0),
     // setTime(0),200)
     if (durationLast === 0) {
       setDurationLast(Number(songsData[0].duration));
     }
-    if (totalCount === 0) {
-      setTotalCount(Number(songsData[0].no_of_images));
-    }
+    // if (totalCount === 0) {
+    //   setTotalCount(Number(songsData[0].no_of_images));
+    // }
     // if(allImageCount === 0){
     //   setAllImageCount(Number(songsData[0].no_of_images))
     // }
@@ -166,16 +167,18 @@ function LandingPage() {
   // *********** TotleTimeAndImage start here **************
 
   function TotleTimeAndImage(data, index) {
-    setIndex(index);
-    setPlaySongposition(index + 1);
-    setDurationLast(
-      (durationLast) => durationLast + parseInt(data[index].duration)
-    );
-    setImageCountLast(data[index].no_of_images);
+    if(index < data.length){
+      setIndex(index);
+      setPlaySongposition(index + 1);
+      setDurationLast(
+        (durationLast) => durationLast + parseInt(data[index].duration)
+      );
+      setImageCountLast(data[index].no_of_images);
+    }
     setTotalCount(
-      (totalCount) => totalCount + parseInt(data[index].no_of_images)
+      (totalCount) => totalCount + parseInt(data[index-1].no_of_images)
     );
-    setAllImageCount(totalCount);
+    setAllImageCount((totalCount) => totalCount + parseInt(data[index-1].no_of_images));
     allImageCount > 10000 ? setTotalCount(0) : "";
     // remainingTimes(time,durationLast)
     
@@ -276,6 +279,8 @@ function LandingPage() {
           setPlaySongposition={setPlaySongposition}
           allsongTime={allsongTime}
           timeData={setAllSongsDuration}
+          setIndex={setIndex}
+          setData={setData}
         />
       </Grid>
       <Grid item xs={12} md={6} sm={12} className={classes.rightSection}>
