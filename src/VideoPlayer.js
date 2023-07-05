@@ -83,7 +83,6 @@ function VideoPlayer (prop) {
     //   prop.setAllImageCount(prop.totalCount);
     // }
   }
-console.log(music, prop.musicData, prop.musicIndex, "+++++VIDEO+++++++")
   const classes = useStyles();
   return (
     <div>

@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie';
 import React, { useState, useEffect, useRef } from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+// import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import Chart from 'chart.js/auto'
 const NewChart = () => {
   const [data, setData] = useState([]);
@@ -30,7 +30,6 @@ const NewChart = () => {
         if (responseJson.success === '0') {
           alert("Something went wrong! Please try again.");
         } else {
-          // alert("Login Successfully");
           setData(responseJson.data);
         }
       });
@@ -61,7 +60,10 @@ const NewChart = () => {
         categoryPercentage: 0.3,
         scales: {
           y: {
-            beginAtZero: true
+            ticks: {
+              display: 'auto',
+            },
+            beginAtZero: true,
           }
         },
         layout: {

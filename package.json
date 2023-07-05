@@ -25,6 +25,7 @@
     "@react-spring/parallax": "^9.6.1",
     "@reacticons/ionicons": "^7.1.0",
     "bootstrap": "^5.0.0-alpha3",
+    "caniuse-lite": "^1.0.30001512",
     "canvasjs-react-charts": "^1.0.5",
     "chart.js": "^4.3.0",
     "components": "^0.1.0",
