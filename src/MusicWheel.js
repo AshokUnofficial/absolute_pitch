@@ -106,7 +106,7 @@ function MusicWheel (props) {
   const [nordData, setNordData] = useState([]);
   const [tempoIndex, setTempoIndex] = useState(0);
   const [intensityIndex, setIntensityIndex] = useState(0);
-  const [packageDataIndex, setPackageDataIndex] = useState(1);
+  const [packageDataIndex, setPackageDataIndex] = useState(2);
   const [imageTypeIndex, setImageTypeIndex] = useState("");
   const [groups, setGroups] = useState("");
   const [packageActive, setPackageActive] = useState("F");
@@ -852,6 +852,8 @@ function MusicWheel (props) {
       if (packageDataIndex == packageData.length - 1) {
         setPackageDataIndex(0);
         // setPackageActive('');
+        setImageTypeActive(false);
+        setDisable(true);
       } else {
         setPackageDataIndex(packageDataIndex + 1);
         if (packageDataIndex == "1") {
@@ -1365,17 +1367,15 @@ function MusicWheel (props) {
               }}
             >
               {durationDataIndex == 1 ? (
-                <Image src={Duration1} alt="..." width="200px" height="230px" />
+                <Image src={Duration1} alt="..."  />
               ) : durationDataIndex == 2 ? (
-                <Image src={Duration2} alt="..." width="200px" height="230px" />
+                <Image src={Duration2} alt="..."  />
               ) : durationDataIndex == 3 ? (
-                <Image src={Duration3} alt="..." width="200px" height="230px" />
+                <Image src={Duration3} alt="..."  />
               ) : (
                 <Image
                   src={DurationDefault}
                   alt="..."
-                  width="230px"
-                  height="260px"
                 />
               )}{" "}
             </button>
