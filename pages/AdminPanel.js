@@ -18,7 +18,7 @@ import Feedback from "./Feedback";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 // import Cookies from "js-cookie";
-const NewChart = dynamic(() => import("../src/NewChart"));
+const NewChart = dynamic(() => import("../src/NewChart"), {ssr: false});
 const Calendar = dynamic(() => import("../src/Calendar"));
 const style = {
   position: 'absolute',
@@ -282,7 +282,7 @@ const AdminPanel = () => {
         <div style={{ background: '#fff', width: '99%', height: 'auto', border: '4px solid white', justifyContent: 'center', alignItems: 'center', textAlign: 'center', borderRadius: "20px", marginTop: '5px', display: 'flex' }}>
           <Calendar />
         </div>
-        <div style={{ width: '99%', height: '320px', border: '4px solid white', justifyContent: 'center', alignItems: 'center', textAlign: 'center', borderRadius: "20px", marginTop: '20px' }}>
+        <div style={{ width: '99%', height: 'auto', border: '4px solid white', justifyContent: 'center', alignItems: 'center', textAlign: 'center', borderRadius: "20px", marginTop: '20px' }}>
           <NewChart />
           {/* <LineChart/> */}
         </div>

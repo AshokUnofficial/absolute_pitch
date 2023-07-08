@@ -1,10 +1,13 @@
 import Cookies from 'js-cookie';
 import React, { useState, useEffect, useRef } from 'react';
-// import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import Chart from 'chart.js/auto'
+import Chart from "react-apexcharts";
+
 const NewChart = () => {
   const [data, setData] = useState([]);
-  const chartEl = useRef(null);
+  const [chartData, setChartData] = useState({
+    options: {},
+    series: []
+  });
 
   useEffect(() => {
     var myHeaders = new Headers();
@@ -36,49 +39,48 @@ const NewChart = () => {
   }, []);
 
   useEffect(() => {
-    const ctx = chartEl.current.getContext("2d");
-    const count = data.map(elm => elm.date)
-    const mixedChart = new Chart(ctx, {
-      data: {
-        type: 'line',
-        labels: count,
-        datasets: [{
-          type: 'line',
-          label: 'Count',
-          data: data.map(elm => elm.time),
-          backgroundColor: '#C1272D',
-          borderRadius: 30,
-        }],
-      },
+    const dates = data.map(elm => elm.date);
+    const counts = data.map(elm => elm.time);
+
+    var options = {
       options: {
-        responsive: true,
-        onResize: (chartInstance) => {
-          chartInstance.update();
+        chart: {
+          id: 'line-chart',
+          toolbar:{
+            show: false
+          },
+          zoom: {
+            enabled: false
+          },
         },
-        maintainAspectRatio: false,
-        barPercentage: 0.6,
-        categoryPercentage: 0.3,
-        scales: {
-          y: {
-            ticks: {
-              display: 'auto',
-            },
-            beginAtZero: true,
-          }
+        colors:["#80808057"],
+        stroke: {
+          show: true,
+          width: 3,
+      },
+        markers: {
+          size: 5,
+          colors: '#e90d0d'
         },
-        layout: {
-          padding: 15,
-        }
-      }
-    });
-    return function cleanup () {
-      mixedChart.destroy();
+        xaxis: {
+          categories: dates,
+        },
+      },
+      series: [{
+        name: 'Count',
+        data: counts,
+      }],
     };
-  }, [data])
+    setChartData(options);
+  }, [data]);
 
   return (
-    <div style={{ background: '#fff', borderRadius: '10px', height: '100%'}}>
-      <canvas id="line-chart" ref={chartEl}></canvas>
+    <div style={{ background: '#fff', borderRadius: '10px', width: '100%' }}>
+      <Chart
+        options={chartData.options}
+        series={chartData.series}
+        type="line"
+      />
     </div>
   );
 };
