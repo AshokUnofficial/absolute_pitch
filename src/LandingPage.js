@@ -22,7 +22,7 @@ const useStyles = makeStyles({
     },
     "@media (min-width: 1280px) and (max-width:1680px)": {
       // marginLeft: "1%",
-      width: "90%",
+      width: "100%",
       // border: "2px solid yellow",
     },
     "@media (min-width: 600px) and (max-width:768px)": {

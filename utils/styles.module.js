@@ -377,7 +377,7 @@ const useStyles = makeStyles({
     position: "relative",
     justifyContent: "space-around",
     // flexdirection: 'column',
-    height: "50vh",
+    height: "60vh",
     alignItems: "center",
     display: "flex",
     "@media (min-width: 1600px) and (max-width: 1920px)": {},
