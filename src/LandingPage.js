@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Grid ,makeStyles} from "@material-ui/core";
+import { Grid, makeStyles } from "@material-ui/core";
 import MusicWheel from "./MusicWheel";
 import VideoPlayer from "./VideoPlayer";
 // import { makeStyles } from "@material-ui/core";
@@ -49,7 +49,7 @@ const useStyles = makeStyles({
     padding: "0px 0px 2px 10px",
   },
 });
-function LandingPage() {
+function LandingPage () {
   const [data, setData] = useState();
   const [index, setIndex] = useState(0);
   const [songTitle, setSongTitle] = useState("Title");
@@ -114,14 +114,14 @@ function LandingPage() {
     Cookies.set("nordArray", nordArray);
   }
 
-// ***********Handle song start here **************
-  function handleSong(songsData, ind) {
-    if(ind >= songsData.length) return false;
+  // ***********Handle song start here **************
+  function handleSong (songsData, ind) {
+    if (ind >= songsData.length) return false;
     // setTimeout( setAllSongsDuration(0),
     // setTime(0),200)
-    if (durationLast === 0) {
-      setDurationLast(Number(songsData[0].duration));
-    }
+    // if (durationLast === 0) {
+    //   setDurationLast(Number(songsData[0].duration));
+    // }
     // if (totalCount === 0) {
     //   setTotalCount(Number(songsData[0].no_of_images));
     // }
@@ -132,7 +132,7 @@ function LandingPage() {
       setPlaySongposition(1);
     }
     setData(songsData);
-    
+
     // setIndex(ind);
     setSongTitle(songsData[ind].song_title);
     setComposer(songsData[ind].composer);
@@ -142,11 +142,16 @@ function LandingPage() {
     setDuration(songsData[ind].tempo);
     // setPlaySongposition(++ind);
     // setDuration(secondsToHms(songsData[ind].tempo));
-    
+    let allDuration = 0;
     for (let x in songsData) {
-      setAllSongsDuration(
-        (allSongsDuration) => allSongsDuration + parseInt(songsData[x].duration)
-      );
+      allDuration = allDuration + parseInt(songsData[x].duration);
+
+    }
+    setAllSongsDuration(
+      allDuration
+    );
+    if (allDuration === durationLast) {
+      setDurationLast(0);
     }
     const getNextSong = document.getElementById("childid").children[ind];
     getNextSong?.scrollIntoView();
@@ -155,37 +160,32 @@ function LandingPage() {
   //****** Handle song End here *************
 
   useEffect(() => {
-    for (let x in data) {
-      setAllSongsDuration(
-        (allSongsDuration) => allSongsDuration + parseInt(data[x].duration)
-      );
-    }
     let r = remainingTimes(allSongsDuration, durationLast);
     setRemainingTime(r);
-  },[data]);
+  }, [data, durationLast]);
 
   // *********** TotleTimeAndImage start here **************
 
-  function TotleTimeAndImage(data, index) {
-    if(index < data.length){
+  function TotleTimeAndImage (data, index) {
+    if (index < data.length) {
       setIndex(index);
       setPlaySongposition(index + 1);
-      setDurationLast(
-        (durationLast) => durationLast + parseInt(data[index].duration)
-      );
       setImageCountLast(data[index].no_of_images);
     }
-    setTotalCount(
-      (totalCount) => totalCount + parseInt(data[index-1].no_of_images)
+    setDurationLast(
+      (durationLast) => durationLast + parseInt(data[index - 1].duration)
     );
-    setAllImageCount((totalCount) => totalCount + parseInt(data[index-1].no_of_images));
+    setTotalCount(
+      (totalCount) => totalCount + parseInt(data[index - 1].no_of_images)
+    );
+    setAllImageCount((totalCount) => totalCount + parseInt(data[index - 1].no_of_images));
     allImageCount > 10000 ? setTotalCount(0) : "";
     // remainingTimes(time,durationLast)
-    
+
   }
 
   // *********** TotleTimeAndImage End here **************
-  function GetSongNord(note_or_cord, type=0) {
+  function GetSongNord (note_or_cord, type = 0) {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
     myHeaders.append("Cookie", "PHPSESSID=6f62aaae4d06c1d0536d68ffef95a969");
@@ -203,18 +203,18 @@ function LandingPage() {
       body: urlencoded,
       redirect: 'follow'
     };
-    
+
     fetch("https://mylatinhome.com/absolute/appdata/webservice.php", requestOptions)
       .then(response => response.text())
       .then(result => {
-        if(!JSON.parse(sessionStorage.getItem('session'))){
+        if (!JSON.parse(sessionStorage.getItem('session'))) {
           sessionStorage.setItem("session", true);
           GetSongNord(songNote, 1);
         }
       })
       .catch(error => console.log('error', error));
   }
-  
+
   Cookies.set("nordArray", JSON.stringify(nordArray));
 
   useEffect(() => {
@@ -228,20 +228,20 @@ function LandingPage() {
   // }, [totalCount]);
 
   // UseEffect for total song duration
-  
+
 
   //set updated total time
   useEffect(() => {
     setTime(allSongsDuration);
   }, [allSongsDuration]);
 
-  useEffect(() => {
-    let r = remainingTimes(allSongsDuration, durationLast);
-    setRemainingTime(r);
-  }, [durationLast]);
+  // useEffect(() => {
+  //   let r = remainingTimes(allSongsDuration, durationLast);
+  //   setRemainingTime(r);
+  // }, [durationLast]);
 
 
-  function remainingTimes(x, y) {
+  function remainingTimes (x, y) {
     let d = Number(x) - Number(y);
     const result = new Date(d * 1000).toISOString().slice(11, 19);
     // console.log(result,'result...'); // 👉️ "00:10:00" (hh:mm:ss)
@@ -275,12 +275,12 @@ function LandingPage() {
           setAllImageCount={setAllImageCount}
           setTotalSeconds={setTotalSeconds}
           remainingTime={remainingTime}
-          tduration={time}
           setPlaySongposition={setPlaySongposition}
           allsongTime={allsongTime}
-          timeData={setAllSongsDuration}
+          setAllSongsDuration={setAllSongsDuration}
           setIndex={setIndex}
           setData={setData}
+          setDurationLast={setDurationLast}
         />
       </Grid>
       <Grid item xs={12} md={6} sm={12} className={classes.rightSection}>
@@ -289,7 +289,7 @@ function LandingPage() {
           musicData={data}
           musicIndex={index}
           TotleTimeAndImage={TotleTimeAndImage}
-          timeData={setAllSongsDuration}
+          setAllSongsDuration={setAllSongsDuration}
           setAllImageCount={setAllImageCount}
           totalCount={totalCount}
         />

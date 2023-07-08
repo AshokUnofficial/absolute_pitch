@@ -7,16 +7,19 @@ import Gmail from "../public/assets/images/mail.png";
 import Twitter from "../public/assets/images/twitter.png";
 import InstaGram from "../public/assets/images/insta.png";
 import FaceBook from "../public/assets/images/facebook.png";
-import bgImage from "../public/assets/images/bgtexture.jpg";
+// import bgImage from "../public/assets/images/bgtexture.jpg";
 import Background from '../public/assets/images/bgtexture.jpg';
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
+// import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import UserLog from "./UserLog";
 import Feedback from "./Feedback";
-import LineChart from "./LineChart";
-import NewChart from "./NewChart";
-import Calendar from "./Calender";
+// import LineChart from "./LineChart";
+import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
+// import Cookies from "js-cookie";
+const NewChart = dynamic(() => import("../src/NewChart"), {ssr: false});
+const Calendar = dynamic(() => import("../src/Calendar"));
 const style = {
   position: 'absolute',
   // top: '5%',
@@ -147,6 +150,7 @@ const useStyles = makeStyles({
   },
 });
 const AdminPanel = () => {
+  const router = useRouter();
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [feedback, setFeedback] = useState(false);
@@ -157,7 +161,7 @@ const AdminPanel = () => {
   const feedBackClose = () => setFeedback(false);
 
   return (
-    <Grid container spacing={0} className={classes.containerBox}>
+    <Grid container spacing={0} className={classes.containerBox} style={{ height: 'auto' }}>
       <Grid
         item
         xs={12}
@@ -206,6 +210,31 @@ const AdminPanel = () => {
             height={490}
           />
         </div>
+        <button
+          style={{
+            borderRadius: "5px",
+            textDecoration: "none",
+            width: "100%",
+            height: "auto",
+            margin: "10px auto",
+            fontSize: "16px",
+            // background: "#E90D0D",
+            color: "#111",
+            border: "none",
+            cursor: "pointer",
+            padding: "5px",
+            "@media  (minWidth: 300px) and (maxWidth: 450px)": {
+              width: "80%",
+              height: "50%",
+              fontSize: "16px",
+            },
+          }}
+          onClick={(e) => {
+            router.push('/');
+          }}
+        >
+          Home
+        </button>
       </Grid>
       <Grid
         item
@@ -253,7 +282,7 @@ const AdminPanel = () => {
         <div style={{ background: '#fff', width: '99%', height: 'auto', border: '4px solid white', justifyContent: 'center', alignItems: 'center', textAlign: 'center', borderRadius: "20px", marginTop: '5px', display: 'flex' }}>
           <Calendar />
         </div>
-        <div style={{ width: '99%', height: '320px', border: '4px solid white', justifyContent: 'center', alignItems: 'center', textAlign: 'center', borderRadius: "20px", marginTop: '20px' }}>
+        <div style={{ width: '99%', height: 'auto', border: '4px solid white', justifyContent: 'center', alignItems: 'center', textAlign: 'center', borderRadius: "20px", marginTop: '20px' }}>
           <NewChart />
           {/* <LineChart/> */}
         </div>
@@ -363,7 +392,7 @@ const AdminPanel = () => {
             onChange={(e) => setLat(e.target.value)}
             style={{ border: 0 }}
             value={lat}
-            allowfullscreen=""
+            allowFullScreen=""
             aria-hidden="false"
             // tabindex="0"
             className={classes.iframeDesign}

@@ -1130,10 +1130,34 @@ function MusicWheel (props) {
 
   return (
     <div className={classes.circleCard}>
-      <div className={classes.resetBtn} style={{ padding: '10px 0 0 10px', marginLeft: '0px', color: '#0d6efd', justifyContent: 'flex-start' }}>
+      <div className={classes.resetBtn} style={{ padding: '10px', marginLeft: '0', color: '#0d6efd', justifyContent: 'space-between', width: '95%' }}>
         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" className="bi bi-question-circle-fill" viewBox="0 0 16 16">
           <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.496 6.033h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286a.237.237 0 0 0 .241.247zm2.325 6.443c.61 0 1.029-.394 1.029-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94 0 .533.425.927 1.01.927z" />
         </svg>
+        <button
+            style={{
+              borderRadius: "5px",
+              textDecoration: "none",
+              width: "fit-content",
+              height: "auto",
+              fontSize: "16px",
+              background: "#E90D0D",
+              color: "#FFFFFF",
+              border: "none",
+              cursor: "pointer",
+              padding: "5px",
+              "@media  (minWidth: 300px) and (maxWidth: 450px)": {
+                width: "80%",
+                height: "50%",
+                fontSize: "16px",
+              },
+            }}
+            onClick={(e) => {
+              router.push('/AdminPanel')
+            }}
+          >
+            Admin Panel
+        </button>
         {/* <Grid
           container
           spacing={1}
@@ -1227,10 +1251,10 @@ function MusicWheel (props) {
           <Grid item xs={3} md={4}>
             <button
               className={`${imageTypeActive == "1"
-                  ? classes.activeKey
-                  : disable
-                    ? classes.topButtonsDisable
-                    : classes.topButtons
+                ? classes.activeKey
+                : disable
+                  ? classes.topButtonsDisable
+                  : classes.topButtons
                 }`}
               onClick={(e) => {
                 btnHandler("Letter", e, 1);
@@ -1255,10 +1279,10 @@ function MusicWheel (props) {
           <Grid item xs={4} md={4}>
             <button
               className={`${imageTypeActive == "2"
-                  ? classes.activeKey
-                  : disable
-                    ? classes.topButtonsDisable
-                    : classes.topButtons
+                ? classes.activeKey
+                : disable
+                  ? classes.topButtonsDisable
+                  : classes.topButtons
                 }`}
               onClick={(e) => {
                 btnHandler("Staff", e, 2);
@@ -1283,10 +1307,10 @@ function MusicWheel (props) {
           <Grid item xs={4} md={4}>
             <button
               className={`${imageTypeActive == "3"
-                  ? classes.activeKey
-                  : disable
-                    ? classes.topButtonsDisable
-                    : classes.topButtons
+                ? classes.activeKey
+                : disable
+                  ? classes.topButtonsDisable
+                  : classes.topButtons
                 // imageTypeActive == "3" ? classes.activeKey : premiumfirst =='1' ? classes.premiumActive : classes.topButtons
                 }`}
               onClick={(e) => {
@@ -1548,6 +1572,8 @@ function MusicWheel (props) {
                   setSongsData([]);
                   props.setData([]);
                   props.setPlaySongposition(0);
+                  props.setAllSongsDuration(0);
+                  props.setDurationLast(0);
                   setImageTypeActive(0);
                   props.setAllImageCount(0);
                   setNord({
@@ -1659,15 +1685,15 @@ function MusicWheel (props) {
           >
             <table className={classes.tableStyle}>
               <tbody>
-              <tr className={classes.trStyle}>
+                <tr className={classes.trStyle}>
 
-                <th className={classes.thStyles}>{props.songTitle}</th>
-                <th className={classes.thStylesNew}>{props.composer}</th>
-                <th className={classes.thStylesNew}>{props.songNote}</th>
-                <th className={classes.thTotalSongs}>{props.duration}</th>
-                <th className={classes.thTotalSongs}>{props.imageCount}</th>
-                <th className={classes.thTotalSongs}>{props.playSongposition}/{totalSongs}</th>
-              </tr>
+                  <th className={classes.thStyles}>{props.songTitle}</th>
+                  <th className={classes.thStylesNew}>{props.composer}</th>
+                  <th className={classes.thStylesNew}>{props.songNote}</th>
+                  <th className={classes.thTotalSongs}>{props.duration}</th>
+                  <th className={classes.thTotalSongs}>{props.imageCount}</th>
+                  <th className={classes.thTotalSongs}>{props.playSongposition}/{totalSongs}</th>
+                </tr>
               </tbody>
             </table>
           </Grid>
@@ -1678,40 +1704,40 @@ function MusicWheel (props) {
       <div className={styles.songsWrapper}>
         <Paper elevation={3} className={classes.paperStyle}>
           <table className={classes.tableStyle} id={props.id}>
-          <tbody>
-            <tr className={classes.trStyle}>
-              <th className={classes.thStyleTitle}>Title</th>
-              <th className={classes.thStyle}>Composer</th>
-              <th className={classes.thStyle}>Note</th>
-              <th className={classes.thStyle}>Tempo</th>
-              <th
-                className={classes.thStyle}
-                style={{ cursor: "pointer" }}
-                onClick={(e) => {
-                  btnHandler(type, e, ind);
-                  fetchSongsData();
-                }}
-              >
-                Intensity
-              </th>
-            </tr>
-            {songsData && songsData.length > 0
-              ? songsData.map((val, ind) => (
-                <tr
-                  key={"songs" + ind}
-                  onClick={() => {handleClickSong(songsData, ind); props.setIndex(ind); props.setPlaySongposition(ind + 1);}}
-                  className={styles.liststyle}
+            <tbody>
+              <tr className={classes.trStyle}>
+                <th className={classes.thStyleTitle}>Title</th>
+                <th className={classes.thStyle}>Composer</th>
+                <th className={classes.thStyle}>Note</th>
+                <th className={classes.thStyle}>Tempo</th>
+                <th
+                  className={classes.thStyle}
+                  style={{ cursor: "pointer" }}
+                  onClick={(e) => {
+                    btnHandler(type, e, ind);
+                    fetchSongsData();
+                  }}
                 >
-                  <td>{val["song_title"]}</td>
-                  <td>{val["composer"]}</td>
-                  <td>{val["note_or_cord"]}</td>
-                  <td>{val["tempo"]}</td>
-                  <td>{val["intensity"]}</td>
-                </tr>
-              ))
-              : // )
-              <tr><td colSpan={6}>No Songs Found</td></tr>}
-              </tbody>
+                  Intensity
+                </th>
+              </tr>
+              {songsData && songsData.length > 0
+                ? songsData.map((val, ind) => (
+                  <tr
+                    key={"songs" + ind}
+                    onClick={() => { handleClickSong(songsData, ind); props.setIndex(ind); props.setPlaySongposition(ind + 1); }}
+                    className={styles.liststyle}
+                  >
+                    <td>{val["song_title"]}</td>
+                    <td>{val["composer"]}</td>
+                    <td>{val["note_or_cord"]}</td>
+                    <td>{val["tempo"]}</td>
+                    <td>{val["intensity"]}</td>
+                  </tr>
+                ))
+                : // )
+                <tr><td colSpan={6}>No Songs Found</td></tr>}
+            </tbody>
           </table>
         </Paper>
       </div>
