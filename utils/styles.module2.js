@@ -107,7 +107,7 @@ const useStyles = makeStyles({
     alignItems: "center",
     justifyContent: "center",
     textAlign: "center",
-    background:'#00BF55',
+    background: '#00BF55',
   },
 
   circle5: {
@@ -127,10 +127,10 @@ const useStyles = makeStyles({
 
   circle6: {
     // width: "35px",
-   
+
     // height: "35px",
     width: "50px",
-   background:'#b20ca4',
+    background: '#b20ca4',
     height: "50px",
     /* padding: 18px 18px; */
     display: "flex",
@@ -149,7 +149,7 @@ const useStyles = makeStyles({
     verticalAlign: "super",
     fontSize: "0.6em",
   },
-  listBg :{ background:'black'},
+  listBg: { background: 'black' },
   bottomButtonContainer: {
     marginTop: "-5px",
 
@@ -279,7 +279,7 @@ const useStyles = makeStyles({
     // fontWeight: "500",
     width: "96%",
     padding: "5px",
-  height:'20px',
+    height: '20px',
     justifyContent: "center",
     alignContent: "center",
     display: "flex",
@@ -335,7 +335,7 @@ const useStyles = makeStyles({
     fontSize: "12px",
     cursor: "pointer",
     border: "none",
-    '&:hover':{
+    '&:hover': {
       // background: "radial-gradient(blue 40%, #000)",
     },
   },
@@ -357,8 +357,8 @@ const useStyles = makeStyles({
     zIndex: "2",
     top: "20px",
     left: " 28px",
-    textAlign:'center',
-    padding:'0 !important',
+    textAlign: 'center',
+    padding: '0 !important',
     transform: "rotate(-0.67deg)",
   },
   leftBtnTextTwo: {
@@ -372,7 +372,7 @@ const useStyles = makeStyles({
     zIndex: "2",
     top: "-12px",
     left: "22px",
-    padding:'0 !important',
+    padding: '0 !important',
     transform: "rotate(-0.33deg)",
   },
   RightBtnTextOne: {
@@ -385,8 +385,8 @@ const useStyles = makeStyles({
     color: "#fff",
     zIndex: "2",
     top: "22px",
-    padding:'0 !important',
-    textAlign:'center',
+    padding: '0 !important',
+    textAlign: 'center',
     left: " 28px",
     transform: "rotate(180.33deg)",
   },
@@ -399,7 +399,7 @@ const useStyles = makeStyles({
     left: "-10px",
     fontFamily: "Roboto",
     fontStyle: "normal",
-    padding:'0 !important',
+    padding: '0 !important',
     fontWeight: "500",
     fontSize: "12px",
     // lineHeight: "12px",
@@ -436,7 +436,7 @@ const useStyles = makeStyles({
     // background: "radial-gradient(#FFF 40%, #000)",
     transform: "rotate(150.33deg)",
     border: "none",
-    '&:hover':{
+    '&:hover': {
       // background: "radial-gradient(blue 40%, #000)",
     },
   },
@@ -455,7 +455,7 @@ const useStyles = makeStyles({
     // background: "radial-gradient(#FFF 40%, #000)",
     transform: "rotate(-25.33deg)",
     border: "none",
-    '&:hover':{
+    '&:hover': {
       // background: "radial-gradient(blue 40%, #000)",
     },
   },
@@ -472,7 +472,7 @@ const useStyles = makeStyles({
     // background: "radial-gradient(#FFF 40%, #000)",
     transform: "rotate(208.33deg)",
     border: "none",
-    '&:hover':{
+    '&:hover': {
       // background: "radial-gradient(blue 40%, #000)",
     },
   },
@@ -565,13 +565,13 @@ const useStyles = makeStyles({
     textAlign: "center !important",
     fontSize: "15px",
   },
-  songScrolling:{
+  songScrolling: {
     width: "92%",
     padding: "0px 10px 0px 10px",
     marginLeft: "18px",
-    background:"#fff",
-    fontSize:'12px',
-    color:'#000',
+    background: "#fff",
+    fontSize: '12px',
+    color: '#000',
   },
   paperStyle: {
     marginTop: "10px",
@@ -596,7 +596,7 @@ const useStyles = makeStyles({
     fontSize: "70px",
     position: "absolute",
     color: "#fff",
-    borderRadius:'5px',
+    borderRadius: '5px',
     "&:hover": {
       color: "yellow",
     },
