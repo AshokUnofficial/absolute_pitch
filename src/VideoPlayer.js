@@ -6,8 +6,7 @@ import { makeStyles } from "@material-ui/core";
 import ReactPlayer from "react-player";
 import Guitar from "../public/assets/images/guitar.jpg";
 import dynamic from "next/dynamic";
-// import 'shaka-player/dist/controls.css';
-// const ShakaPlayer = dynamic(() => import('shaka-player-react'), { ssr: false });
+// import InitialVideo from '../public/video/homePageVideo.mp4'
 
 const useStyles = makeStyles({
   root: {
@@ -72,7 +71,7 @@ function VideoPlayer (prop) {
   const music = prop.musicData?.length > 0
     ? prop.musicData[prop.musicIndex]["song_url"]
     : "";
-console.log(music)
+
   function playNextSong () {
     // prop.timeData(0)
     for (let i = prop.musicIndex + 1; i <= prop.musicData.length; i++) {
@@ -102,11 +101,13 @@ console.log(music)
               stopOnUnmount
               // style={{ marginTop: "-50px" }}
               config={{ file: { attributes: { controlsList: 'nodownload' } } }}
-
             />
 
           ) : (
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/GBYs4y1BtGg" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+            <video width="100%" height="auto" controls>
+              <source src='/video/homePageVideo.mp4' type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
           )}
           {/* <div className={classes.imgContainer}><Image src={Guitar} alt="..."  /></div> */}
         </Grid>
@@ -116,4 +117,4 @@ console.log(music)
   );
 }
 
-export default VideoPlayer;
+export default VideoPlayer;;
