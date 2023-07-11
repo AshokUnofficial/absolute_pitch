@@ -75,11 +75,12 @@ const NewChart = () => {
   }, [data]);
 
   return (
-    <div style={{ background: '#fff', borderRadius: '10px', width: '100%' }}>
+    <div style={{ background: '#fff', borderRadius: '10px', width: '100%', height: '100%' }}>
       <Chart
         options={chartData.options}
         series={chartData.series}
         type="line"
+        height={'100%'}
       />
     </div>
   );

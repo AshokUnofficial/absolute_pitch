@@ -183,6 +183,7 @@ const SignIn = () => {
           // alert("Login Successfully");
           setUserId(responseJson?.data?.user_details?.id);
           Cookies.set("userId",responseJson?.data?.user_details?.id);
+          Cookies.set("userName",responseJson?.data?.user_details?.name);
           router.push({
             pathname: "/",
           });

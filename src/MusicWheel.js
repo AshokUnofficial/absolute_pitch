@@ -718,7 +718,6 @@ function MusicWheel (props) {
     "https://mylatinhome.com/absolute/note-sound/Ab.wav",
   ];
 
-
   const getClassNamesFor = (id) => {
     if (!sortConfig) {
       return;
@@ -739,12 +738,7 @@ function MusicWheel (props) {
     setSortConfig({ key, direction });
   };
 
-
-  const handleClick = (e, path) => {
-    router.push("/UserLog");
-  };
-
-  function changeHandler (c, ind, event) {
+  function changeHandler (c, ind) {
     // if (imageTypeIndex == "") {
     //   alert("Please seect any ImageType Key");
     // } else {
@@ -782,9 +776,11 @@ function MusicWheel (props) {
       setTempoIndex(0);
       setDurationDataIndex(0);
       setIntensityIndex(0);
+      setHighlightedNord({ c1: [], c2: [], c3: [] })
     }
     //}
   }
+
   function subscriptionPlan (type) {
     if (type == "Free") {
       setSubscriptionActivePlan(1);
@@ -915,12 +911,14 @@ function MusicWheel (props) {
     if (type == "Duration") {
       let noteList = songsDataAll.map(elm => elm.note_or_cord);
       noteList = [...new Set(noteList)];
+      let nordData = [];
       if (durationDataIndex == Object.keys(durationData).length) {
         setDurationDataIndex(0);
         setDurationValue("");
         setSongsData(songsDataAll);
         handleClickSong(songsDataAll, 0);
         noteList.forEach(elm => {
+          nordData.push(elm.includes('m') ? elm.slice(0, elm.length - 1) + '-' : elm.includes('M') ? elm.slice(0, elm.length - 1) + '+' : elm);
           const selected_nord = (elm.includes('m') || elm.includes('M')) ? elm.slice(0, elm.length - 1) : elm;
           const selecetd_index = data["c3"].indexOf(selected_nord);
           if (!elm.includes('m') && !elm.includes('M')) {
@@ -935,20 +933,26 @@ function MusicWheel (props) {
         setDurationDataIndex(durationDataIndex + 1);
 
         if (durationDataIndex == "0" && noteList.filter(elm => (!elm.includes('m') && !elm.includes('M'))).length > 0) {
-          setDurationValue(durationData["minute1"]);
+          const selected_nord = songsDataAll.filter(elm => !elm.note_or_cord.includes('m') && !elm.note_or_cord.includes('M')).flat(1).map(elm => elm.note_or_cord);
+          nordData.push(selected_nord.length > 0 ? selected_nord[0] : '');
+          // setDurationValue(durationData["minute1"]);
           setSongsData(songsDataAll.filter(elm => !elm.note_or_cord.includes('m') && !elm.note_or_cord.includes('M')).flat(1));
           handleClickSong(songsDataAll.filter(elm => !elm.note_or_cord.includes('m') && !elm.note_or_cord.includes('M')).flat(1), 0);
           highlightNord(songsDataAll.filter(elm => !elm.note_or_cord.includes('m') && !elm.note_or_cord.includes('M')).flat(1), 0);
         }
 
         else if (durationDataIndex == "1" && noteList.filter(elm => elm.includes('m')).length > 0) {
-          setDurationValue(durationData["minute2"]);
+          const selected_nord = songsDataAll.filter(elm => elm.note_or_cord.includes('m')).flat(1).map(elm => elm.note_or_cord);
+          nordData.push(selected_nord.length > 0 ? selected_nord[0].slice(0, selected_nord[0].length - 1) + '-' : '');
+          // setDurationValue(durationData["minute2"]);
           setSongsData(songsDataAll.filter(elm => elm.note_or_cord.includes('m')).flat(1));
           handleClickSong(songsDataAll.filter(elm => elm.note_or_cord.includes('m')).flat(1), 0);
           highlightNord(songsDataAll.filter(elm => elm.note_or_cord.includes('m')).flat(1), 0);
         }
         else if (durationDataIndex == "2" && noteList.filter(elm => elm.includes('M')).length > 0) {
-          setDurationValue(durationData["minute3"]);
+          const selected_nord = songsDataAll.filter(elm => elm.note_or_cord.includes('M')).flat(1).map(elm => elm.note_or_cord);
+          nordData.push(selected_nord.length > 0 ? selected_nord[0].slice(0, selected_nord[0].length - 1) + '+' : '');
+          // setDurationValue(durationData["minute3"]);
           setSongsData(songsDataAll.filter(elm => elm.note_or_cord.includes('M')).flat(1));
           handleClickSong(songsDataAll.filter(elm => elm.note_or_cord.includes('M')).flat(1), 0);
           highlightNord(songsDataAll.filter(elm => elm.note_or_cord.includes('M')).flat(1), 0);
@@ -961,6 +965,7 @@ function MusicWheel (props) {
           let noteList = songsDataAll.map(elm => elm.note_or_cord);
           noteList = [...new Set(noteList)];
           noteList.forEach(elm => {
+            nordData.push(elm.includes('m') ? elm.slice(0, elm.length - 1) + '-' : elm.includes('M') ? elm.slice(0, elm.length - 1) + '+' : elm);
             const selected_nord = (elm.includes('m') || elm.includes('M')) ? elm.slice(0, elm.length - 1) : elm;
             const selecetd_index = data["c3"].indexOf(selected_nord);
             if (!elm.includes('m') && !elm.includes('M')) {
@@ -977,8 +982,18 @@ function MusicWheel (props) {
           setDurationValue("");
           return false;
         }
-        setNord({ c1: [], c2: [], c3: [] });
-        setNordData([]);
+        let nord = { c1: [], c2: [], c3: [] };
+        nordData.forEach(elm => {
+          if(elm.includes('-')){
+            nord.c2.push(1)
+          }else if(elm.includes('+')){
+            nord.c1.push(1)
+          }else if(!elm.includes('-') && !elm.includes('+')){
+            nord.c3.push(1)
+          }
+        })
+        setNord(nord);
+        setNordData(nordData);
       }
     }
     //}
@@ -1052,7 +1067,6 @@ function MusicWheel (props) {
 
   function highlightNord (songsData, ind) {
     const current_song = songsData[ind];
-    console.log(songsData, ind, "------------------------");
     let selected_nord = current_song["note_or_cord"];
     const last_nord = selected_nord[selected_nord.length - 1];
     if (last_nord != "m" && last_nord != "M") {
@@ -1145,7 +1159,7 @@ function MusicWheel (props) {
         if (responseJson.data.length == 0) {
           props.setPlaySongposition(0);
         }
-        if (responseJson != "") {
+        if (responseJson.success) {
           setSongsData(responseJson.data);
           setSongsDataAll(responseJson.data);
           // props.timeData(0)
@@ -1154,7 +1168,6 @@ function MusicWheel (props) {
 
           // Cookies.set("apiData",responseJson.data['duration']);
           // for (let i = 0; i <= responseJson.data.length; i++) {
-
           handleClickSong(responseJson.data, 0);
           // break;
           // setAllSongsDuration((pre)=>pre+responseJson.data[i].duration);
@@ -1162,7 +1175,7 @@ function MusicWheel (props) {
 
         } else {
           // props.timeData(0);
-          alert("error in response");
+          alert("Something went wrong!");
         }
       });
   }
@@ -1489,7 +1502,14 @@ function MusicWheel (props) {
                       className={classes.playerBtn}
                       alt="alt"
                       onClick={(e) => {
-                        fetchSongsData();
+                        if (songsData.length > 0 && props.musicIndex !== 0) {
+                          handleClickSong(songsData, 0);
+                          props.setIndex(0);
+                          props.setPlaySongposition(0);
+                          props.setDurationLast(0);
+                        } else {
+                          fetchSongsData();
+                        }
                       }}
                       style={{
                         width: "60% !important",
@@ -1595,6 +1615,7 @@ function MusicWheel (props) {
                   },
                 }}
                 onClick={() => {
+                  // router.reload();
                   props.setSongTitle('Title');
                   props.setSongNote('Note');
                   props.setComposer('Composer');
@@ -1606,7 +1627,6 @@ function MusicWheel (props) {
                   setPackageDataIndex(1);
                   setPackageActive("F");
                   setDurationDataIndex(0);
-
                   setDurationValue("");
                   setDisable(false);
                   setFreeActive(false);
@@ -1616,13 +1636,13 @@ function MusicWheel (props) {
                   setNordIndex111(0);
                   setAllPlaySongsDuration("00:00");
                   setSongsData([]);
-                  setSongsDataAll([]);
                   props.setData([]);
+                  setSongsDataAll([]);
                   props.setPlaySongposition(0);
                   props.setAllSongsDuration(0);
                   props.setDurationLast(0);
                   setImageTypeActive(0);
-                  props.setAllImageCount(0);
+                  // props.setAllImageCount(0);
                   setNord({
                     c1: [],
                     c2: [],
@@ -1633,6 +1653,7 @@ function MusicWheel (props) {
                     c2: [],
                     c3: [],
                   });
+                  setNordData([]);
                   // highlightNord(songsData, ind);
                   // fetchSongsData();
                 }}

@@ -12,6 +12,8 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import Background from "../public/assets/images/blackboard.png";
 import Logo from "../public/assets/images/logo.png";
+import Cookies from "js-cookie";
+
 const useStyles = makeStyles({
   root: {
     position: "relative",
@@ -184,6 +186,7 @@ const SignUp = () => {
           router.push({
             pathname: "/SigninPage",
           });
+          Cookies.set("userName",responseJson?.data?.user_details?.name);
         }
       });
   };
