@@ -63,14 +63,16 @@ const useStyles = makeStyles({
     },
   },
 });
+
 function VideoPlayer (prop) {
-  const [song, setSong] = useState();
-  const [totalSeconds, setTotalSeconds] = useState(0);
+  // const [song, setSong] = useState();
+  // const [totalSeconds, setTotalSeconds] = useState(0);
+  const classes = useStyles();
 
   const music = prop.musicData?.length > 0
     ? prop.musicData[prop.musicIndex]["song_url"]
     : "";
-
+console.log(music)
   function playNextSong () {
     // prop.timeData(0)
     for (let i = prop.musicIndex + 1; i <= prop.musicData.length; i++) {
@@ -83,7 +85,6 @@ function VideoPlayer (prop) {
     //   prop.setAllImageCount(prop.totalCount);
     // }
   }
-  const classes = useStyles();
   return (
     <div>
       <Grid container spacing={2} style={{ display: 'block', position: 'relative' }}>
@@ -98,6 +99,7 @@ function VideoPlayer (prop) {
               playing
               fluid={"true"}
               onEnded={playNextSong}
+              stopOnUnmount
               // style={{ marginTop: "-50px" }}
               config={{ file: { attributes: { controlsList: 'nodownload' } } }}
 

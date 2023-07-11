@@ -10,14 +10,14 @@ const myLoader = ({ src, width, quality }) => {
 const useStyles = makeStyles({
   root: {
     position: "relative",
-    maxWidth: "99.8%",
-    border: "none",
-    height: "99vh",
+    // maxWidth: "99.8%",
+    // border: "none",
+    // height: "99vh",
   },
   sectonArea: {
-    width: "99%",
-    // float: "left",
-    height: "98vh",
+    // width: "99%",
+    // // float: "left",
+    // height: "98vh",
     // border: "2px solid black",
   },
   para: {
@@ -33,33 +33,38 @@ const useStyles = makeStyles({
     width: '8%',
     cursor: 'pointer',
     height: '30px',
-    fontSize: '25px',
+    fontSize: '7px',
     background: 'red',
+    writingMode: 'vertical-rl',
+    textOrientation: 'upright',
+    textTransform: 'uppercase',
   },
   th: {
     top: 0,
-    marginTop: "-10px",
+    // marginTop: "-10px",
     position: "sticky",
     //  borderRight:'2px solid black',
     background: "#5D432C",
     color: "white !important",
     width: "8%",
-    height: "30px",
-    fontSize: "25px",
+    height: "40px !important",
+    fontSize: "13px",
+    lineHeight: '0',
+
     "@media  (min-width: 300px) and (max-width: 450px)": {
       width: "8%",
-      height: "40px",
-      fontSize: "20px",
+      height: "20px",
+      fontSize: "10px",
     },
     "@media  (min-width: 451px) and (max-width: 599px)": {
       width: "8%",
       height: "50px",
-      fontSize: "25px",
+      fontSize: "12px",
     },
     "@media  (min-width: 600px) and (max-width: 1024px)": {
       width: "8%",
       height: "60px",
-      fontSize: "30px",
+      fontSize: "11px",
     },
   },
   resetTh: {
@@ -67,20 +72,23 @@ const useStyles = makeStyles({
     color: "white !important",
     width: "8%",
     height: "30px",
-    fontSize: "25px",
+    fontSize: "7px",
     cursor: "pointer",
+    writingMode: 'vertical-rl',
+    textOrientation: 'upright',
+    textTransform: 'uppercase',
   },
 
   th2: {
     top: 0,
-    marginTop: "-10px",
+    // marginTop: "-10px",
     position: "sticky",
     //  borderRight:'2px solid black',
     background: "#82E3F4",
     color: "white !important",
     width: "8%",
-    height: "30px",
-    fontSize: "25px",
+    height: "44px !important",
+    fontSize: "17px",
     "@media  (min-width: 300px) and (max-width: 450px)": {
       width: "8%",
       height: "40px",
@@ -99,7 +107,7 @@ const useStyles = makeStyles({
   },
   tableDesign: {
     width: "100%",
-    height: "88vh",
+    // height: "57vh",
     "@media  (min-width: 300px) and (max-width: 450px)": {
       width: "70%",
       height: "80%",
@@ -221,14 +229,14 @@ const UserLog = () => {
       "https://mylatinhome.com/absolute/appdata/webservice.php",
       requestOptions
     )
-    .then((response) => response.json())
-    .then((responseJson) => {
-      if (responseJson.success === '0') {
-        alert("Something went wrong! Please try again.");
-      } else {
-        fetchNodesData();
-      }
-    });
+      .then((response) => response.json())
+      .then((responseJson) => {
+        if (responseJson.success === '0') {
+          alert("Something went wrong! Please try again.");
+        } else {
+          fetchNodesData();
+        }
+      });
   };
 
   let j = 0;
@@ -290,18 +298,18 @@ const UserLog = () => {
       <div
         className={classes.sectonArea}
         style={{
-          background: "#849191",
+          // background: "#849191",
           alignItems: "center",
           marginLeft: "5px",
         }}
       >
-        <div className={classes.para}>
+        {/* <div className={classes.para}>
           <h3 style={{ color: "#fff" }}>User Log</h3>
-        </div>
+        </div> */}
         {/* <Link href="/">
                 <a onClick={(e) => router.push("/Library")}>Library</a>
               </Link> */}
-       <table className={classes.tableDesign}>
+        <table className={classes.tableDesign}>
           <tbody>
             <tr>
               {dataArr["c1"].map((val, ind) => (

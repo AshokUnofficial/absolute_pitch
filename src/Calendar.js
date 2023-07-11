@@ -72,7 +72,7 @@ const Calendar = () => {
     };
 
     return (
-        <div style={{width: '100%', padding: '20px'}}>
+        <div style={{width: '100%', height: '100%', boxSizing: 'border-box'}}>
             <FullCalendar
                 plugins={[dayGridPlugin]}
                 initialView="dayGridMonth"
