@@ -918,7 +918,8 @@ function MusicWheel (props) {
         setDurationValue("");
         setSongsData(songsDataAll);
         handleClickSong(songsDataAll, 0);
-        
+        setTotalSongs(songsDataAll.length)
+
         noteList.forEach(elm => {
           nordDataList.push(elm.includes('m') ? elm.slice(0, elm.length - 1) + '-' : elm.includes('M') ? elm.slice(0, elm.length - 1) + '+' : elm);
           const selected_nord = (elm.includes('m') || elm.includes('M')) ? elm.slice(0, elm.length - 1) : elm;
@@ -939,6 +940,7 @@ function MusicWheel (props) {
           nordDataList.push(selected_nord.length > 0 ? selected_nord[0] : '');
           // setDurationValue(durationData["minute1"]);
           setSongsData(songsDataAll.filter(elm => !elm.note_or_cord.includes('m') && !elm.note_or_cord.includes('M')).flat(1));
+          setTotalSongs(songsDataAll.filter(elm => !elm.note_or_cord.includes('m') && !elm.note_or_cord.includes('M')).flat(1).length)
           handleClickSong(songsDataAll.filter(elm => !elm.note_or_cord.includes('m') && !elm.note_or_cord.includes('M')).flat(1), 0);
           highlightNord(songsDataAll.filter(elm => !elm.note_or_cord.includes('m') && !elm.note_or_cord.includes('M')).flat(1), 0);
         }
@@ -948,6 +950,7 @@ function MusicWheel (props) {
           nordDataList.push(selected_nord.length > 0 ? selected_nord[0].slice(0, selected_nord[0].length - 1) + '-' : '');
           // setDurationValue(durationData["minute2"]);
           setSongsData(songsDataAll.filter(elm => elm.note_or_cord.includes('m')).flat(1));
+          setTotalSongs(songsDataAll.filter(elm => elm.note_or_cord.includes('m')).flat(1).length)
           handleClickSong(songsDataAll.filter(elm => elm.note_or_cord.includes('m')).flat(1), 0);
           highlightNord(songsDataAll.filter(elm => elm.note_or_cord.includes('m')).flat(1), 0);
         }
@@ -956,6 +959,7 @@ function MusicWheel (props) {
           nordDataList.push(selected_nord.length > 0 ? selected_nord[0].slice(0, selected_nord[0].length - 1) + '+' : '');
           // setDurationValue(durationData["minute3"]);
           setSongsData(songsDataAll.filter(elm => elm.note_or_cord.includes('M')).flat(1));
+          setTotalSongs(songsDataAll.filter(elm => elm.note_or_cord.includes('M')).flat(1).length);
           handleClickSong(songsDataAll.filter(elm => elm.note_or_cord.includes('M')).flat(1), 0);
           highlightNord(songsDataAll.filter(elm => elm.note_or_cord.includes('M')).flat(1), 0);
         }
@@ -963,6 +967,7 @@ function MusicWheel (props) {
           setDurationDataIndex(0);
           setDurationValue("");
           setSongsData(songsDataAll);
+          setTotalSongs(songsDataAll.length);
           handleClickSong(songsDataAll, 0);
           let noteList = songsDataAll.map(elm => elm.note_or_cord);
           noteList = [...new Set(noteList)];
@@ -1509,6 +1514,7 @@ function MusicWheel (props) {
                           props.setIndex(0);
                           props.setPlaySongposition(0);
                           props.setDurationLast(0);
+                          setTotalSongs(songsData.length);
                         } else {
                           fetchSongsData();
                         }
