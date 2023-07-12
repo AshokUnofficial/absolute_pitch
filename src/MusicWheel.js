@@ -743,6 +743,17 @@ function MusicWheel (props) {
     // if (imageTypeIndex == "") {
     //   alert("Please seect any ImageType Key");
     // } else {
+    if (durationDataIndex !== 0 && nordData.length > 0) { 
+      if(nord.c1.length > 0 && c !== 'c1'){
+        return false;
+      }
+      else if(nord.c2.length > 0 && c !== 'c2'){
+        return false;
+      }
+      else if(nord.c3.length > 0 && c !== 'c3'){
+        return false;
+      }
+    }
     const temp = { ...nord };
     const count = [...temp["c1"], ...temp["c2"], ...temp["c3"]]?.length || 0;
     if (["c1", "c2", "c3"].includes(c)) {
@@ -773,11 +784,11 @@ function MusicWheel (props) {
         setNordData(nordData);
 
       }
-      setPackageDataIndex(0);
+      // setPackageDataIndex(packageDataIndex);
       setTempoIndex(0);
       setDurationDataIndex(0);
       setIntensityIndex(0);
-      setHighlightedNord({ c1: [], c2: [], c3: [] })
+      setHighlightedNord({ c1: [], c2: [], c3: [] });
     }
     //}
   }
@@ -848,36 +859,38 @@ function MusicWheel (props) {
 
     if (type == "Package") {
       if (packageDataIndex == packageData.length - 1) {
-        setPackageDataIndex(0);
-        // setPackageActive('');
+        setPackageDataIndex(2);
+        setPackageActive('F');
         setImageTypeActive(false);
+        setGroups("");
+        setImageTypeIndex("");
         setDisable(true);
       } else {
-        setPackageDataIndex(packageDataIndex + 1);
-        if (packageDataIndex == "1") {
+        setPackageDataIndex(prev => prev + 1);
+        if (packageDataIndex == "2") {
           setImageTypeActive(1);
           setImageTypeIndex("Letter");
           setGroups("G1,G2,G3,G4");
           setSubscriptionActivePlan(2);
           setPackageActive("");
         }
-        if (packageDataIndex == "2") {
-          setGroups("o1,o2,o3");
-          setSubscriptionActivePlan(3);
-          setImageTypeActive(1);
-          setImageTypeIndex("Letter");
-        }
         if (packageDataIndex == "3") {
-          setGroups("G1,G2,G3,G4,o1,o2,o3");
+          setGroups("G1,G2,G3,G4,O1,O2,O3,O4");
           setSubscriptionActivePlan(3);
           setImageTypeIndex("Letter");
           setImageTypeActive(1);
+        }
+        if (packageDataIndex == "4") {
+          setGroups("O1,O2,O3,O4");
+          setSubscriptionActivePlan(3);
+          setImageTypeActive(1);
+          setImageTypeIndex("Letter");
         }
 
-        setNord({ c1: [], c2: [], c3: [] });
-        setNordData([]);
+        // setNord({ c1: [], c2: [], c3: [] });
+        // setNordData([]);
       }
-      if (packageDataIndex == "4") {
+      if (packageDataIndex == "1") {
         setPackageActive("F");
         setPackageDataIndex(1);
       }
@@ -910,67 +923,50 @@ function MusicWheel (props) {
 
     }
     if (type == "Duration") {
-      let noteList = songsDataAll.map(elm => elm.note_or_cord);
-      noteList = [...new Set(noteList)];
-      let nordDataList = [];
-      if (durationDataIndex == Object.keys(durationData).length) {
-        setDurationDataIndex(0);
-        setDurationValue("");
-        setSongsData(songsDataAll);
-        handleClickSong(songsDataAll, 0);
-        setTotalSongs(songsDataAll.length)
-
-        noteList.forEach(elm => {
-          nordDataList.push(elm.includes('m') ? elm.slice(0, elm.length - 1) + '-' : elm.includes('M') ? elm.slice(0, elm.length - 1) + '+' : elm);
-          const selected_nord = (elm.includes('m') || elm.includes('M')) ? elm.slice(0, elm.length - 1) : elm;
-          const selecetd_index = data["c3"].indexOf(selected_nord);
-          if (!elm.includes('m') && !elm.includes('M')) {
-            setHighlightedNord(prev => ({ ...prev, c3: [selecetd_index] }));
-          } else if (elm.includes('m')) {
-            setHighlightedNord(prev => ({ ...prev, c2: [selecetd_index] }));
-          } else if (elm.includes('M')) {
-            setHighlightedNord(prev => ({ ...prev, c1: [selecetd_index] }));
-          }
-        });
-      } else {
-        setDurationDataIndex(durationDataIndex + 1);
-
-        if (durationDataIndex == "0" && noteList.filter(elm => (!elm.includes('m') && !elm.includes('M'))).length > 0) {
-          const selected_nord = songsDataAll.filter(elm => !elm.note_or_cord.includes('m') && !elm.note_or_cord.includes('M')).flat(1).map(elm => elm.note_or_cord);
-          nordDataList.push(selected_nord.length > 0 ? selected_nord[0] : '');
-          // setDurationValue(durationData["minute1"]);
-          setSongsData(songsDataAll.filter(elm => !elm.note_or_cord.includes('m') && !elm.note_or_cord.includes('M')).flat(1));
-          setTotalSongs(songsDataAll.filter(elm => !elm.note_or_cord.includes('m') && !elm.note_or_cord.includes('M')).flat(1).length)
-          handleClickSong(songsDataAll.filter(elm => !elm.note_or_cord.includes('m') && !elm.note_or_cord.includes('M')).flat(1), 0);
-          highlightNord(songsDataAll.filter(elm => !elm.note_or_cord.includes('m') && !elm.note_or_cord.includes('M')).flat(1), 0);
-        }
-
-        else if (durationDataIndex == "1" && noteList.filter(elm => elm.includes('m')).length > 0) {
-          const selected_nord = songsDataAll.filter(elm => elm.note_or_cord.includes('m')).flat(1).map(elm => elm.note_or_cord);
-          nordDataList.push(selected_nord.length > 0 ? selected_nord[0].slice(0, selected_nord[0].length - 1) + '-' : '');
-          // setDurationValue(durationData["minute2"]);
-          setSongsData(songsDataAll.filter(elm => elm.note_or_cord.includes('m')).flat(1));
-          setTotalSongs(songsDataAll.filter(elm => elm.note_or_cord.includes('m')).flat(1).length)
-          handleClickSong(songsDataAll.filter(elm => elm.note_or_cord.includes('m')).flat(1), 0);
-          highlightNord(songsDataAll.filter(elm => elm.note_or_cord.includes('m')).flat(1), 0);
-        }
-        else if (durationDataIndex == "2" && noteList.filter(elm => elm.includes('M')).length > 0) {
-          const selected_nord = songsDataAll.filter(elm => elm.note_or_cord.includes('M')).flat(1).map(elm => elm.note_or_cord);
-          nordDataList.push(selected_nord.length > 0 ? selected_nord[0].slice(0, selected_nord[0].length - 1) + '+' : '');
-          // setDurationValue(durationData["minute3"]);
-          setSongsData(songsDataAll.filter(elm => elm.note_or_cord.includes('M')).flat(1));
-          setTotalSongs(songsDataAll.filter(elm => elm.note_or_cord.includes('M')).flat(1).length);
-          handleClickSong(songsDataAll.filter(elm => elm.note_or_cord.includes('M')).flat(1), 0);
-          highlightNord(songsDataAll.filter(elm => elm.note_or_cord.includes('M')).flat(1), 0);
-        }
-        else if (durationDataIndex == "3") {
+      if (durationDataIndex === 0 && nordData.length === 0) {
+        setNord({ c1: [], c2: [], c3: data['c3'].map((_, index) => index) });
+        setNordData(data.c3);
+        setDurationDataIndex(prev => prev + 1);
+        setSongsData(songsDataAll.filter(elm => !elm.note_or_cord.includes('m') && !elm.note_or_cord.includes('M')).flat(1));
+        handleClickSong(songsDataAll.filter(elm => !elm.note_or_cord.includes('m') && !elm.note_or_cord.includes('M')).flat(1), 0);
+        setTotalSongs(songsDataAll.filter(elm => !elm.note_or_cord.includes('m') && !elm.note_or_cord.includes('M')).flat(1).length);
+      }
+      else if (durationDataIndex === 1 && nordData.length > 3) {
+        setNord({ c1: [], c2: data['c3'].map((_, index) => index), c3: [] });
+        setNordData(data.c3.map(elm => elm + '-'));
+        setDurationDataIndex(prev => prev + 1);
+        setSongsData(songsDataAll.filter(elm => elm.note_or_cord.includes('m')).flat(1));
+        handleClickSong(songsDataAll.filter(elm => elm.note_or_cord.includes('m')).flat(1), 0);
+        setTotalSongs(songsDataAll.filter(elm => elm.note_or_cord.includes('m')).flat(1).length);
+      }
+      else if (durationDataIndex === 2 && nordData.length > 3) {
+        setNord({ c1: data['c3'].map((_, index) => index), c2: [], c3: [] });
+        setNordData(data.c3.map(elm => elm + '+'));
+        setDurationDataIndex(prev => prev + 1);
+        setSongsData(songsDataAll.filter(elm => elm.note_or_cord.includes('M')).flat(1));
+        handleClickSong(songsDataAll.filter(elm => elm.note_or_cord.includes('M')).flat(1), 0);
+        setTotalSongs(songsDataAll.filter(elm => elm.note_or_cord.includes('M')).flat(1).length);
+      }
+      else if (durationDataIndex === 3 && nordData.length > 3) {
+        setDurationDataIndex(1);
+        setHighlightedNord({ c1: [], c2: [], c3: [] });
+        setNord({ c1: [], c2: [], c3: data['c3'].map((_, index) => index) });
+        setNordData(data.c3);
+        setSongsData(songsDataAll.filter(elm => !elm.note_or_cord.includes('m') && !elm.note_or_cord.includes('M')).flat(1));
+        handleClickSong(songsDataAll.filter(elm => !elm.note_or_cord.includes('m') && !elm.note_or_cord.includes('M')).flat(1), 0);
+        setTotalSongs(songsDataAll.filter(elm => !elm.note_or_cord.includes('m') && !elm.note_or_cord.includes('M')).flat(1).length);
+      }
+      else {
+        let noteList = songsDataAll.map(elm => elm.note_or_cord);
+        noteList = [...new Set(noteList)];
+        let nordDataList = [];
+        if (durationDataIndex == Object.keys(durationData).length) {
           setDurationDataIndex(0);
           setDurationValue("");
           setSongsData(songsDataAll);
-          setTotalSongs(songsDataAll.length);
           handleClickSong(songsDataAll, 0);
-          let noteList = songsDataAll.map(elm => elm.note_or_cord);
-          noteList = [...new Set(noteList)];
+          setTotalSongs(songsDataAll.length);
+
           noteList.forEach(elm => {
             nordDataList.push(elm.includes('m') ? elm.slice(0, elm.length - 1) + '-' : elm.includes('M') ? elm.slice(0, elm.length - 1) + '+' : elm);
             const selected_nord = (elm.includes('m') || elm.includes('M')) ? elm.slice(0, elm.length - 1) : elm;
@@ -984,26 +980,77 @@ function MusicWheel (props) {
             }
           });
         } else {
-          setSongsData([]);
-          setHighlightedNord({ c1: [], c2: [], c3: [] });
-          setDurationValue("");
-          return false;
+          setDurationDataIndex(durationDataIndex + 1);
+
+          if (durationDataIndex == "0" && noteList.filter(elm => (!elm.includes('m') && !elm.includes('M'))).length > 0) {
+            const selected_nord = songsDataAll.filter(elm => !elm.note_or_cord.includes('m') && !elm.note_or_cord.includes('M')).flat(1).map(elm => elm.note_or_cord);
+            nordDataList.push(selected_nord.length > 0 ? selected_nord[0] : '');
+            // setDurationValue(durationData["minute1"]);
+            setSongsData(songsDataAll.filter(elm => !elm.note_or_cord.includes('m') && !elm.note_or_cord.includes('M')).flat(1));
+            setTotalSongs(songsDataAll.filter(elm => !elm.note_or_cord.includes('m') && !elm.note_or_cord.includes('M')).flat(1).length);
+            handleClickSong(songsDataAll.filter(elm => !elm.note_or_cord.includes('m') && !elm.note_or_cord.includes('M')).flat(1), 0);
+            highlightNord(songsDataAll.filter(elm => !elm.note_or_cord.includes('m') && !elm.note_or_cord.includes('M')).flat(1), 0);
+          }
+
+          else if (durationDataIndex == "1" && noteList.filter(elm => elm.includes('m')).length > 0) {
+            const selected_nord = songsDataAll.filter(elm => elm.note_or_cord.includes('m')).flat(1).map(elm => elm.note_or_cord);
+            nordDataList.push(selected_nord.length > 0 ? selected_nord[0].slice(0, selected_nord[0].length - 1) + '-' : '');
+            // setDurationValue(durationData["minute2"]);
+            setSongsData(songsDataAll.filter(elm => elm.note_or_cord.includes('m')).flat(1));
+            setTotalSongs(songsDataAll.filter(elm => elm.note_or_cord.includes('m')).flat(1).length);
+            handleClickSong(songsDataAll.filter(elm => elm.note_or_cord.includes('m')).flat(1), 0);
+            highlightNord(songsDataAll.filter(elm => elm.note_or_cord.includes('m')).flat(1), 0);
+          }
+          else if (durationDataIndex == "2" && noteList.filter(elm => elm.includes('M')).length > 0) {
+            const selected_nord = songsDataAll.filter(elm => elm.note_or_cord.includes('M')).flat(1).map(elm => elm.note_or_cord);
+            nordDataList.push(selected_nord.length > 0 ? selected_nord[0].slice(0, selected_nord[0].length - 1) + '+' : '');
+            // setDurationValue(durationData["minute3"]);
+            setSongsData(songsDataAll.filter(elm => elm.note_or_cord.includes('M')).flat(1));
+            setTotalSongs(songsDataAll.filter(elm => elm.note_or_cord.includes('M')).flat(1).length);
+            handleClickSong(songsDataAll.filter(elm => elm.note_or_cord.includes('M')).flat(1), 0);
+            highlightNord(songsDataAll.filter(elm => elm.note_or_cord.includes('M')).flat(1), 0);
+          }
+          else if (durationDataIndex == "3") {
+            setDurationDataIndex(0);
+            setDurationValue("");
+            setSongsData(songsDataAll);
+            setTotalSongs(songsDataAll.length);
+            handleClickSong(songsDataAll, 0);
+            let noteList = songsDataAll.map(elm => elm.note_or_cord);
+            noteList = [...new Set(noteList)];
+            noteList.forEach(elm => {
+              nordDataList.push(elm.includes('m') ? elm.slice(0, elm.length - 1) + '-' : elm.includes('M') ? elm.slice(0, elm.length - 1) + '+' : elm);
+              const selected_nord = (elm.includes('m') || elm.includes('M')) ? elm.slice(0, elm.length - 1) : elm;
+              const selecetd_index = data["c3"].indexOf(selected_nord);
+              if (!elm.includes('m') && !elm.includes('M')) {
+                setHighlightedNord(prev => ({ ...prev, c3: [selecetd_index] }));
+              } else if (elm.includes('m')) {
+                setHighlightedNord(prev => ({ ...prev, c2: [selecetd_index] }));
+              } else if (elm.includes('M')) {
+                setHighlightedNord(prev => ({ ...prev, c1: [selecetd_index] }));
+              }
+            });
+          } else {
+            setSongsData([]);
+            setHighlightedNord({ c1: [], c2: [], c3: [] });
+            setDurationValue("");
+            return false;
+          }
         }
+        let nord = { c1: [], c2: [], c3: [] };
+        nordDataList.forEach(elm => {
+          if (elm.includes('-')) {
+            nord.c2.push(data['c3'].indexOf(elm.slice(0, elm.length - 1)));
+          } else if (elm.includes('+')) {
+            nord.c1.push(data['c3'].indexOf(elm.slice(0, elm.length - 1)));
+          } else if (!elm.includes('-') && !elm.includes('+')) {
+            nord.c3.push(data['c3'].indexOf(elm));
+          }
+        });
+        setNord(nord);
+        setNordData(nordDataList);
       }
-      let nord = { c1: [], c2: [], c3: [] };
-      nordDataList.forEach(elm => {
-        if(elm.includes('-')){
-          nord.c2.push(data['c3'].indexOf(elm.slice(0, elm.length - 1)))
-        }else if(elm.includes('+')){
-          nord.c1.push(data['c3'].indexOf(elm.slice(0, elm.length - 1)))
-        }else if(!elm.includes('-') && !elm.includes('+')){
-          nord.c3.push(data['c3'].indexOf(elm))
-        }
-      })
-      setNord(nord);
-      setNordData(nordDataList);
     }
-    //}
   }
 
   function toggleActiveStyle (ind) {
@@ -1103,7 +1150,7 @@ function MusicWheel (props) {
   }
 
   function getNord () {
-    var str2 = nordData
+    var str2 = nordData;
     let final_result = [];
     for (let i = 0; i < nordData.length; i++) {
       let str = nordData[i];
@@ -1116,6 +1163,17 @@ function MusicWheel (props) {
       }
       final_result.push(str);
     }
+    // if (nordData.length === 0) {
+    //   if (durationDataIndex === 1) {
+    //     final_result.push(...data.c3);
+    //   }
+    //   else if (durationDataIndex === 2) {
+    //     final_result.push(...data.c3.map(elm => elm + 'm'));
+    //   }
+    //   else if (durationDataIndex === 3) {
+    //     final_result.push(...data.c3.map(elm => elm + 'M'));
+    //   }
+    // }
     return final_result;
   }
 
@@ -1127,7 +1185,6 @@ function MusicWheel (props) {
     // secondsToHms(totalduraion);
     props.setAllImageCount(0);
   }
-
 
   function fetchSongsData () {
     var myHeaders = new Headers();
@@ -1147,7 +1204,7 @@ function MusicWheel (props) {
     urlencoded.append("tempo", tempoData[tempoIndex]);
     urlencoded.append("image_type", imageTypeIndex);
     urlencoded.append("package", packageActive);
-
+   
     var requestOptions = {
       method: "POST",
       headers: myHeaders,
@@ -1632,8 +1689,9 @@ function MusicWheel (props) {
                   setPackageDataIndex(0);
                   setIntensityIndex(0);
                   setTempoIndex(0);
-                  setPackageDataIndex(1);
+                  setPackageDataIndex(2);
                   setPackageActive("F");
+                  setGroups('');
                   setDurationDataIndex(0);
                   setDurationValue("");
                   setDisable(false);
