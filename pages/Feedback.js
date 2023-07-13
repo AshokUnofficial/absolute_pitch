@@ -326,7 +326,7 @@ const Feedback = ({ setFeedback }) => {
                   src={Wheel}
                   alt="Picture of the author"
                   width="800"
-                  height={380}
+                  height={580}
                 />
                 {/* </Grid>
             </Grid> */}
