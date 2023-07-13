@@ -10,6 +10,15 @@ body {
   /* background-image: url("../public/assets/img3.jpg"); */
 }
 
+*::-webkit-scrollbar {
+  display: none;
+}
+
+.MuiButton-root:hover{
+  background-color: navy;
+  color: #FFF;
+}
+
 /* CALENDAR CSS */
 .fc .fc-more-popover .fc-popover-body {
   display: flex;
@@ -18,7 +27,7 @@ body {
   width: 220px;
 }
 
-.fc-direction-ltr{
+.fc-direction-ltr {
   height: 100%;
 }
 

@@ -789,8 +789,8 @@ const useStyles = makeStyles({
     // height: "150px",
     // width: "150px",
 
-    height: "245px",
-    width: "245px",
+    height: "155px",
+    width: "155px",
 
     border: "none",
     // border:'2px solid red',
@@ -1099,7 +1099,7 @@ const useStyles = makeStyles({
     display: "flex",
     justifyContent: "center",
     width: "60%",
-    marginLeft: "20%",
+    margin: "0 auto",
     "@media  (min-width: 1600px) and (max-width: 1920px)": {
       // height: '280px',
       width: "60%",

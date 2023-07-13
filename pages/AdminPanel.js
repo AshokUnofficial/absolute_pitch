@@ -33,13 +33,14 @@ const Calendar = dynamic(() => import("../src/Calendar"));
 
 const style = {
   position: 'absolute',
-  // top: '5%',
-  // left: '45%',
-  overflow: 'auto',
-  // transform: 'translate(-50%, -50%)',
-  width: '100%',
-  height: '100%',
-  background: 'skyblue',
+  borderRadius: '10px',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  overflow: 'hidden',
+  width: '60%',
+  height: '90%',
+  background: '#FFF',
   boxShadow: 24,
   "@media  (min-width: 300px) and (max-width: 450px)": {
     borderRadius: "5px",
@@ -77,7 +78,7 @@ const AdminPanel = () => {
   const handleLogout = () => {
     Cookies.remove('userName');
     Cookies.remove('userId');
-    router.push('/SigninPage'); 
+    router.push('/SigninPage');
   };
 
   useEffect(() => {
@@ -150,8 +151,11 @@ const AdminPanel = () => {
         onClose={handleClose}
       >
         <Box sx={style}>
-          <div> <span style={{ float: 'right', borderRadius: '50%', fontSize: '40px', width: '4%', justifyContent: 'center', alignItems: 'center', textAlign: 'center', cursor: 'pointer' }} onClick={feedBackClose}>X</span></div>
-          <Feedback />
+          <div style={{height: '50px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 15px', color: '#4c4c4c'}}>
+            <h2>Feedback Form</h2>
+            <span style={{ float: 'right', borderRadius: '50%', fontSize: '40px', width: '4%', justifyContent: 'center', alignItems: 'center', textAlign: 'center', cursor: 'pointer' }} onClick={feedBackClose}>X</span>
+          </div>
+          <Feedback setFeedback={setFeedback} />
         </Box>
       </Modal>
     </div >

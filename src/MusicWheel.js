@@ -743,16 +743,16 @@ function MusicWheel (props) {
     // if (imageTypeIndex == "") {
     //   alert("Please seect any ImageType Key");
     // } else {
-    if (durationDataIndex !== 0 && nordData.length > 0) { 
-      if(nord.c1.length > 0 && c !== 'c1'){
+    if (durationDataIndex !== 0 && nordData.length > 3) {
+      // if (nord.c1.length > 0 && c !== 'c1') {
+      //   return false;
+      // }
+      // else if (nord.c2.length > 0 && c !== 'c2') {
+      //   return false;
+      // }
+      // else if (nord.c3.length > 0 && c !== 'c3') {
         return false;
-      }
-      else if(nord.c2.length > 0 && c !== 'c2'){
-        return false;
-      }
-      else if(nord.c3.length > 0 && c !== 'c3'){
-        return false;
-      }
+      // }
     }
     const temp = { ...nord };
     const count = [...temp["c1"], ...temp["c2"], ...temp["c3"]]?.length || 0;
@@ -924,7 +924,7 @@ function MusicWheel (props) {
     }
     if (type == "Duration") {
       if (durationDataIndex === 0 && nordData.length === 0) {
-        setNord({ c1: [], c2: [], c3: data['c3'].map((_, index) => index) });
+        // setNord({ c1: [], c2: [], c3: data['c3'].map((_, index) => index) });
         setNordData(data.c3);
         setDurationDataIndex(prev => prev + 1);
         setSongsData(songsDataAll.filter(elm => !elm.note_or_cord.includes('m') && !elm.note_or_cord.includes('M')).flat(1));
@@ -932,7 +932,7 @@ function MusicWheel (props) {
         setTotalSongs(songsDataAll.filter(elm => !elm.note_or_cord.includes('m') && !elm.note_or_cord.includes('M')).flat(1).length);
       }
       else if (durationDataIndex === 1 && nordData.length > 3) {
-        setNord({ c1: [], c2: data['c3'].map((_, index) => index), c3: [] });
+        // setNord({ c1: [], c2: data['c3'].map((_, index) => index), c3: [] });
         setNordData(data.c3.map(elm => elm + '-'));
         setDurationDataIndex(prev => prev + 1);
         setSongsData(songsDataAll.filter(elm => elm.note_or_cord.includes('m')).flat(1));
@@ -940,7 +940,7 @@ function MusicWheel (props) {
         setTotalSongs(songsDataAll.filter(elm => elm.note_or_cord.includes('m')).flat(1).length);
       }
       else if (durationDataIndex === 2 && nordData.length > 3) {
-        setNord({ c1: data['c3'].map((_, index) => index), c2: [], c3: [] });
+        // setNord({ c1: data['c3'].map((_, index) => index), c2: [], c3: [] });
         setNordData(data.c3.map(elm => elm + '+'));
         setDurationDataIndex(prev => prev + 1);
         setSongsData(songsDataAll.filter(elm => elm.note_or_cord.includes('M')).flat(1));
@@ -950,7 +950,7 @@ function MusicWheel (props) {
       else if (durationDataIndex === 3 && nordData.length > 3) {
         setDurationDataIndex(1);
         setHighlightedNord({ c1: [], c2: [], c3: [] });
-        setNord({ c1: [], c2: [], c3: data['c3'].map((_, index) => index) });
+        // setNord({ c1: [], c2: [], c3: data['c3'].map((_, index) => index) });
         setNordData(data.c3);
         setSongsData(songsDataAll.filter(elm => !elm.note_or_cord.includes('m') && !elm.note_or_cord.includes('M')).flat(1));
         handleClickSong(songsDataAll.filter(elm => !elm.note_or_cord.includes('m') && !elm.note_or_cord.includes('M')).flat(1), 0);
@@ -1177,10 +1177,6 @@ function MusicWheel (props) {
     return final_result;
   }
 
-  // function refreshPage() {
-  //   window.location.reload(false);
-  // }
-
   function ResetCounter () {
     // secondsToHms(totalduraion);
     props.setAllImageCount(0);
@@ -1204,7 +1200,7 @@ function MusicWheel (props) {
     urlencoded.append("tempo", tempoData[tempoIndex]);
     urlencoded.append("image_type", imageTypeIndex);
     urlencoded.append("package", packageActive);
-   
+
     var requestOptions = {
       method: "POST",
       headers: myHeaders,
@@ -1255,10 +1251,102 @@ function MusicWheel (props) {
 
   return (
     <div className={classes.circleCard}>
-      <div className={classes.resetBtn} style={{ padding: '10px', marginLeft: '0', color: '#0d6efd', justifyContent: 'space-between', width: '95%' }}>
+      <div className={classes.resetBtn} style={{ padding: '10px', marginLeft: '0', color: '#0d6efd', justifyContent: 'space-between', width: '100%', boxSizing: 'border-box', alignItems: 'center' }}>
         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" className="bi bi-question-circle-fill" viewBox="0 0 16 16">
           <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.496 6.033h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286a.237.237 0 0 0 .241.247zm2.325 6.443c.61 0 1.029-.394 1.029-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94 0 .533.425.927 1.01.927z" />
         </svg>
+        <div className={classes.resetBtn}>
+          <Grid
+            container
+            spacing={1}
+            style={{ border: "none" }}
+          >
+            <Grid item xs={3} md={4}>
+              <button
+                className={`${imageTypeActive == "1"
+                  ? classes.activeKey
+                  : disable
+                    ? classes.topButtonsDisable
+                    : classes.topButtons
+                  }`}
+                onClick={(e) => {
+                  btnHandler("Letter", e, 1);
+                }}
+                style={{
+                  borderRadius: "5px",
+                  width: "60%",
+                  height: "98%",
+                  marginLeft: "50px",
+                }}
+              >
+                {/* A Ab B Bb */}
+                <Image
+                  src={letter}
+                  alt="alt"
+                  width="120px"
+                  height="70px"
+                  style={{ marginTop: "-2px" }}
+                />
+              </button>
+            </Grid>
+            <Grid item xs={4} md={4}>
+              <button
+                className={`${imageTypeActive == "2"
+                  ? classes.activeKey
+                  : disable
+                    ? classes.topButtonsDisable
+                    : classes.topButtons
+                  }`}
+                onClick={(e) => {
+                  btnHandler("Staff", e, 2);
+                }}
+                style={{
+                  borderRadius: "5px",
+                  width: "60%",
+                  height: "98%",
+                  marginLeft: "40px",
+                }}
+              // disabled={`disable`}
+              >
+                <Image
+                  src={staff}
+                  alt="alt"
+                  width="120px"
+                  height="70px"
+                  style={{ marginTop: "-2px" }}
+                />
+              </button>
+            </Grid>
+            <Grid item xs={4} md={4}>
+              <button
+                className={`${imageTypeActive == "3"
+                  ? classes.activeKey
+                  : disable
+                    ? classes.topButtonsDisable
+                    : classes.topButtons
+                  // imageTypeActive == "3" ? classes.activeKey : premiumfirst =='1' ? classes.premiumActive : classes.topButtons
+                  }`}
+                onClick={(e) => {
+                  btnHandler("Keys", e, 3);
+                }}
+                style={{
+                  borderRadius: "5px",
+                  width: "60%",
+                  height: "98%",
+                  marginLeft: "20px",
+                }}
+              // disabled={`disable`}
+              >
+                <Image
+                  src={keys}
+                  alt="alt"
+                  height="90px"
+                // style={{ maxWidth: "100%", }}
+                />
+              </button>
+            </Grid>
+          </Grid>
+        </div>
         <button
           style={{
             borderRadius: "5px",
@@ -1367,269 +1455,198 @@ function MusicWheel (props) {
           </Grid>
         </Grid> */}
       </div>
-      <div className={classes.resetBtn}>
-        <Grid
-          container
-          spacing={1}
-          style={{ border: "none" }}
-        >
-          <Grid item xs={3} md={4}>
-            <button
-              className={`${imageTypeActive == "1"
-                ? classes.activeKey
-                : disable
-                  ? classes.topButtonsDisable
-                  : classes.topButtons
-                }`}
-              onClick={(e) => {
-                btnHandler("Letter", e, 1);
-              }}
-              style={{
-                borderRadius: "5px",
-                width: "60%",
-                height: "98%",
-                marginLeft: "50px",
-              }}
-            >
-              {/* A Ab B Bb */}
-              <Image
-                src={letter}
-                alt="alt"
-                width="120px"
-                height="70px"
-                style={{ marginTop: "-2px" }}
-              />
-            </button>
-          </Grid>
-          <Grid item xs={4} md={4}>
-            <button
-              className={`${imageTypeActive == "2"
-                ? classes.activeKey
-                : disable
-                  ? classes.topButtonsDisable
-                  : classes.topButtons
-                }`}
-              onClick={(e) => {
-                btnHandler("Staff", e, 2);
-              }}
-              style={{
-                borderRadius: "5px",
-                width: "60%",
-                height: "98%",
-                marginLeft: "40px",
-              }}
-            // disabled={`disable`}
-            >
-              <Image
-                src={staff}
-                alt="alt"
-                width="120px"
-                height="70px"
-                style={{ marginTop: "-2px" }}
-              />
-            </button>
-          </Grid>
-          <Grid item xs={4} md={4}>
-            <button
-              className={`${imageTypeActive == "3"
-                ? classes.activeKey
-                : disable
-                  ? classes.topButtonsDisable
-                  : classes.topButtons
-                // imageTypeActive == "3" ? classes.activeKey : premiumfirst =='1' ? classes.premiumActive : classes.topButtons
-                }`}
-              onClick={(e) => {
-                btnHandler("Keys", e, 3);
-              }}
-              style={{
-                borderRadius: "5px",
-                width: "60%",
-                height: "98%",
-                marginLeft: "20px",
-              }}
-            // disabled={`disable`}
-            >
-              <Image
-                src={keys}
-                alt="alt"
-                height="90px"
-              // style={{ maxWidth: "100%", }}
-              />
-            </button>
-          </Grid>
-        </Grid>
-      </div>
-      <div style={{ marginTop: "2%" }}>
-        <Grid container spacing={1}>
-          <Grid item xs={2} md={2} className={classes.tempoBtnContainer}>
-            <button
-              className={`${classes.packageBtn} ${freeActive ? classes.disableBtn : ""
-                }`}
-              onClick={(e) => {
-                btnHandler("Package", e);
-              }}
-            >
-              {packageDataIndex == 1 ? (
-                <Image src={Mix} alt="..." />
-              ) : packageDataIndex == 2 ? (
-                <Image src={Mix1} alt="..." />
-              ) : packageDataIndex == 3 ? (
-                <Image src={Mix2} alt="..." />
-              ) : packageDataIndex == 4 ? (
-                <Image src={Mix3} alt="..." />
-              ) : (
-                <Image src={Mix} alt="..." />
-              )}
-            </button>
 
-            <button
-              className={`${classes.durationBtn} ${durationDataIndex > 0 ? "" : ""
-                }`}
-              onClick={(e) => {
-                btnHandler("Duration", e);
-              }}
-            >
-              {durationDataIndex == 1 ? (
-                <Image src={Duration1} alt="..." />
-              ) : durationDataIndex == 2 ? (
-                <Image src={Duration2} alt="..." />
-              ) : durationDataIndex == 3 ? (
-                <Image src={Duration3} alt="..." />
-              ) : (
-                <Image
-                  src={DurationDefault}
-                  alt="..."
-                />
-              )}{" "}
-            </button>
-          </Grid>
-          <Grid item xs={8} md={8} className={classes.wheelContianer}>
-            <div className={classes.mainCircle}>
-              <ul className="circle">
-                {data["c1"].map((val, ind) => (
-                  <li key={classes.circle + "-" + ind} className={styles.li}>
+      <div style={{ marginTop: "2%", position: 'relative' }}>
+        <Grid container spacing={1} justifyContent='center'>
+          {/* <Grid item xs={2} md={2} className={classes.tempoBtnContainer}> */}
+          <button
+            className={`${classes.packageBtn} ${freeActive ? classes.disableBtn : ""
+              }`}
+            style={{
+              top: "3%",
+              left: "0",
+            }}
+            onClick={(e) => {
+              btnHandler("Package", e);
+            }}
+          >
+            {packageDataIndex == 1 ? (
+              <Image src={Mix} alt="..." />
+            ) : packageDataIndex == 2 ? (
+              <Image src={Mix1} alt="..." />
+            ) : packageDataIndex == 3 ? (
+              <Image src={Mix2} alt="..." />
+            ) : packageDataIndex == 4 ? (
+              <Image src={Mix3} alt="..." />
+            ) : (
+              <Image src={Mix} alt="..." />
+            )}
+          </button>
+
+          <button
+            className={`${classes.durationBtn} ${durationDataIndex > 0 ? "" : ""
+              }`}
+            style={{
+              top: 'unset',
+              bottom: "10%",
+              left: "0",
+            }}
+            onClick={(e) => {
+              btnHandler("Duration", e);
+            }}
+          >
+            {durationDataIndex == 1 ? (
+              <Image src={Duration1} alt="..." />
+            ) : durationDataIndex == 2 ? (
+              <Image src={Duration2} alt="..." />
+            ) : durationDataIndex == 3 ? (
+              <Image src={Duration3} alt="..." />
+            ) : (
+              <Image
+                src={DurationDefault}
+                alt="..."
+              />
+            )}{" "}
+          </button>
+          {/* </Grid> */}
+          {/* <Grid item xs={8} md={8} className={classes.wheelContianer}> */}
+          <div className={classes.mainCircle}>
+            <ul className="circle">
+              {data["c1"].map((val, ind) => (
+                <li key={classes.circle + "-" + ind} className={styles.li}>
+                  <div
+                    className={`${styles.text} ${nord["c1"].includes(ind) ? styles.bluebg : ""
+                      }  ${highlightedNord["c1"].includes(ind)
+                        ? styles.greenbg
+                        : ""
+                      }`}
+                    onClick={(e) => changeHandler("c1", ind, e)}
+                  >
+                    {val}
+                  </div>
+                </li>
+              ))}
+
+              <ul className="circle2">
+                {data["c2"].map((val, ind) => (
+                  <li
+                    key={classes.circle2 + "-" + ind}
+                    className={styles.list}
+                  >
                     <div
-                      className={`${styles.text} ${nord["c1"].includes(ind) ? styles.bluebg : ""
-                        }  ${highlightedNord["c1"].includes(ind)
+                      className={`${styles.textTwo} ${nord["c2"].includes(ind) ? styles.bluebg : ""
+                        } ${highlightedNord["c2"].includes(ind)
                           ? styles.greenbg
                           : ""
                         }`}
-                      onClick={(e) => changeHandler("c1", ind, e)}
+                      onClick={(e) => changeHandler("c2", ind, e)}
                     >
-                      {val}
+                      {val} {nord["c2"].includes(val)}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+
+              <ul className="circle3">
+                {data["c3"].map((val, ind) => (
+                  <li
+                    key={classes.circle3 + "-" + ind}
+                    className={styles.list}
+                  >
+                    <div
+                      className={`${styles.textThird} ${nord["c3"].includes(ind) ? styles.bluebg : ""
+                        } ${highlightedNord["c3"].includes(ind)
+                          ? styles.greenbg
+                          : ""
+                        }`}
+                      onClick={(e) => changeHandler("c3", ind, e)}
+                    >
+                      {nl2br(data["c3String"][ind])}
                     </div>
                   </li>
                 ))}
 
-                <ul className="circle2">
-                  {data["c2"].map((val, ind) => (
-                    <li
-                      key={classes.circle2 + "-" + ind}
-                      className={styles.list}
-                    >
-                      <div
-                        className={`${styles.textTwo} ${nord["c2"].includes(ind) ? styles.bluebg : ""
-                          } ${highlightedNord["c2"].includes(ind)
-                            ? styles.greenbg
-                            : ""
-                          }`}
-                        onClick={(e) => changeHandler("c2", ind, e)}
-                      >
-                        {val} {nord["c2"].includes(val)}
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-
-                <ul className="circle3">
-                  {data["c3"].map((val, ind) => (
-                    <li
-                      key={classes.circle3 + "-" + ind}
-                      className={styles.list}
-                    >
-                      <div
-                        className={`${styles.textThird} ${nord["c3"].includes(ind) ? styles.bluebg : ""
-                          } ${highlightedNord["c3"].includes(ind)
-                            ? styles.greenbg
-                            : ""
-                          }`}
-                        onClick={(e) => changeHandler("c3", ind, e)}
-                      >
-                        {nl2br(data["c3String"][ind])}
-                      </div>
-                    </li>
-                  ))}
-
-                  <div className={classes.circle4}>
-                    <Image
-                      src={playBtn}
-                      className={classes.playerBtn}
-                      alt="alt"
-                      onClick={(e) => {
-                        if (songsData.length > 0 && props.musicIndex !== 0) {
-                          handleClickSong(songsData, 0);
-                          props.setIndex(0);
-                          props.setPlaySongposition(0);
-                          props.setDurationLast(0);
-                          setTotalSongs(songsData.length);
-                        } else {
-                          fetchSongsData();
-                        }
-                      }}
-                      style={{
-                        width: "60% !important",
-                        height: "60% !important",
-                      }}
-                    />
-                  </div>
-                </ul>
+                <div className={classes.circle4}>
+                  <Image
+                    src={playBtn}
+                    className={classes.playerBtn}
+                    alt="alt"
+                    onClick={(e) => {
+                      if (songsData.length > 0 && props.musicIndex !== 0) {
+                        handleClickSong(songsData, 0);
+                        props.setIndex(0);
+                        props.setPlaySongposition(0);
+                        props.setDurationLast(0);
+                        setTotalSongs(songsData.length);
+                      } else {
+                        fetchSongsData();
+                      }
+                    }}
+                    style={{
+                      width: "60% !important",
+                      height: "60% !important",
+                    }}
+                  />
+                </div>
               </ul>
-            </div>
-          </Grid>
+            </ul>
+          </div>
+          {/* </Grid> */}
 
-          <Grid item xs={2} md={2} className={classes.tempoBtnContainer}>
-            <button
-              id="TempoBtn"
-              className={`${classes.tempoBtnNew} ${tempoIndex > 0 ? "" : ""}`}
-              onClick={(e) => {
-                btnHandler("Tempo", e);
-              }}
-            >
-              {tempoIndex == 0 ? (
-                <Image src={Tempo} alt="..." />
-              ) : tempoIndex == 1 ? (
-                <Image src={Tempo1} alt="..." />
-              ) : tempoIndex == 2 ? (
-                <Image src={Tempo2} alt="..." />
-              ) : tempoIndex == 3 ? (
-                <Image src={Tempo3} alt="..." />
-              ) : tempoIndex == 4 ? (
-                <Image src={Tempo4} alt="..." />
-              ) : (
-                <Image src={Tempo} alt="..." />
-              )}
-            </button>
+          {/* <Grid item xs={2} md={2} className={classes.tempoBtnContainer}> */}
+          <button
+            id="TempoBtn"
+            className={`${classes.tempoBtnNew} ${tempoIndex > 0 ? "" : ""}`}
+            style={{
+              top: "2%",
+              right: "1%",
+              height: '155px',
+              width: '155px',
+            }}
+            onClick={(e) => {
+              btnHandler("Tempo", e);
+            }}
+          >
+            {tempoIndex == 0 ? (
+              <Image src={Tempo} alt="..." />
+            ) : tempoIndex == 1 ? (
+              <Image src={Tempo1} alt="..." />
+            ) : tempoIndex == 2 ? (
+              <Image src={Tempo2} alt="..." />
+            ) : tempoIndex == 3 ? (
+              <Image src={Tempo3} alt="..." />
+            ) : tempoIndex == 4 ? (
+              <Image src={Tempo4} alt="..." />
+            ) : (
+              <Image src={Tempo} alt="..." />
+            )}
+          </button>
 
-            <button
-              className={`${classes.IntensityBtnNew} ${disableIntensity ? classes.disableBtn : ""
-                }`}
-              onClick={(e) => {
-                btnHandler("Intensity", e);
+          <button
+            className={`${classes.IntensityBtnNew} ${disableIntensity ? classes.disableBtn : ""
+              }`}
+              style={{
+                top: 'unset',
+                bottom: "11%",
+                right: "1%",
               }}
-            >
-              {intensityIndex == 0 ? (
-                <Image src={Intencity} alt="..." />
-              ) : intensityIndex == 1 ? (
-                <Image src={Intencity2} alt="..." />
-              ) : intensityIndex == 2 ? (
-                <Image src={Intencity3} alt="..." />
-              ) : intensityIndex == 3 ? (
-                <Image src={Intencity4} alt="..." />
-              ) : (
-                <Image src={Intencity} alt="..." />
-              )}
-            </button>
-          </Grid>
+            onClick={(e) => {
+              btnHandler("Intensity", e);
+            }}
+          >
+            {intensityIndex == 0 ? (
+              <Image src={Intencity} alt="..." />
+            ) : intensityIndex == 1 ? (
+              <Image src={Intencity2} alt="..." />
+            ) : intensityIndex == 2 ? (
+              <Image src={Intencity3} alt="..." />
+            ) : intensityIndex == 3 ? (
+              <Image src={Intencity4} alt="..." />
+            ) : (
+              <Image src={Intencity} alt="..." />
+            )}
+          </button>
+          {/* </Grid> */}
         </Grid>
 
         <div className={classes.resetBtn}>

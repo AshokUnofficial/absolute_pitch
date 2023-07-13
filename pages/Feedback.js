@@ -16,6 +16,9 @@ import {
   InputLabel,
   FormControl,
 } from "@material-ui/core";
+import Cookies from "js-cookie";
+import { Alert } from "@mui/material";
+import Link from "next/link";
 const useStyles = makeStyles({
   root: {
     position: "relative",
@@ -23,22 +26,22 @@ const useStyles = makeStyles({
     background: "#fff",
   },
   containerBox: {
-    // height: "auto",
-    width: "99.5%",
+    width: "100%",
+    boxSizing: "border-box",
+    height: "100vh",
     padding: "10px",
     background: "#fff !important",
-    height: "100vh",
     "@media (min-width: 770px) and (max-width:1024px)": {
       height: "95%",
     },
     "@media (min-width: 1280px) and (max-width:1680px)": {
       // marginLeft: "1%",
       width: "90%",
-      border: "2px solid yellow",
+      // border: "2px solid yellow",
     },
     "@media (min-width: 600px) and (max-width:768px)": {
       height: "125vh",
-      border: "2px solid blue",
+      // border: "2px solid blue",
     },
     "@media  (min-width: 1681px)and (max-width: 1920px)": {
       width: "100%",
@@ -53,26 +56,20 @@ const useStyles = makeStyles({
       padding: "5px",
     },
   },
-  leftSection: {
-    padding: "30px 5px 2px 0px",
-  },
-  rightSection: {
-    padding: "30px 0px 2px 10px",
-  },
   typo_design: {
     fontFamily: "Nunito Sans",
     fontStyle: "normal",
     fontWeight: "600",
     fontSize: "36px",
-    lineHeight: "50px",
+    lineHeight: "15px",
     textAlign: "center",
     alignItems: "center",
     marginTop: "10px",
     color: "#000000",
     background: "Navy",
     color: "#fff",
-    borderRadius: "20px",
-    padding: "22px",
+    borderRadius: "10px",
+    padding: "20px",
     width: "80%",
     "@media (max-width: 958px)": {
       fontSize: "16px",
@@ -80,23 +77,24 @@ const useStyles = makeStyles({
     },
   },
   typo_design2: {
+    color: "#fff",
+    width: "100%",
+    boxSizing: 'border-box',
     fontFamily: "Nunito Sans",
     fontStyle: "normal",
     fontWeight: "600",
-    fontSize: "36px",
+    fontSize: "20px",
     justifyContent: "center",
     display: "flex",
     textAlign: "center",
     alignItems: "center",
     marginTop: "10px",
-    color: "#000000",
+    // color: "#000000",
     background: "Navy",
-    color: "#fff",
-    borderRadius: "20px",
-    padding: "24px",
-    width: "80%",
+    // borderRadius: "20px",
+    padding: "3px",
     // lineHeight: "50px",
-    height: "76%",
+    height: "fit-content",
     "@media (max-width: 958px)": {
       fontSize: "16px",
       lineHeight: "22px",
@@ -135,7 +133,7 @@ const useStyles = makeStyles({
     border: " 2px solid Navy !important",
     borderRadius: "10px",
     marginTop: "12px",
-    padding: "18px 0px 18px 0px",
+    // padding: "18px 0px 18px 0px",
     "&:active": {
       border: " 2px solid Navy !important",
       border: " 2px solid Navy !important",
@@ -163,8 +161,8 @@ const useStyles = makeStyles({
 
     "& .MuiInputLabel-filled.MuiInputLabel-shrink.MuiInputLabel-marginDense": {
       transform: "translate(30px, -8px) scale(0.75)",
-      background: "#fff",
-      padding: "0 50px",
+      background: "#FFF",
+      padding: "0 10px",
     },
 
     "& .MuiFilledInput-root": {
@@ -189,18 +187,18 @@ const useStyles = makeStyles({
       fontSize: "25px",
     },
     "& .MuiInputLabel-filled": {
-      transform: "translate(30px, 30px) scale(1)",
-      fontSize: "25px",
+      // transform: "translate(30px, 30px) scale(1)",
+      fontSize: "19px",
     },
   },
   songBox: {
     width: "100%",
-    height: "17vh",
+    height: "auto",
     // border: "2px solid yellow",
   },
   systemBox: {
     width: "100%",
-    height: "28vh",
+    // height: "28vh",
     // background:'grey',
   },
   IconBox: {
@@ -208,20 +206,27 @@ const useStyles = makeStyles({
     display: "flex",
     textAlign: "center",
     alignItems: "center",
-    height: "50%",
-    background: "grey",
+    // height: "50%",
+    // background: "grey",
   },
   iconDesign: {
     color: "Navy",
-    width: "100px !important",
-    height: "100px !important",
+    width: "50px !important",
+    height: "50px !important",
     background: "#fff",
     borderRadius: "50%",
     padding: "10px",
     cursor: "pointer",
   },
+  imgBox: {
+    width: "90% !important",
+    height: "300px !important",
+    minWidth: 'unset !important',
+    minHeight: 'unset !important',
+    margin: '0 !important'
+  },
 });
-const Feedback = () => {
+const Feedback = ({ setFeedback }) => {
   const classes = useStyles();
   const [classics, setClassics] = useState("");
   const [Original, setOriginal] = useState("");
@@ -229,9 +234,26 @@ const Feedback = () => {
   const [wheel, setWheel] = useState("");
   const [testimonial, setTestimonial] = useState("");
   const [about, setAbout] = useState("");
-  const Data = (e) => {
-    alert(classics);
+  const [like, setLike] = useState(false);
+  const [disLike, setDislike] = useState(false);
+  const [formSuccess, setFormSuccess] = useState(false);
+  const [error, setError] = useState({
+    classics: false,
+    Original: false,
+    buttons: false,
+    wheel: false,
+  });
 
+  const Data = (e) => {
+    if (!classics || !Original || !buttons || !wheel) {
+      setError({
+        classics: !classics,
+        Original: !Original,
+        buttons: !buttons,
+        wheel: !wheel,
+      });
+      return false;
+    }
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
@@ -256,233 +278,259 @@ const Feedback = () => {
       "https://mylatinhome.com/absolute/appdata/webservice.php",
       requestOptions
     )
-      .then((response) => response.text())
-      .then((result) => console.log(result))
+      .then((response) => response.json())
+      .then((result) => result.success ? setFormSuccess(true) : alert('Something went wrong! Please try again.'))
       .catch((error) => console.log("error", error));
   };
   return (
-    <form id="my-form">
-      <Grid container spacing={0} className={classes.containerBox}>
-        <Grid
-          item
-          xs={12}
-          md={4}
-          sm={12}
-          sx={12}
-          className={classes.leftSection}
-        >
-          <div className={classes.systemBox}>
-            <div style={{ marginTop: "2px", height: "58%", width: "100%" }}>
-              <Image
-                src={Songs}
-                alt="Picture of the author"
-                width="800"
-                height={190}
-              />
-            </div>
-            <div>
-              {" "}
-              <h1 className={classes.typo_design2} style={{ width: "93%" }}>
-                Songs
-              </h1>
-            </div>
-          </div>
-          <div className={classes.systemBox}>
-            <Grid container spacing={1}>
-              <Grid item md={6} xs={12} style={{ background: "grey" }}>
+    <>
+      {!formSuccess ?
+        <form id="my-form" style={{ overflowX: "auto", height: '92%' }}>
+          <Grid container spacing={0} className={classes.containerBox}>
+            <Grid
+              item
+              xs={12}
+              md={12}
+              sm={12}
+              sx={12}
+              className={classes.leftSection}
+            >
+              <div className={classes.systemBox}>
+                <div style={{ width: "100%" }}>
+                  <div>
+                    {" "}
+                    <h1 className={classes.typo_design2}>
+                      Songs
+                    </h1>
+                  </div>
+                  <Image
+                    src={Songs}
+                    alt="Picture of the author"
+                    width="800"
+                    height={190}
+                  />
+                </div>
+              </div>
+              <div className={classes.systemBox}>
+                {/* <Grid container>
+              <Grid item md={12} xs={12} className={classes.imgBox}>                 */}
+                <div
+                  style={{
+                    justifyContent: "center",
+                    display: "flex",
+                  }}
+                >
+                  <h1 className={classes.typo_design2}>System</h1>
+                </div>
                 <Image
                   src={Wheel}
                   alt="Picture of the author"
-                  width={500}
+                  width="800"
                   height={380}
-                  style={{ marginTop: "2px", borderRadius: "20px" }}
                 />
-              </Grid>
-              <Grid item md={6} xs={12} style={{ position: "relative" }}>
+                {/* </Grid>
+            </Grid> */}
+              </div>
+            </Grid>
+            <Grid item xs={12} md={12} sm={12} className={classes.rightSection}>
+              <div className={classes.systemBox}>
                 <div
                   style={{
-                    height: "100%",
-                    background: "grey",
                     justifyContent: "center",
                     display: "flex",
+                    marginTop: "10px",
                   }}
                 >
-                  <h1 className={classes.typo_design2}>SYSTEM</h1>
+                  <h1 className={classes.typo_design2}>Fill The Below Details</h1>
                 </div>
-              </Grid>
-            </Grid>
-          </div>
-          <div className={classes.systemBox}>
-            <Grid container spacing={1} style={{ height: "100%" }}>
-              <Grid item md={6} xs={12} style={{ height: "98%" }}>
-                <div className={classes.IconBox}>
-                  <ThumbUpIcon
-                    className={classes.iconDesign}
-                    onClick={(e) => alert("Like clicked")}
-                  />
-                </div>
-                <div className={classes.IconBox}>
-                  <ThumbDownIcon
-                    className={classes.iconDesign}
-                    onClick={(e) => alert("DisLike clicked")}
-                  />
-                </div>
-                {/* <Image
-              src={Wheel}
-              alt="Picture of the author"
-              width={500}
-              height={420}
-              style={{marginTop:'10px'}}
-            /> */}
-              </Grid>
-              <Grid item md={6} xs={12} style={{ position: "relative" }}>
-                <div
-                  style={{
-                    height: "98%",
-                    background: "grey",
-                    justifyContent: "center",
-                    display: "flex",
-                  }}
-                >
-                  <h1 className={classes.typo_design2}>Anything</h1>
-                </div>
-              </Grid>
-            </Grid>
-          </div>
-        </Grid>
-        <Grid item xs={12} md={8} sm={12} className={classes.rightSection}>
-          <div className={classes.songBox}>
-            <Grid container spacing={1}>
-              <Grid item md={3} xs={12}>
+              </div>
+              <div className={classes.songBox}>
+                <Grid container spacing={1}>
+                  {/* <Grid item md={3} xs={12}>
                 <h1 className={classes.typo_design}>Classics</h1>
-              </Grid>
-              <Grid item md={9} xs={12} style={{ position: "relative" }}>
-                <TextField
-                  required
-                  id="name"
-                  type="text"
-                  className={classes.inputField}
-                  label="Classics"
-                  variant="filled"
-                  value={classics}
-                  onChange={(e) => setClassics(e.target.value)}
-                  name="name"
-                  size="small"
-                />
-              </Grid>
-            </Grid>
-          </div>
-          <div className={classes.songBox}>
-            <Grid container spacing={1}>
-              <Grid item md={3} xs={12}>
+              </Grid> */}
+                  <Grid item md={12} xs={12} style={{ position: "relative" }}>
+                    <TextField
+                      required
+                      error={error.classics}
+                      id="name"
+                      type="text"
+                      className={classes.inputField}
+                      label="Classics"
+                      variant="filled"
+                      value={classics}
+                      onChange={(e) => setClassics(e.target.value)}
+                      name="name"
+                      size="small"
+                    />
+                  </Grid>
+                </Grid>
+              </div>
+              <div className={classes.songBox}>
+                <Grid container spacing={1}>
+                  {/* <Grid item md={3} xs={12}>
                 <h1 className={classes.typo_design}>Originals</h1>
-              </Grid>
-              <Grid item md={9} xs={12} style={{ position: "relative" }}>
-                <TextField
-                  required
-                  id="name"
-                  type="text"
-                  className={classes.inputField}
-                  label="Originals"
-                  value={Original}
-                  variant="filled"
-                  onChange={(e) => setOriginal(e.target.value)}
-                  name="name"
-                  size="small"
-                />
-              </Grid>
-            </Grid>
-          </div>
-          <div className={classes.songBox}>
-            <Grid container spacing={1}>
-              <Grid item md={3} xs={12}>
+              </Grid> */}
+                  <Grid item md={12} xs={12} style={{ position: "relative" }}>
+                    <TextField
+                      required
+                      error={error.Original}
+                      id="name"
+                      type="text"
+                      className={classes.inputField}
+                      label="Originals"
+                      value={Original}
+                      variant="filled"
+                      onChange={(e) => setOriginal(e.target.value)}
+                      name="name"
+                      size="small"
+                    />
+                  </Grid>
+                </Grid>
+              </div>
+              <div className={classes.songBox}>
+                <Grid container spacing={1}>
+                  {/* <Grid item md={3} xs={12}>
                 <h1 className={classes.typo_design}>Buttons</h1>
-              </Grid>
-              <Grid item md={9} xs={12} style={{ position: "relative" }}>
-                <TextField
-                  required
-                  id="name"
-                  type="text"
-                  className={classes.inputField}
-                  label="Buttons"
-                  variant="filled"
-                  value={buttons}
-                  onChange={(e) => setButtons(e.target.value)}
-                  name="name"
-                  size="small"
-                />
-              </Grid>
-            </Grid>
-          </div>
-          <div className={classes.songBox}>
-            <Grid container spacing={1}>
-              <Grid item md={3} xs={12}>
+              </Grid> */}
+                  <Grid item md={12} xs={12} style={{ position: "relative" }}>
+                    <TextField
+                      required
+                      error={error.buttons}
+                      id="name"
+                      type="text"
+                      className={classes.inputField}
+                      label="Buttons"
+                      variant="filled"
+                      value={buttons}
+                      onChange={(e) => setButtons(e.target.value)}
+                      name="name"
+                      size="small"
+                    />
+                  </Grid>
+                </Grid>
+              </div>
+              <div className={classes.songBox}>
+                <Grid container spacing={1}>
+                  {/* <Grid item md={3} xs={12}>
                 <h1 className={classes.typo_design}>Wheel</h1>
-              </Grid>
-              <Grid item md={9} xs={12} style={{ position: "relative" }}>
-                <TextField
-                  required
-                  id="name"
-                  type="text"
-                  className={classes.inputField}
-                  label="Wheel"
-                  variant="filled"
-                  onChange={(e) => setWheel(e.target.value)}
-                  name="name"
-                  size="small"
-                />
-              </Grid>
+              </Grid> */}
+                  <Grid item md={12} xs={12} style={{ position: "relative" }}>
+                    <TextField
+                      required
+                      error={error.wheel}
+                      id="name"
+                      type="text"
+                      className={classes.inputField}
+                      label="Wheel"
+                      variant="filled"
+                      onChange={(e) => setWheel(e.target.value)}
+                      name="name"
+                      size="small"
+                    />
+                  </Grid>
+                </Grid>
+              </div>
+              <div className={classes.songBox}>
+                <Grid container spacing={1}>
+                  <Grid item xs={12} md={12}>
+                    <TextField
+                      id="name"
+                      type="text"
+                      multiline
+                      minRows={2}
+                      className={classes.inputField}
+                      label="Write Your Thoughts"
+                      variant="filled"
+                      value={about}
+                      onChange={(e) => setAbout(e.target.value)}
+                      name="name"
+                      size="small"
+                    />
+                  </Grid>
+                </Grid>
+              </div>
+              <div className={classes.songBox}>
+                <Grid container spacing={1}>
+                  <Grid item md={12} xs={12} style={{ position: "relative" }}>
+                    <TextField
+                      id="name"
+                      type="text"
+                      multiline
+                      minRows={2}
+                      className={classes.inputField}
+                      label="Testimonial"
+                      variant="filled"
+                      value={testimonial}
+                      onChange={(e) => setTestimonial(e.target.value)}
+                      name="name"
+                      size="small"
+                    />
+                  </Grid>
+                  <Grid item md={12} xs={12} style={{ position: "relative", textAlign: 'center', display: 'flex', justifyContent: 'space-between' }}>
+                    <div className={classes.systemBox} style={{ position: "relative", textAlign: 'center', display: 'flex' }}>
+                      <div className={classes.IconBox}>
+                        <ThumbUpIcon
+                          className={classes.iconDesign}
+                          style={{
+                            background: like ? '#d3e9cc' : ''
+                          }}
+                          onClick={(e) => {
+                            setLike(prev => !prev);
+                            setDislike(false);
+                          }}
+                        />
+                      </div>
+                      <div className={classes.IconBox}>
+                        <ThumbDownIcon
+                          className={classes.iconDesign}
+                          style={{
+                            background: disLike ? '#e9cccc' : ''
+                          }}
+                          onClick={(e) => {
+                            setDislike(prev => !prev);
+                            setLike(false);
+                          }
+                          }
+                        />
+                      </div>
+                    </div>
+                    <Button
+                      className={classes.typo_design}
+                      style={{ width: "30%" }}
+                      onClick={Data}
+                    >
+                      SEND
+                    </Button>
+                  </Grid>
+                </Grid>
+              </div>
             </Grid>
-          </div>
-          <div className={classes.songBox}>
-            <Grid container spacing={1}>
-              <Grid item xs={12} md={12}>
-                <TextField
-                  id="name"
-                  type="text"
-                  multiline
-                  rows={4}
-                  className={classes.inputField}
-                  label="Write Text Here..."
-                  variant="filled"
-                  value={about}
-                  onChange={(e) => setAbout(e.target.value)}
-                  name="name"
-                  size="small"
-                />
-              </Grid>
-            </Grid>
-          </div>
-        </Grid>
-        <Grid container spacing={1}>
-          <Grid item md={2} xs={12} style={{ position: "relative" }}>
-            <h1 className={classes.typo_design}>TESTIMONIAL</h1>
           </Grid>
-          <Grid item md={8} xs={12} style={{ position: "relative" }}>
-            <TextField
-              id="name"
-              type="text"
-              className={classes.inputField}
-              label="Write Text Here..."
-              variant="filled"
-              value={testimonial}
-              onChange={(e) => setTestimonial(e.target.value)}
-              name="name"
-              size="small"
-            />
-          </Grid>
-          <Grid item md={2} xs={12} style={{ position: "relative" }}>
+        </form>
+        :
+        <Grid container spacing={0} className={classes.containerBox}>
+          <div style={{ display: 'flex',flexDirection: 'column', justifyContent: 'center', alignItems: 'center', width: '100%', height: '70vh', gap: '20px' }}>
+            <Alert severity="success" style={{fontSize: '20px', alignItems: 'center'}}>Feedback Submitted Successfully!</Alert>
+            <Link href='/'>
+              <Button
+                variant="outlined"
+                style={{ width: "30%", fontSize: "15px" }}
+              >
+                Go To Player
+              </Button>
+            </Link>
             <Button
-              className={classes.typo_design}
-              style={{ marginLeft: "20px", width: "90%" }}
-              onClick={Data}
+              variant="outlined"
+              style={{ width: "30%" }}
+              onClick={() => setFeedback(false)}
             >
-              SEND
+              Close
             </Button>
-          </Grid>
+          </div>
         </Grid>
-      </Grid>
-    </form>
+      }
+    </>
   );
 };
 
