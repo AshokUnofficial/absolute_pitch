@@ -742,18 +742,7 @@ function MusicWheel (props) {
   function changeHandler (c, ind) {
     // if (imageTypeIndex == "") {
     //   alert("Please seect any ImageType Key");
-    // } else {
-    if (durationDataIndex !== 0 && nordData.length > 3) {
-      // if (nord.c1.length > 0 && c !== 'c1') {
-      //   return false;
-      // }
-      // else if (nord.c2.length > 0 && c !== 'c2') {
-      //   return false;
-      // }
-      // else if (nord.c3.length > 0 && c !== 'c3') {
-        return false;
-      // }
-    }
+    // }
     const temp = { ...nord };
     const count = [...temp["c1"], ...temp["c2"], ...temp["c3"]]?.length || 0;
     if (["c1", "c2", "c3"].includes(c)) {
@@ -768,7 +757,11 @@ function MusicWheel (props) {
             var nordData2 = data[c][ind];
           }
           setNordIndex111(ind);
-          setNordData([...nordData, nordData2]);
+          if (nordData.length > 3) {
+            setNordData([nordData2]);
+          } else {
+            setNordData([...nordData, nordData2]);
+          }
         }
       } else if (temp[c].indexOf(ind) > -1) {
         const nordIndex = temp[c].indexOf(ind);
@@ -857,7 +850,7 @@ function MusicWheel (props) {
       }
     }
 
-    if (type == "Package") {
+    else if (type == "Package") {
       if (packageDataIndex == packageData.length - 1) {
         setPackageDataIndex(2);
         setPackageActive('F');
@@ -895,7 +888,8 @@ function MusicWheel (props) {
         setPackageDataIndex(1);
       }
     }
-    if (type == "Intensity") {
+
+    else if (type == "Intensity") {
       if (intensityIndex == intensityData.length - 1) {
         setIntensityIndex(0);
       } else {
@@ -905,26 +899,28 @@ function MusicWheel (props) {
       }
     }
 
-    if (type == "Keys") {
+    else if (type == "Keys") {
 
       setImageTypeIndex(type);
       toggleActiveStyle(ind);
 
     }
-    if (type == "Letter") {
+
+    else if (type == "Letter") {
       setImageTypeIndex(type);
       toggleActiveStyle(ind);
 
     }
-    if (type == "Staff") {
+
+    else if (type == "Staff") {
       // alert("You need to purchase the membership");
       setImageTypeIndex(type);
       toggleActiveStyle(ind);
 
     }
-    if (type == "Duration") {
+
+    else if (type == "Duration") {
       if (durationDataIndex === 0 && nordData.length === 0) {
-        // setNord({ c1: [], c2: [], c3: data['c3'].map((_, index) => index) });
         setNordData(data.c3);
         setDurationDataIndex(prev => prev + 1);
         setSongsData(songsDataAll.filter(elm => !elm.note_or_cord.includes('m') && !elm.note_or_cord.includes('M')).flat(1));
@@ -932,7 +928,6 @@ function MusicWheel (props) {
         setTotalSongs(songsDataAll.filter(elm => !elm.note_or_cord.includes('m') && !elm.note_or_cord.includes('M')).flat(1).length);
       }
       else if (durationDataIndex === 1 && nordData.length > 3) {
-        // setNord({ c1: [], c2: data['c3'].map((_, index) => index), c3: [] });
         setNordData(data.c3.map(elm => elm + '-'));
         setDurationDataIndex(prev => prev + 1);
         setSongsData(songsDataAll.filter(elm => elm.note_or_cord.includes('m')).flat(1));
@@ -940,7 +935,6 @@ function MusicWheel (props) {
         setTotalSongs(songsDataAll.filter(elm => elm.note_or_cord.includes('m')).flat(1).length);
       }
       else if (durationDataIndex === 2 && nordData.length > 3) {
-        // setNord({ c1: data['c3'].map((_, index) => index), c2: [], c3: [] });
         setNordData(data.c3.map(elm => elm + '+'));
         setDurationDataIndex(prev => prev + 1);
         setSongsData(songsDataAll.filter(elm => elm.note_or_cord.includes('M')).flat(1));
@@ -948,10 +942,9 @@ function MusicWheel (props) {
         setTotalSongs(songsDataAll.filter(elm => elm.note_or_cord.includes('M')).flat(1).length);
       }
       else if (durationDataIndex === 3 && nordData.length > 3) {
-        setDurationDataIndex(1);
+        setDurationDataIndex(0);
         setHighlightedNord({ c1: [], c2: [], c3: [] });
-        // setNord({ c1: [], c2: [], c3: data['c3'].map((_, index) => index) });
-        setNordData(data.c3);
+        setNordData([]);
         setSongsData(songsDataAll.filter(elm => !elm.note_or_cord.includes('m') && !elm.note_or_cord.includes('M')).flat(1));
         handleClickSong(songsDataAll.filter(elm => !elm.note_or_cord.includes('m') && !elm.note_or_cord.includes('M')).flat(1), 0);
         setTotalSongs(songsDataAll.filter(elm => !elm.note_or_cord.includes('m') && !elm.note_or_cord.includes('M')).flat(1).length);
@@ -1034,6 +1027,8 @@ function MusicWheel (props) {
             setSongsData([]);
             setHighlightedNord({ c1: [], c2: [], c3: [] });
             setDurationValue("");
+            setNord({c1: [], c2: [], c3:[]})
+            setNordData([]);
             return false;
           }
         }
@@ -1066,11 +1061,10 @@ function MusicWheel (props) {
   }
 
   useEffect(() => {
-    if (props.musicIndex >= 0 && props.musicData?.length >= 0) {
+    if (props.musicIndex >= 0 && props.musicData?.length > 0) {
       highlightNord(props.musicData, props.musicIndex);
     }
-  }, [props.musicIndex]);
-
+  }, [props.musicIndex, props.musicData]);
 
   function handleClickSong (songsData, ind) {
     // props.timeData(0);
@@ -1625,11 +1619,11 @@ function MusicWheel (props) {
           <button
             className={`${classes.IntensityBtnNew} ${disableIntensity ? classes.disableBtn : ""
               }`}
-              style={{
-                top: 'unset',
-                bottom: "11%",
-                right: "1%",
-              }}
+            style={{
+              top: 'unset',
+              bottom: "11%",
+              right: "1%",
+            }}
             onClick={(e) => {
               btnHandler("Intensity", e);
             }}
@@ -1704,6 +1698,7 @@ function MusicWheel (props) {
                   props.setImageCount(0);
                   props.setDuration('Intensity');
                   setPackageDataIndex(0);
+                  setImageTypeIndex("")
                   setIntensityIndex(0);
                   setTempoIndex(0);
                   setPackageDataIndex(2);
