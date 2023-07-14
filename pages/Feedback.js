@@ -26,7 +26,7 @@ const useStyles = makeStyles({
     background: "#fff",
   },
   containerBox: {
-    width: "100%",
+    width: "100% !important",
     boxSizing: "border-box",
     height: "100vh",
     padding: "10px",
@@ -130,33 +130,26 @@ const useStyles = makeStyles({
   },
   inputField: {
     width: "100%",
-    border: " 2px solid Navy !important",
+    border: " 2px solid Navy",
     borderRadius: "10px",
     marginTop: "12px",
-    // padding: "18px 0px 18px 0px",
     "&:active": {
-      border: " 2px solid Navy !important",
-      border: " 2px solid Navy !important",
+      border: " 2px solid Navy",
     },
     "&:focus": {
-      border: " 2px solid Navy !important",
-      border: " 2px solid Navy !important",
+      border: " 2px solid Navy",
     },
     "&:focus-within": {
-      border: " 2px solid Navy !important",
-      border: " 2px solid Navy !important",
+      border: " 2px solid Navy",
     },
     "&:visited": {
-      border: " 2px solid Navy !important",
-      border: " 2px solid Navy !important",
+      border: " 2px solid Navy",
     },
     "&:focus-visible": {
-      border: " 2px solid Navy !important",
-      border: " 2px solid Navy !important",
+      border: " 2px solid Navy",
     },
     "&:target": {
-      border: " 2px solid Navy !important",
-      border: " 2px solid Navy !important",
+      border: " 2px solid Navy",
     },
 
     "& .MuiInputLabel-filled.MuiInputLabel-shrink.MuiInputLabel-marginDense": {
@@ -198,8 +191,7 @@ const useStyles = makeStyles({
   },
   systemBox: {
     width: "100%",
-    // height: "28vh",
-    // background:'grey',
+    textAlign: "center",
   },
   IconBox: {
     justifyContent: "center",
@@ -510,8 +502,8 @@ const Feedback = ({ setFeedback }) => {
         </form>
         :
         <Grid container spacing={0} className={classes.containerBox}>
-          <div style={{ display: 'flex',flexDirection: 'column', justifyContent: 'center', alignItems: 'center', width: '100%', height: '70vh', gap: '20px' }}>
-            <Alert severity="success" style={{fontSize: '20px', alignItems: 'center'}}>Feedback Submitted Successfully!</Alert>
+          <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', width: '100%', height: '70vh', gap: '20px' }}>
+            <Alert severity="success" style={{ fontSize: '20px', alignItems: 'center' }}>Feedback Submitted Successfully!</Alert>
             <Link href='/'>
               <Button
                 variant="outlined"

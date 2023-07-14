@@ -920,7 +920,8 @@ function MusicWheel (props) {
     }
 
     else if (type == "Duration") {
-      if (durationDataIndex === 0 && nordData.length === 0) {
+      if (durationDataIndex === 0 && (nordData.length === 0 || songsData.length === 0)) {
+        setNord({c1:[], c2:[], c3:[]})
         setNordData(data.c3);
         setDurationDataIndex(prev => prev + 1);
         setSongsData(songsDataAll.filter(elm => !elm.note_or_cord.includes('m') && !elm.note_or_cord.includes('M')).flat(1));
