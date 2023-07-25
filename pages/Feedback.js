@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Wheel from "../public/assets/images/wheel.png";
 import Songs from "../public/assets/images/songs.png";
+import DurationDefault from "../public/assets/images/Duration.png";
+import Intencity from "../public/assets/images/Intencity.png";
+import Tempo from "../public/assets/images/Tempo 1st.png";
+import Mix from "../public/assets/images/Mix.png";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import {
@@ -15,6 +19,9 @@ import {
   MenuItem,
   InputLabel,
   FormControl,
+  Checkbox,
+  FormControlLabel,
+  FormHelperText
 } from "@material-ui/core";
 import Cookies from "js-cookie";
 import { Alert } from "@mui/material";
@@ -129,6 +136,7 @@ const useStyles = makeStyles({
     },
   },
   inputField: {
+    lineHeight: "1.1 !important",
     width: "100%",
     border: " 2px solid Navy",
     borderRadius: "10px",
@@ -176,8 +184,10 @@ const useStyles = makeStyles({
       borderBottom: "none",
     },
     "& .MuiFilledInput-input": {
-      padding: "10px 20px 12px 25px !important",
+      padding: "0px 20px 12px 25px !important",
       fontSize: "25px",
+      lineHeight: 1.3,
+      latterSpacing: "1.2px",
     },
     "& .MuiInputLabel-filled": {
       // transform: "translate(30px, 30px) scale(1)",
@@ -223,26 +233,32 @@ const Feedback = ({ setFeedback }) => {
   const [classics, setClassics] = useState("");
   const [Original, setOriginal] = useState("");
   const [buttons, setButtons] = useState("");
-  const [wheel, setWheel] = useState("");
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [testimonial, setTestimonial] = useState("");
   const [about, setAbout] = useState("");
   const [like, setLike] = useState(false);
   const [disLike, setDislike] = useState(false);
+  const [testimonialApprove, setTestimonialApprove] = useState(false);
   const [formSuccess, setFormSuccess] = useState(false);
   const [error, setError] = useState({
     classics: false,
     Original: false,
     buttons: false,
-    wheel: false,
+    email: false,
+    name: false,
+    testimonialApprove: false,
   });
 
   const Data = (e) => {
-    if (!classics || !Original || !buttons || !wheel) {
+    if (!classics || !Original || !buttons || !name || !email || !testimonialApprove) {
       setError({
         classics: !classics,
         Original: !Original,
         buttons: !buttons,
-        wheel: !wheel,
+        email: !email,
+        name: !name,
+        testimonialApprove: !testimonialApprove
       });
       return false;
     }
@@ -255,7 +271,9 @@ const Feedback = ({ setFeedback }) => {
     urlencoded.append("classic", classics);
     urlencoded.append("original", Original);
     urlencoded.append("button", buttons);
-    urlencoded.append("wheel", wheel);
+    urlencoded.append("email", email);
+    urlencoded.append("name", name);
+    urlencoded.append("testimonialApprove", testimonialApprove);
     urlencoded.append("anything", about);
     urlencoded.append("testimonial", testimonial);
 
@@ -279,74 +297,22 @@ const Feedback = ({ setFeedback }) => {
       {!formSuccess ?
         <form id="my-form" style={{ overflowX: "auto", height: '92%' }}>
           <Grid container spacing={0} className={classes.containerBox}>
-            <Grid
-              item
-              xs={12}
-              md={12}
-              sm={12}
-              sx={12}
-              className={classes.leftSection}
-            >
-              <div className={classes.systemBox}>
-                <div style={{ width: "100%" }}>
-                  <div>
-                    {" "}
-                    <h1 className={classes.typo_design2}>
-                      Songs
-                    </h1>
-                  </div>
-                  <Image
-                    src={Songs}
-                    alt="Picture of the author"
-                    width="800"
-                    height={190}
-                  />
-                </div>
-              </div>
-              <div className={classes.systemBox}>
-                {/* <Grid container>
-              <Grid item md={12} xs={12} className={classes.imgBox}>                 */}
-                <div
-                  style={{
-                    justifyContent: "center",
-                    display: "flex",
-                  }}
-                >
-                  <h1 className={classes.typo_design2}>System</h1>
-                </div>
-                <Image
-                  src={Wheel}
-                  alt="Picture of the author"
-                  width="800"
-                  height={580}
-                />
-                {/* </Grid>
-            </Grid> */}
-              </div>
-            </Grid>
             <Grid item xs={12} md={12} sm={12} className={classes.rightSection}>
-              <div className={classes.systemBox}>
-                <div
-                  style={{
-                    justifyContent: "center",
-                    display: "flex",
-                    marginTop: "10px",
-                  }}
-                >
-                  <h1 className={classes.typo_design2}>Fill The Below Details</h1>
-                </div>
-              </div>
               <div className={classes.songBox}>
-                <Grid container spacing={1}>
-                  {/* <Grid item md={3} xs={12}>
-                <h1 className={classes.typo_design}>Classics</h1>
-              </Grid> */}
-                  <Grid item md={12} xs={12} style={{ position: "relative" }}>
+                <Grid container spacing={3}>
+                  <Grid item md={2} xs={2} style={{ display: "flex", padding: "22px 10px 10px 10px" }}>
+                    <Image src={DurationDefault} style={{ backgroundColor: "black" }} height={100} />
+                  </Grid>
+                  <Grid item md={10} xs={10} style={{ position: "relative" }}>
                     <TextField
                       required
                       error={error.classics}
                       id="name"
                       type="text"
+                      placeholder="Anything You Would Like Us To Change"
+                      multiline
+                      maxRows={2}
+                      minRows={2}
                       className={classes.inputField}
                       label="Classics"
                       variant="filled"
@@ -359,18 +325,22 @@ const Feedback = ({ setFeedback }) => {
                 </Grid>
               </div>
               <div className={classes.songBox}>
-                <Grid container spacing={1}>
-                  {/* <Grid item md={3} xs={12}>
-                <h1 className={classes.typo_design}>Originals</h1>
-              </Grid> */}
-                  <Grid item md={12} xs={12} style={{ position: "relative" }}>
+                <Grid container spacing={3}>
+                  <Grid item md={2} xs={2} style={{ display: "flex", padding: "22px 10px 10px 10px" }}>
+                    <Image src={Intencity} style={{ backgroundColor: "black" }} height={100} />
+                  </Grid>
+                  <Grid item md={10} xs={10} style={{ position: "relative" }}>
                     <TextField
                       required
                       error={error.Original}
                       id="name"
                       type="text"
+                      multiline
+                      maxRows={2}
+                      minRows={2}
                       className={classes.inputField}
                       label="Originals"
+                      placeholder="Anything You Would Like Us To Change"
                       value={Original}
                       variant="filled"
                       onChange={(e) => setOriginal(e.target.value)}
@@ -381,42 +351,25 @@ const Feedback = ({ setFeedback }) => {
                 </Grid>
               </div>
               <div className={classes.songBox}>
-                <Grid container spacing={1}>
-                  {/* <Grid item md={3} xs={12}>
-                <h1 className={classes.typo_design}>Buttons</h1>
-              </Grid> */}
-                  <Grid item md={12} xs={12} style={{ position: "relative" }}>
+                <Grid container spacing={3}>
+                  <Grid item md={2} xs={2} style={{ display: "flex", padding: "22px 10px 10px 10px" }}>
+                    <Image src={Tempo} style={{ backgroundColor: "black" }} height={100} />
+                  </Grid>
+                  <Grid item md={10} xs={10} style={{ position: "relative" }}>
                     <TextField
                       required
                       error={error.buttons}
                       id="name"
                       type="text"
+                      multiline
+                      maxRows={2}
+                      minRows={2}
                       className={classes.inputField}
+                      placeholder="Suggestions for tempo changes, song and suggested tempo"
                       label="Buttons"
                       variant="filled"
                       value={buttons}
                       onChange={(e) => setButtons(e.target.value)}
-                      name="name"
-                      size="small"
-                    />
-                  </Grid>
-                </Grid>
-              </div>
-              <div className={classes.songBox}>
-                <Grid container spacing={1}>
-                  {/* <Grid item md={3} xs={12}>
-                <h1 className={classes.typo_design}>Wheel</h1>
-              </Grid> */}
-                  <Grid item md={12} xs={12} style={{ position: "relative" }}>
-                    <TextField
-                      required
-                      error={error.wheel}
-                      id="name"
-                      type="text"
-                      className={classes.inputField}
-                      label="Wheel"
-                      variant="filled"
-                      onChange={(e) => setWheel(e.target.value)}
                       name="name"
                       size="small"
                     />
@@ -430,9 +383,10 @@ const Feedback = ({ setFeedback }) => {
                       id="name"
                       type="text"
                       multiline
-                      minRows={2}
+                      maxRows={6}
+                      minRows={6}
                       className={classes.inputField}
-                      label="Write Your Thoughts"
+                      label="Anything You Would Like Us To Change"
                       variant="filled"
                       value={about}
                       onChange={(e) => setAbout(e.target.value)}
@@ -443,13 +397,14 @@ const Feedback = ({ setFeedback }) => {
                 </Grid>
               </div>
               <div className={classes.songBox}>
-                <Grid container spacing={1}>
+                <Grid container spacing={2}>
                   <Grid item md={12} xs={12} style={{ position: "relative" }}>
                     <TextField
                       id="name"
                       type="text"
                       multiline
-                      minRows={2}
+                      maxRows={6}
+                      minRows={6}
                       className={classes.inputField}
                       label="Testimonial"
                       variant="filled"
@@ -458,6 +413,54 @@ const Feedback = ({ setFeedback }) => {
                       name="name"
                       size="small"
                     />
+                  </Grid>
+                  <Grid item md={6} xs={6} style={{ position: "relative" }}>
+                    <TextField
+                      id="name"
+                      type="text"
+                      required
+                      error={error.email}
+                      className={classes.inputField}
+                      style={{ paddingTop: "10px" }}
+                      label="Email"
+                      variant="filled"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      name="name"
+                      size="small"
+                    />
+                  </Grid>
+                  <Grid item md={6} xs={6} style={{ position: "relative" }}>
+                    <TextField
+                      id="name"
+                      type="text"
+                      required
+                      error={error.name}
+                      className={classes.inputField}
+                      style={{ paddingTop: "10px" }}
+                      label="First Name Last Initial"
+                      variant="filled"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      name="name"
+                      size="small"
+                    />
+                  </Grid>
+                  <Grid item md={12} xs={12} style={{ position: "relative" }}>
+                    <FormControlLabel
+                      label="I Approve The Public Use Of This Testimonial"
+                      control={
+                        <Checkbox
+                          required
+                          size="medium"
+                          checked={testimonialApprove}
+                          onChange={(e) => setTestimonialApprove(e.target.checked)}
+                          inputProps={{ 'aria-label': 'controlled' }}
+                        />
+                      } />
+                    {testimonial.length > 0 && !testimonialApprove ?
+                      <FormHelperText style={{ color: "red" }}>You have not provided your approvel yet.</FormHelperText>
+                      : null}
                   </Grid>
                   <Grid item md={12} xs={12} style={{ position: "relative", textAlign: 'center', display: 'flex', justifyContent: 'space-between' }}>
                     <div className={classes.systemBox} style={{ position: "relative", textAlign: 'center', display: 'flex' }}>

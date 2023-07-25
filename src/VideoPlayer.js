@@ -6,9 +6,12 @@ import { makeStyles } from "@material-ui/core";
 import ReactPlayer from "react-player";
 import Guitar from "../public/assets/images/guitar.jpg";
 import dynamic from "next/dynamic";
-// import InitialVideo from '../public/video/homePageVideo.mp4'
+import useStyles from "../utils/styles.module";
 
-const useStyles = makeStyles({
+// import InitialVideo from '../public/video/homePageVideo.mp4'
+import "./style.module.css";
+
+const styles = makeStyles({
   root: {
     position: "relative",
   },
@@ -19,6 +22,8 @@ const useStyles = makeStyles({
     background: "black !important",
     borderRadius: "10px",
     // padding: "20px",
+    flexDirection: "column",
+    width: "100%",
     height: "97.5vh",
     marginTop: "8px",
     position: 'relative',
@@ -50,6 +55,9 @@ const useStyles = makeStyles({
     "@media (min-width: 720px) and (max-width:1024px)": {
       // marginTop: "-400px",
     },
+    video: {
+      borderRadius: "10px"
+    }
   },
   imgContainer: {
     position: 'absolute', bottom: '0', height: '350px', overflow: 'hidden',
@@ -66,7 +74,8 @@ const useStyles = makeStyles({
 function VideoPlayer (prop) {
   // const [song, setSong] = useState();
   // const [totalSeconds, setTotalSeconds] = useState(0);
-  const classes = useStyles();
+  const classes = styles();
+  const tableClasses = useStyles();
 
   const music = prop.musicData?.length > 0
     ? prop.musicData[prop.musicIndex]["song_url"]
@@ -87,30 +96,68 @@ function VideoPlayer (prop) {
   return (
     <div>
       <Grid container spacing={2} style={{ display: 'block', position: 'relative' }}>
-        <Grid item xs={12} md={12} className={classes.videoCard} >
-          {prop.musicData?.length > 0 ? (
-            <ReactPlayer
-              controls
-              url={music}
-              width="100vw"
-              height="96vh"
-              className={classes.playerDisplay}
-              playing
-              fluid={"true"}
-              onEnded={playNextSong}
-              stopOnUnmount
-              // style={{ marginTop: "-50px" }}
-              config={{ file: { attributes: { controlsList: 'nodownload' } } }}
-            />
+        <div className={classes.videoCard}>
+          <Grid item style={{
+            width: "100%",
+            boxSizing: "border-box",
+            padding: "10px 10px",
+            position: "absolute", 
+            top: 0
+          }}>
+            <div className={tableClasses.songScrolling} style={{ marginLeft: "auto", marginRight: "auto"}}>
+              <Grid
+                container
+                spacing={0}
+                className={tableClasses.bottomBoxContainer}
+                style={{ padding: "0px" }}
+              >
 
-          ) : (
-            <video width="100%" height="auto" controls>
-              <source src='/video/homePageVideo.mp4' type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          )}
-          {/* <div className={classes.imgContainer}><Image src={Guitar} alt="..."  /></div> */}
-        </Grid>
+                <Grid
+                  item
+                  xs={10}
+                  md={12}
+                  style={{ padding: "0px", marginLeft: "0px" }}
+                >
+                  <table className={tableClasses.tableStyle}>
+                    <tbody>
+                      <tr className={tableClasses.trStyle}>
+
+                        <th className={tableClasses.thStyles}>{prop.songTitle}</th>
+                        <th className={tableClasses.thStylesNew}>{prop.composer}</th>
+                        <th className={tableClasses.thStylesNew}>{prop.songNote}</th>
+                        <th className={tableClasses.thTotalSongs}>{prop.duration}</th>
+                        <th className={tableClasses.thTotalSongs}>{prop.imageCount}</th>
+                        <th className={tableClasses.thTotalSongs}>{prop.playSongposition}/{prop.totalSongs}</th>
+                      </tr>
+                    </tbody>
+                  </table>
+                </Grid>
+              </Grid>
+            </div>
+          </Grid>
+          <Grid item xs={12} md={12} style={{display: "flex"}}>
+            {prop.musicData?.length > 0 ? (
+              <ReactPlayer
+                controls
+                url={music}
+                width="100vw"
+                height="auto"
+                className={classes.playerDisplay}
+                playing
+                fluid={"true"}
+                onEnded={playNextSong}
+                stopOnUnmount
+                config={{ file: { attributes: { controlsList: 'nodownload' } } }}
+              />
+
+            ) : (
+              <video width="100%" height="auto" controls>
+                <source src='/video/homePageVideo.mp4' type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            )}
+          </Grid>
+        </div>
 
       </Grid>
     </div>

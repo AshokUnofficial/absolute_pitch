@@ -60,8 +60,8 @@ const useStyles = makeStyles({
       // marginTop: "20%",
     },
     "@media (min-width: 1681px) and (max-width: 1920px)": {
-      width: "400px",
-      height: "400px",
+      // width: "400px",
+      // height: "400px",
       // border:'2px solid red'
     },
   },
@@ -570,13 +570,7 @@ const useStyles = makeStyles({
       height: "150px",
       width: "150px",
     },
-    "@media (min-width: 1600px) and (max-width: 1920px)": {
-      height: "200px",
-      width: "200px",
-      left: " 25%",
-      // border:'2px solid red'
-    },
-    "@media (min-width: 1921px) and (max-width: 1220px)": {
+    "@media (min-width: 1600px)": {
       height: "200px",
       width: "200px",
       left: " 25%",
@@ -651,7 +645,7 @@ const useStyles = makeStyles({
     //   width: "120px",
     //   top: "75%",
     // },
-    "@media (min-width: 1600px) and (max-width: 1920px)": {
+    "@media (min-width: 1600px)": {
       height: "200px",
       width: "200px",
       // border:'2px solid red',
@@ -770,7 +764,7 @@ const useStyles = makeStyles({
     "&:hover": {
       // background: "radial-gradient(blue 40%, #000)",
     },
-    "@media (min-width: 1600px) and (max-width: 1920px)": {
+    "@media (min-width: 1600px)": {
       right: "20%",
       height: "200px",
       width: "200px",
@@ -843,10 +837,10 @@ const useStyles = makeStyles({
       height: "145px",
       width: "145px",
     },
-    "@media (min-width: 1600px) and (max-width: 1920px)": {
+    "@media (min-width: 1600px)": {
       right: "20%",
-      height: "200px",
-      width: "200px",
+      height: "200px !important",
+      width: "200px !important",
     },
   },
 

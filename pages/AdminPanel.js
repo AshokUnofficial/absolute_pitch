@@ -152,9 +152,10 @@ const AdminPanel = () => {
       >
         <Box sx={style}>
           <div style={{height: '50px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 15px', color: '#4c4c4c'}}>
-            <h2>Feedback Form</h2>
+            <h2>We Want To Be Even Better</h2>
             <span style={{ float: 'right', borderRadius: '50%', fontSize: '40px', width: '4%', justifyContent: 'center', alignItems: 'center', textAlign: 'center', cursor: 'pointer' }} onClick={feedBackClose}>X</span>
           </div>
+            <hr />
           <Feedback setFeedback={setFeedback} />
         </Box>
       </Modal>

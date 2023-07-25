@@ -231,7 +231,7 @@ const UserLog = () => {
     )
       .then((response) => response.json())
       .then((responseJson) => {
-        if (responseJson.success === '0') {
+        if (responseJson.success == '0') {
           alert("Something went wrong! Please try again.");
         } else {
           fetchNodesData();

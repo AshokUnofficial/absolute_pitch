@@ -72,6 +72,7 @@ function LandingPage () {
   const [time, setTime] = useState(0);
   const [remainingTime, setRemainingTime] = useState(0);
   const [totalCount, setTotalCount] = useState(0);
+  const [totalSongs, setTotalSongs] = useState(0);
   const nordArray = {
     A: 0,
     Ab: 0,
@@ -280,6 +281,7 @@ function LandingPage () {
           setAllSongsDuration={setAllSongsDuration}
           setIndex={setIndex}
           setData={setData}
+          setTotalSongs={setTotalSongs}
           setDurationLast={setDurationLast}
         />
       </Grid>
@@ -292,6 +294,13 @@ function LandingPage () {
           setAllSongsDuration={setAllSongsDuration}
           setAllImageCount={setAllImageCount}
           totalCount={totalCount}
+          songTitle={songTitle}
+          composer={composer}
+          songNote={songNote}
+          duration={duration}
+          imageCount={imageCount}
+          playSongposition={playSongposition}
+          totalSongs={totalSongs}
         />
       </Grid>
     </Grid>

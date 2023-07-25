@@ -8,9 +8,6 @@ import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import letter from "../public/assets/images/abLetter.jpg";
-
-// import staff from "../public/assets/images/newStaffs.jpg";
-// import keys from "../public/assets/images/newKeyss.jpg";
 import staff from "../public/assets/images/staff.jpg";
 import keys from "../public/assets/images/keys.jpg";
 import playBtn from "../public/assets/images/playerButton.jpg";
@@ -921,7 +918,7 @@ function MusicWheel (props) {
 
     else if (type == "Duration") {
       if (durationDataIndex === 0 && (nordData.length === 0 || songsData.length === 0)) {
-        setNord({c1:[], c2:[], c3:[]})
+        setNord({ c1: [], c2: [], c3: [] });
         setNordData(data.c3);
         setDurationDataIndex(prev => prev + 1);
         setSongsData(songsDataAll.filter(elm => !elm.note_or_cord.includes('m') && !elm.note_or_cord.includes('M')).flat(1));
@@ -1028,7 +1025,7 @@ function MusicWheel (props) {
             setSongsData([]);
             setHighlightedNord({ c1: [], c2: [], c3: [] });
             setDurationValue("");
-            setNord({c1: [], c2: [], c3:[]})
+            setNord({ c1: [], c2: [], c3: [] });
             setNordData([]);
             return false;
           }
@@ -1066,6 +1063,10 @@ function MusicWheel (props) {
       highlightNord(props.musicData, props.musicIndex);
     }
   }, [props.musicIndex, props.musicData]);
+
+  useEffect(() => {
+    props.setTotalSongs(totalSongs);
+  },[totalSongs]);
 
   function handleClickSong (songsData, ind) {
     // props.timeData(0);
@@ -1242,6 +1243,10 @@ function MusicWheel (props) {
       props.setTotalSeconds(totalduraion.current);
       secondsToHms(totalduraion.current);
     }, 1000);
+
+    const adminPannelBtn = document.querySelector('#admin-pannel');
+    const btnText = Cookies.get('userName') ? Cookies.get('userName') : "Admin Panel"
+    adminPannelBtn.innerHTML = btnText;
   }, []);
 
   return (
@@ -1343,6 +1348,7 @@ function MusicWheel (props) {
           </Grid>
         </div>
         <button
+          id="admin-pannel"
           style={{
             borderRadius: "5px",
             textDecoration: "none",
@@ -1353,7 +1359,9 @@ function MusicWheel (props) {
             color: "#FFFFFF",
             border: "none",
             cursor: "pointer",
-            padding: "5px",
+            textTransform: "capitalize",
+            padding: "5px 10px",
+            // padding: "5px",
             "@media  (minWidth: 300px) and (maxWidth: 450px)": {
               width: "80%",
               height: "50%",
@@ -1699,7 +1707,7 @@ function MusicWheel (props) {
                   props.setImageCount(0);
                   props.setDuration('Intensity');
                   setPackageDataIndex(0);
-                  setImageTypeIndex("")
+                  setImageTypeIndex("");
                   setIntensityIndex(0);
                   setTempoIndex(0);
                   setPackageDataIndex(2);
@@ -1797,33 +1805,14 @@ function MusicWheel (props) {
         </div>
       </div>
 
-      <div className={classes.songScrolling}>
+      {/* <div className={classes.songScrolling}>
         <Grid
           container
           spacing={0}
           className={classes.bottomBoxContainer}
           style={{ padding: "0px" }}
         >
-          {/* <Grid
-            item
-            xs={2}
-            md={1}
-            style={{ padding: "-10px", margin: "-10px" }}
-          >
-            <p
-              className={`${classes.bottomBox}`}
-              style={{
-                color: "#fff",
-                width: "63px",
-                background: "#333333",
-                textAlign: "center",
-                fontSize: "20px",
-                marginLeft: "15px",
-              }}
-            >
-              {props.playSongposition}/{totalSongs}
-            </p>
-          </Grid> */}
+          
           <Grid
             item
             xs={10}
@@ -1845,8 +1834,6 @@ function MusicWheel (props) {
             </table>
           </Grid>
         </Grid>
-      </div>
-      {/* <div style={{ marginBottom: "30px" }}>
       </div> */}
       <div className={styles.songsWrapper}>
         <Paper elevation={3} className={classes.paperStyle}>

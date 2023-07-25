@@ -481,7 +481,7 @@ li:nth-child(12) .text {
   background: #23414a;
 }
 
-@media (min-width: 1600px) and (max-width: 1920px) {
+@media (min-width: 1600px) {
   .circle {
     width: 25em;
     height: 25em;

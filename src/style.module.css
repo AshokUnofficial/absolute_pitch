@@ -355,7 +355,7 @@
   .list:nth-child(2) .textThird {
     /* background: #89b49b; */
     background: #FFFFFF;
-    opacity: 80%;
+    /* opacity: 80%; */
    
   }
   
@@ -617,7 +617,7 @@
       border-radius: 50%;
       justify-content: center !important;
     }
-    .text {
+    /* .text {
       position: absolute;
       left: -95%;
       width: 200%; height: 200%;
@@ -632,8 +632,8 @@
         color: #000;
         cursor: pointer;
         font-weight: 500;
-    }
-    .textTwo {
+    } */
+    /* .textTwo {
       position: absolute;
       left: -100%;
       width: 200%; height: 200%;
@@ -645,8 +645,8 @@
         color: #000;
         cursor: pointer;
         font-weight: 500;
-    }
-    .textThird {
+    } */
+    /* .textThird {
         position: absolute;
         left: -98%;
         width: 200%;
@@ -655,14 +655,13 @@
         transform: skewY(60deg) rotate(12deg);
         padding-top: 6px;
         font-size: 26px !important;
-        /* font-family: "Roboto"; */
         font-style: normal;
         color: #000;
         cursor: pointer;
         font-weight: 500;
-      }
+      } */
     
-      .textFour {
+      /* .textFour {
         position: absolute;
         left: -94%;
         width: 200%;
@@ -675,7 +674,7 @@
         font-style: normal;
         color: #000;
         cursor: pointer;
-      }
+      } */
 
   }
   .liststyle:hover {
