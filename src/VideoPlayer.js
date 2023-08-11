@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { setCookie } from "cookies-next";
+// import { setCookie } from "cookies-next";
 import { Grid } from "@mui/material";
-import Image from "next/image";
+// import Image from "next/image";
 import { makeStyles } from "@material-ui/core";
 import ReactPlayer from "react-player";
-import Guitar from "../public/assets/images/guitar.jpg";
-import dynamic from "next/dynamic";
+// import Guitar from "../public/assets/images/guitar.jpg";
+// import dynamic from "next/dynamic";
 import useStyles from "../utils/styles.module";
 
 // import InitialVideo from '../public/video/homePageVideo.mp4'
@@ -46,6 +46,7 @@ const styles = makeStyles({
   playerDisplay: {
     objectFit: "cover",
     backgroundSize: "cover",
+    marginTop: "15px",
 
     // marginTop: "-4%",
     // "@media (min-width: 1280px) and (max-width:1480px)": {  marginTop: "-300px", },
@@ -100,11 +101,11 @@ function VideoPlayer (prop) {
           <Grid item style={{
             width: "100%",
             boxSizing: "border-box",
-            padding: "10px 10px",
+            padding: "10px 0px",
             position: "absolute", 
             top: 0
           }}>
-            <div className={tableClasses.songScrolling} style={{ marginLeft: "auto", marginRight: "auto"}}>
+            <div className={tableClasses.songScrolling} style={{ opacity: '0.6'}}>
               <Grid
                 container
                 spacing={0}
@@ -141,7 +142,7 @@ function VideoPlayer (prop) {
                 controls
                 url={music}
                 width="100vw"
-                height="auto"
+                height="100vh"
                 className={classes.playerDisplay}
                 playing
                 fluid={"true"}
