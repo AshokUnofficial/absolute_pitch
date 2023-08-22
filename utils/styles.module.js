@@ -238,8 +238,8 @@ const useStyles = makeStyles({
     background: "#333 !important",
     borderRadius: "10px",
     height: "97.5vh",
-    "@media (min-width: 1280px) and (max-width:1480px)": { height: "135vh" },
-    "@media (min-width: 1481px) and (max-width:1920px)": { height: "110vh" },
+    // "@media (min-width: 1280px) and (max-width:1480px)": { height: "135vh" },
+    // "@media (min-width: 1481px) and (max-width:1920px)": { height: "110vh" },
     "@media (min-width: 600px) and (max-width:768px)": {
       margin: "25px 15px 15px 25px !important",
     },
@@ -410,9 +410,9 @@ const useStyles = makeStyles({
     padding: "0px 2px",
     width: "100% !important",
     // marginLeft: "4px !important",
-    marginTop: "-10px !important",
+    // marginTop: "-10px !important",
     "@media (min-width: 1280px) and (max-width:1680px)": {
-      marginTop: "-10px",
+      // marginTop: "-10px",
       width: "100%",
       // marginLeft: "6px",
     },
@@ -935,7 +935,7 @@ const useStyles = makeStyles({
     color: "#000",
     alignItems: "center",
     textAlign: "center",
-    marginTop: "10px",
+    // marginTop: "10px",
     "@media (min-width: 1280px) and (max-width:1680px)": {
       // marginTop: "5% !important",
       fontSize: "14px",
@@ -954,7 +954,7 @@ const useStyles = makeStyles({
     // padding: "5px",
     textAlign: "center",
     // marginTop:'-15px',
-    height: "98%",
+    height: "100%",
     "@media (min-width: 1600px) and (max-width: 1920px)": {
       height: "95%",
     },
@@ -965,11 +965,11 @@ const useStyles = makeStyles({
     height: "98%",
   },
   trStyle: {
-    marginTop: "-15px",
-    background: "black",
-    height: "35px",
-    marginTop: "0px",
-    width: "98%",
+    // marginTop: "-15px",
+    // background: "black",
+    height: "25px",
+    // marginTop: "0px",
+    width: "100%",
   },
   thStyle: {
     top: 0,
@@ -1017,7 +1017,7 @@ const useStyles = makeStyles({
     width: "12%",
   },
   paperStyle: {
-    marginTop: "35px",
+    // marginTop: "35px",
     width: "93%",
     padding: "0px 0px 0px 8px",
     lineHeight: "30px",
@@ -1026,7 +1026,7 @@ const useStyles = makeStyles({
     overflow: "scroll",
     height: " -webkit-fill-available",
     "@media (min-width: 600px) and (max-width:768px)": {
-      marginTop: "10px",
+      // marginTop: "10px",
       width: "92%",
       padding: "5px 10px 0px 10px",
       lineHeight: "30px",
@@ -1036,7 +1036,7 @@ const useStyles = makeStyles({
       // overflow: "scroll",
     },
     "@media (min-width: 780px) and (max-width:1200px)": {
-      marginTop: "10px",
+      // marginTop: "10px",
       width: "92%",
       padding: "5px 10px 0px 10px",
       lineHeight: "30px",
@@ -1046,12 +1046,12 @@ const useStyles = makeStyles({
       // overflow: "scroll",
     },
     "@media (min-width: 1201px) and (max-width:1680px)": {
-      marginTop: "10px",
+      // marginTop: "10px",
       width: "92%",
       padding: "5px 10px 0px 10px",
       lineHeight: "30px",
       marginLeft: "8px",
-      height: "180px",
+      // height: "180px",
       // overflow: "scroll",
     },
     "@media (min-width: 1800px) and (max-width: 1920px)": {

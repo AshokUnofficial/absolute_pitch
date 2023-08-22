@@ -478,8 +478,8 @@
    display: flex;
    align-items: center;
     justify-content: center;
-    height: 250px !important;
-    margin-top: -30px;
+    height: 153px !important;
+    /* margin-top: -30px; */
     /* margin-top: 60px; */
     bottom: 0;
   /* overflow: scroll; */
@@ -497,24 +497,24 @@
   @media  (max-width: 768px) {
     .songsWrapper  {
        height: 22%;
-       margin-top: -25px;
-       margin-bottom: 5px !important;
+       /* margin-top: -25px; */
+       /* margin-bottom: 5px !important; */
    
      }
   }
   @media  (min-width: 1600px) and (max-width: 1800px) {
     .songsWrapper  {
       height: 22%;
-       margin-top: -30px;
-       margin-bottom: 5px !important;
+       /* margin-top: -30px; */
+       /* margin-bottom: 5px !important; */
    
      }
   }
   @media  (min-width: 1801px) and (max-width: 1920px) {
     .songsWrapper  {
       height: 22%;
-       margin-top: -30px;
-       margin-bottom: 5px !important;
+       /* margin-top: -30px; */
+       /* margin-bottom: 5px !important; */
    
      }
 
@@ -733,8 +733,8 @@
    }
    .songsWrapper  {
     height: 30%;
-     margin-top: 5px;
-     margin-bottom: 5px !important;
+     /* margin-top: 5px;
+     margin-bottom: 5px !important; */
  
    }
   }
@@ -753,8 +753,8 @@
    }
    .songsWrapper  {
     height: 30%;
-     margin-top: 5px;
-     margin-bottom: 5px !important;
+     /* margin-top: 5px;
+     margin-bottom: 5px !important; */
  
    }
   }
@@ -766,8 +766,8 @@
     }
     .songsWrapper  {
       height: 20%;
-       margin-top: 5px;
-       margin-bottom: 5px !important;
+       /* margin-top: 5px;
+       margin-bottom: 5px !important; */
    
      }
   }
@@ -783,8 +783,8 @@
      }
     .songsWrapper  {
       height: 22%;
-       margin-top: -2px;
-       margin-bottom: 5px !important;
+       /* margin-top: -2px;
+       margin-bottom: 5px !important; */
    
      }
   }
@@ -799,8 +799,8 @@
    }
    .songsWrapper  {
     height: 30%;
-     margin-top: 5px;
-     margin-bottom: 5px !important;
+     /* margin-top: 5px;
+     margin-bottom: 5px !important; */
  
    }
   }

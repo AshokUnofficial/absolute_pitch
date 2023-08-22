@@ -47,6 +47,9 @@ const useStyles = makeStyles({
   },
   rightSection: {
     padding: "0px 0px 2px 10px",
+    "@media  (min-width: 0px)and (max-width: 959px)": {
+      marginTop: "20px",
+    },
   },
 });
 function LandingPage () {

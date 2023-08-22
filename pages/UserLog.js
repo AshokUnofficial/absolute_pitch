@@ -44,7 +44,7 @@ const useStyles = makeStyles({
     // marginTop: "-10px",
     position: "sticky",
     //  borderRight:'2px solid black',
-    background: "#5D432C",
+    background: "#111",
     color: "white !important",
     width: "8%",
     height: "40px !important",
@@ -84,8 +84,8 @@ const useStyles = makeStyles({
     // marginTop: "-10px",
     position: "sticky",
     //  borderRight:'2px solid black',
-    background: "#82E3F4",
-    color: "white !important",
+    background: "#fff",
+    color: "#111 !important",
     width: "8%",
     height: "44px !important",
     fontSize: "17px",
@@ -107,6 +107,7 @@ const useStyles = makeStyles({
   },
   tableDesign: {
     width: "100%",
+    backgroundColor: "lightGray",
     // height: "57vh",
     "@media  (min-width: 300px) and (max-width: 450px)": {
       width: "70%",

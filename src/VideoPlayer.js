@@ -27,8 +27,8 @@ const styles = makeStyles({
     height: "97.5vh",
     marginTop: "8px",
     position: 'relative',
-    "@media (min-width: 1280px) and (max-width:1480px)": { height: "135vh" },
-    "@media (min-width: 1481px) and (max-width:1920px)": { height: "110vh" },
+    // "@media (min-width: 1280px) and (max-width:1480px)": { height: "135vh" },
+    // "@media (min-width: 1481px) and (max-width:1920px)": { height: "110vh" },
     "@media (min-width: 600px) and (max-width:768px)": {
       margin: "25px 15px 15px 25px !important",
     },
@@ -46,7 +46,7 @@ const styles = makeStyles({
   playerDisplay: {
     objectFit: "cover",
     backgroundSize: "cover",
-    marginTop: "15px",
+    // marginTop: "15px",
 
     // marginTop: "-4%",
     // "@media (min-width: 1280px) and (max-width:1480px)": {  marginTop: "-300px", },
@@ -101,7 +101,7 @@ function VideoPlayer (prop) {
           <Grid item style={{
             width: "100%",
             boxSizing: "border-box",
-            padding: "10px 0px",
+            padding: "5px 0px",
             position: "absolute", 
             top: 0
           }}>
@@ -136,13 +136,13 @@ function VideoPlayer (prop) {
               </Grid>
             </div>
           </Grid>
-          <Grid item xs={12} md={12} style={{display: "flex"}}>
+          <Grid item xs={12} md={12} style={{display: "flex", width: "100%", height: "100%"}}>
             {prop.musicData?.length > 0 ? (
               <ReactPlayer
                 controls
                 url={music}
-                width="100vw"
-                height="100vh"
+                width="100%"
+                height="100%"
                 className={classes.playerDisplay}
                 playing
                 fluid={"true"}

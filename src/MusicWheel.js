@@ -105,7 +105,7 @@ function MusicWheel (props) {
   const [nordList, setNordList] = useState([]);
   const [tempoIndex, setTempoIndex] = useState(0);
   const [intensityIndex, setIntensityIndex] = useState(0);
-  const [packageDataIndex, setPackageDataIndex] = useState(2);
+  const [packageDataIndex, setPackageDataIndex] = useState(1);
   const [imageTypeIndex, setImageTypeIndex] = useState("");
   const [groups, setGroups] = useState("");
   const [packageActive, setPackageActive] = useState("F");
@@ -787,7 +787,7 @@ function MusicWheel (props) {
     if (type == "Free") {
       setSubscriptionActivePlan(1);
       if (packageDataIndex == packageData.length - 1) {
-        setPackageDataIndex(0);
+        setPackageDataIndex(1);
       } else {
         setPackageDataIndex(packageDataIndex);
         setIntensityIndex(0);
@@ -842,47 +842,50 @@ function MusicWheel (props) {
       } else {
         setTempoIndex(tempoIndex + 1);
 
-        setNord({ c1: [], c2: [], c3: [] });
-        setNordData([]);
+        // setNord({ c1: [], c2: [], c3: [] });
+        // setNordData([]);
       }
     }
 
     else if (type == "Package") {
       if (packageDataIndex == packageData.length - 1) {
-        setPackageDataIndex(2);
+        setPackageDataIndex(1);
         setPackageActive('F');
         setImageTypeActive(false);
-        setGroups("");
+        setGroups("F1,F2");
         setImageTypeIndex("");
         setDisable(true);
       } else {
         setPackageDataIndex(prev => prev + 1);
-        if (packageDataIndex == "2") {
+        if (packageDataIndex == "1" || !packageDataIndex) {
           setImageTypeActive(1);
           setImageTypeIndex("Letter");
           setGroups("G1,G2,G3,G4");
           setSubscriptionActivePlan(2);
           setPackageActive("");
         }
+        if (packageDataIndex == "2") {
+          setImageTypeActive(1);
+          setImageTypeIndex("Letter");
+          setGroups("O1,O2,O3,O4");
+          setSubscriptionActivePlan(2);
+          setPackageActive("");
+        }
         if (packageDataIndex == "3") {
+          setGroups("G1,G2,G3,G4,O1,O2,O3,O4");
+          setSubscriptionActivePlan(3);
+          setImageTypeActive(1);
+          setImageTypeIndex("Letter");
+        }
+        if (packageDataIndex == "4") {
           setGroups("G1,G2,G3,G4,O1,O2,O3,O4");
           setSubscriptionActivePlan(3);
           setImageTypeIndex("Letter");
           setImageTypeActive(1);
         }
-        if (packageDataIndex == "4") {
-          setGroups("O1,O2,O3,O4");
-          setSubscriptionActivePlan(3);
-          setImageTypeActive(1);
-          setImageTypeIndex("Letter");
-        }
 
         // setNord({ c1: [], c2: [], c3: [] });
         // setNordData([]);
-      }
-      if (packageDataIndex == "1") {
-        setPackageActive("F");
-        setPackageDataIndex(1);
       }
     }
 
@@ -891,8 +894,8 @@ function MusicWheel (props) {
         setIntensityIndex(0);
       } else {
         setIntensityIndex(intensityIndex + 1);
-        setNord({ c1: [], c2: [], c3: [] });
-        setNordData([]);
+        // setNord({ c1: [], c2: [], c3: [] });
+        // setNordData([]);
       }
     }
 
@@ -1183,6 +1186,7 @@ function MusicWheel (props) {
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
     myHeaders.append("Cookie", "PHPSESSID=ckmj4nc6enk1u3e0rle62m3l64");
+    console.log(groups)
 
     const nord_or_cord = getNord();
     var urlencoded = new URLSearchParams();
@@ -1245,7 +1249,7 @@ function MusicWheel (props) {
     }, 1000);
 
     const adminPannelBtn = document.querySelector('#admin-pannel');
-    const btnText = Cookies.get('userName') ? Cookies.get('userName') : "Admin Panel"
+    const btnText = Cookies.get('userName') ? Cookies.get('userName') : "Admin"
     adminPannelBtn.innerHTML = btnText;
   }, []);
 
@@ -1333,7 +1337,7 @@ function MusicWheel (props) {
                   borderRadius: "5px",
                   width: "60%",
                   height: "98%",
-                  marginLeft: "20px",
+                  marginLeft: "30px",
                 }}
               // disabled={`disable`}
               >
@@ -1372,7 +1376,7 @@ function MusicWheel (props) {
             router.push('/AdminPanel');
           }}
         >
-          Admin Panel
+          Admin
         </button>
         {/* <Grid
           container
@@ -1459,7 +1463,7 @@ function MusicWheel (props) {
         </Grid> */}
       </div>
 
-      <div style={{ marginTop: "2%", position: 'relative' }}>
+      <div style={{ position: 'relative' }}>
         <Grid container spacing={1} justifyContent='center'>
           {/* <Grid item xs={2} md={2} className={classes.tempoBtnContainer}> */}
           <button
@@ -1656,7 +1660,7 @@ function MusicWheel (props) {
           <Grid
             container
             spacing={1}
-            style={{ marginTop: "15px", border: "none" }}
+            style={{ border: "none" }}
           >
             <Grid item xs={3} md={4}>
               <button
@@ -1706,11 +1710,11 @@ function MusicWheel (props) {
                   props.setComposer('Composer');
                   props.setImageCount(0);
                   props.setDuration('Intensity');
-                  setPackageDataIndex(0);
+                  setPackageDataIndex(1);
                   setImageTypeIndex("");
                   setIntensityIndex(0);
                   setTempoIndex(0);
-                  setPackageDataIndex(2);
+                  // setPackageDataIndex(2);
                   setPackageActive("F");
                   setGroups('');
                   setDurationDataIndex(0);
