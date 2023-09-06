@@ -6,6 +6,57 @@ import Image from "next/image";
 import Iframe from "react-iframe";
 import Logo from "../public/logo.png";
 import Article from "../public/arcticle.jpg";
+import axios from 'axios';
+
+
+const dataTemp =  [
+  {
+    "id": "7",
+    "title": "Vhal no Dariyo ",
+    "youtube_link": "https://www.youtube.com/embed/261t7_T0NCo?si=WbabVcCD5teH0d5T",
+    "description": "I am from maharashtra... Once I visited gujrat (himmatnagar) and my gujrati friend use to listen this song everyday..and I'm such obsessed with this ... Now I'm living in maharashtra and  I listen this song everyday",
+    "date": "2023-08-25 11:29:55 AM"
+  },
+    {
+      "id": "6",
+      "title": "Vhal no Dariyo ",
+      "youtube_link": "https://www.youtube.com/embed/261t7_T0NCo?si=WbabVcCD5teH0d5T",
+      "description": "I am from maharashtra... Once I visited gujrat (himmatnagar) and my gujrati friend use to listen this song everyday..and I'm such obsessed with this ... Now I'm living in maharashtra and  I listen this song everyday",
+      "date": "2023-08-25 11:29:55 AM"
+    },
+    {
+      "id": "5",
+      "title": "Vhal no Dariyo ",
+      "youtube_link": "https://www.youtube.com/embed/261t7_T0NCo?si=WbabVcCD5teH0d5T",
+      "description": "I am from maharashtra... Once I visited gujrat (himmatnagar) and my gujrati friend use to listen this song everyday..and I'm such obsessed with this ... Now I'm living in maharashtra and  I listen this song everyday",
+      "date": "2023-08-25 11:29:34 AM"
+    },
+  {
+    "id": "7",
+    "title": "Vhal no Dariyo ",
+    "youtube_link": "https://www.youtube.com/embed/261t7_T0NCo?si=WbabVcCD5teH0d5T",
+    "description": "I am from maharashtra... Once I visited gujrat (himmatnagar) and my gujrati friend use to listen this song everyday..and I'm such obsessed with this ... Now I'm living in maharashtra and  I listen this song everyday",
+    "date": "2023-08-25 11:29:55 AM"
+  },
+    {
+      "id": "6",
+      "title": "Vhal no Dariyo ",
+      "youtube_link": "https://www.youtube.com/embed/261t7_T0NCo?si=WbabVcCD5teH0d5T",
+      "description": "I am from maharashtra... Once I visited gujrat (himmatnagar) and my gujrati friend use to listen this song everyday..and I'm such obsessed with this ... Now I'm living in maharashtra and  I listen this song everyday",
+      "date": "2023-08-25 11:29:55 AM"
+    },
+    {
+      "id": "5",
+      "title": "Vhal no Dariyo ",
+      "youtube_link": "https://www.youtube.com/embed/261t7_T0NCo?si=WbabVcCD5teH0d5T",
+      "description": "I am from maharashtra... Once I visited gujrat (himmatnagar) and my gujrati friend use to listen this song everyday..and I'm such obsessed with this ... Now I'm living in maharashtra and  I listen this song everyday",
+      "date": "2023-08-25 11:29:34 AM"
+    }
+  ]
+
+
+
+
 const myLoader = ({ src, width, quality }) => {
   return `https://example.com/${src}?w=${width}&q=${quality || 75}`;
 };
@@ -13,40 +64,64 @@ const useStyles = makeStyles({
   root: {
     position: "relative",
     maxWidth: "100%",
+    
+  
+    
+  },
+  mainContainer: {
+    height: "100%",
+    background: "#fff",
   },
   LibraryBoxs: {
-    // border: "2px solid green",
-    height: "100vh",
+    border: "1px solid gray",
+    gap : "10px",
+    height: "auto",
+    // height: "100vh",
+    padding: "20px",
   },
   content: {
+    height: "max-content",
     display: "flex",
-    justifyContent: "space-between",
+    justifyContent: "flex-start",
     maxWidth: "98%",
     margin: "0 auto",
+    flexWrap: "wrap",
+    gap: "25px",
     // background: #A0C5E8,
     padding: "10px 0",
+    alignItems: "center",
     marginTop: "5%",
   },
 
   spanBox: {
-    width: "100px",
-    height: "100px",
+    width: "125px",
+    height: "125px",
     background: "black",
   },
   spanBox1: {
-    width: "100px",
-    height: "100px",
+    width: "125px",
+    height: "125px",
     background: "lightblue",
     // padding: "5px",
     cursor: "pointer",
   },
   headingStyle: {
     fontSize: "30px",
-    marginLeft: "40%",
+    // marginLeft: "40%",
+    fontWeight: "bold", // You can add more inline styles here
+    fontFamily: "Arial, Helvetica, sans-serif",
+    color: "#333",
+    textAlign: "center",
+
+    
   },
   headingStyle2: {
     fontSize: "25px",
-    marginLeft: "20%",
+    // marginLeft: "20%",
+    fontFamily: "Arial, Helvetica, sans-serif",
+    color: "#333",
+    fontWeight: "500",
+    textAlign: "center",
   },
   cp_modal_body: {
     height: "70%",
@@ -56,18 +131,94 @@ const useStyles = makeStyles({
     alignItems: "center",
     padding: "1rem",
   },
+  cardContainer: {
+    display: "flex",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    flexWrap: "wrap",
+    gap: "25px",
+  },
+  card: {
+    borderRadius: "5px",
+    width: "auto",
+    height: "max-content",
+    background: "#f0f0f0",
+    padding: "10px",
+    width: "420px",
+    height: "max-content",
+    marginBottom: "20px",
+
+
+  },
+  cardTitle: {
+    height: "auto",
+whiteSpace: "pre-wrap",
+    margin: "4px",
+  fontSize: "14px",
+  fontWeight: "bold",
+ 
+  },
 });
 
 const Library = () => {
+  
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    // Define the URL to fetch
+    const apiUrl = 'https://mylatinhome.com/absolute/appdata/webservice.php?library=1';
+
+    // Fetch data from the API
+    fetch(apiUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        setData(data); // Store the fetched data in the 'data' state variable
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  }, []); 
+  
+  
+
+
+
   let path = "https://mylatinhome.com/absolute/note-sound/Am.wav";
   const [audio] = useState(typeof Audio !== "undefined" && new Audio(path));
   const [openModel, setOpenModel] = useState(false);
   const classes = useStyles();
+
   const handleClose = (text) => {
     setOpenModel(false);
   };
   return (
-    <Grid container spacing={0}>
+    <>
+    {/* <div className="container">
+    <h1>Video Cards</h1>
+    <div className="row">
+      {data.map((item) => (
+        <div className="col-md-4" key={item.id}>
+          <div className="card">
+            <iframe
+              width="560"
+              height="315"
+              src={item.youtube_link}
+              title={item.title}
+              frameBorder="0"
+              allowFullScreen
+            ></iframe>
+            <div className="card-body">
+              <h5 className="card-title">{item.title}</h5>
+              <p className="card-text">{item.description}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div> */}
+
+<div className={classes.mainContainer}>
+    <Grid container spacing={0} >
       <Grid
         item
         xs={12}
@@ -79,6 +230,58 @@ const Library = () => {
       >
         <p className={classes.headingStyle}>Media</p>
         <p className={classes.headingStyle2}>YoutUbe/Rumble Links Thumbnail</p>
+
+
+        <div className={classes.cardContainer}>
+        {data ? (
+        // Render data in cards when it's available
+        data.data.video.map((item, index) => (
+          <div className={classes.card}>
+          <div className={classes.cardBody}>
+            <p className={classes.cardTitle}>
+            {item.title}
+            </p>
+            {/* <p className={classes.cardDescription}>
+            {item.description}
+            </p> */}
+            </div>
+            <iFrame
+                width="420px"
+                height="260px"
+                src={item.youtube_link}
+                title={item.title}
+                
+                allowFullScreen
+              ></iFrame>
+          </div>
+         
+        ))
+      ) : (
+        // Display a loading indicator or message when data is null
+        <p>Loading...</p>
+      )}
+    
+
+          
+          {/* {dataTemp.map((item) => (
+          <div className={classes.card}>
+          <div className={classes.cardBody}>
+            <p className={classes.cardTitle}>
+            {item.title}
+            </p>
+          
+            </div>
+            <iFrame
+                width="120px"
+                height="120px"
+                src={item.youtube_link}
+                title={item.title}
+                
+                allowFullScreen
+              ></iFrame>
+          </div>
+          ))} */}
+          </div>
         <div className={classes.content}>
           <Modal
             open={openModel}
@@ -93,8 +296,8 @@ const Library = () => {
                     <span className={classes.spanBox}>
                       <Iframe
                         url="https://www.sdrive.app/embed/1ptBQD"
-                        width="100px"
-                        height="100px"
+                        width="125px"
+                        height="125px"
                         id=""
                         className=""
                         display="block"
@@ -147,12 +350,12 @@ const Library = () => {
               ></div>
             </Box>
           </Modal>
-
-          <span className={classes.spanBox}>
+                
+          {/* <span className={classes.spanBox}>
             <Iframe
               url="https://www.sdrive.app/embed/1ptBQD"
-              width="100px"
-              height="100px"
+              width="125px"
+              height="125px"
               id=""
               className=""
               display="block"
@@ -162,8 +365,8 @@ const Library = () => {
           <span className={classes.spanBox}>
             <Iframe
               url="https://www.sdrive.app/embed/1ptBQD"
-              width="100px"
-              height="100px"
+              width="125px"
+              height="125px"
               id=""
               className=""
               display="block"
@@ -173,8 +376,8 @@ const Library = () => {
           <span className={classes.spanBox}>
             <Iframe
               url="https://www.sdrive.app/embed/1ptBQD"
-              width="100px"
-              height="100px"
+              width="125px"
+              height="125px"
               id=""
               className=""
               display="block"
@@ -184,8 +387,122 @@ const Library = () => {
           <span className={classes.spanBox}>
             <Iframe
               url="https://www.sdrive.app/embed/1ptBQD"
-              width="100px"
-              height="100px"
+              width="125px"
+              height="125px"
+              id=""
+              className=""
+              display="block"
+              position="relative"
+            />
+          </span> */}
+        </div>
+        {/* <div className={classes.content}>
+          <span className={classes.spanBox}>
+            <Iframe
+              url="https://www.sdrive.app/embed/1ptBQD"
+              width="125px"
+              height="125px"
+              id=""
+              className=""
+              display="block"
+              position="relative"
+            />
+          </span>
+          <span className={classes.spanBox}>
+            <Iframe
+              url="https://www.sdrive.app/embed/1ptBQD"
+              width="125px"
+              height="125px"
+              id=""
+              className=""
+              display="block"
+              position="relative"
+            />
+          </span>
+          <span className={classes.spanBox}>
+            <Iframe
+              url="https://www.sdrive.app/embed/1ptBQD"
+              width="125px"
+              height="125px"
+              id=""
+              className=""
+              display="block"
+              position="relative"
+            />
+          </span>
+          <span className={classes.spanBox}>
+            <Iframe
+              url="https://www.sdrive.app/embed/1ptBQD"
+              width="125px"
+              height="125px"
+              id=""
+              className=""
+              display="block"
+              position="relative"
+            />
+          </span>
+          <span className={classes.spanBox}>
+            <Iframe
+              url="https://www.sdrive.app/embed/1ptBQD"
+              width="125px"
+              height="125px"
+              id=""
+              className=""
+              display="block"
+              position="relative"
+            />
+          </span>
+        </div> */}
+        {/* <div className={classes.content}>
+          <span className={classes.spanBox}>
+            <Iframe
+              url="https://www.sdrive.app/embed/1ptBQD"
+              width="125px"
+              height="125px"
+              id=""
+              className=""
+              display="block"
+              position="relative"
+            />
+          </span>
+          <span className={classes.spanBox}>
+            <Iframe
+              url="https://www.sdrive.app/embed/1ptBQD"
+              width="125px"
+              height="125px"
+              id=""
+              className=""
+              display="block"
+              position="relative"
+            />
+          </span>
+          <span className={classes.spanBox}>
+            <Iframe
+              url="https://www.sdrive.app/embed/1ptBQD"
+              width="125px"
+              height="125px"
+              id=""
+              className=""
+              display="block"
+              position="relative"
+            />
+          </span>
+          <span className={classes.spanBox}>
+            <Iframe
+              url="https://www.sdrive.app/embed/1ptBQD"
+              width="125px"
+              height="125px"
+              id=""
+              className=""
+              display="block"
+              position="relative"
+            />
+          </span>
+          <span className={classes.spanBox}>
+            <Iframe
+              url="https://www.sdrive.app/embed/1ptBQD"
+              width="125px"
+              height="125px"
               id=""
               className=""
               display="block"
@@ -197,8 +514,8 @@ const Library = () => {
           <span className={classes.spanBox}>
             <Iframe
               url="https://www.sdrive.app/embed/1ptBQD"
-              width="100px"
-              height="100px"
+              width="125px"
+              height="125px"
               id=""
               className=""
               display="block"
@@ -208,8 +525,8 @@ const Library = () => {
           <span className={classes.spanBox}>
             <Iframe
               url="https://www.sdrive.app/embed/1ptBQD"
-              width="100px"
-              height="100px"
+              width="125px"
+              height="125px"
               id=""
               className=""
               display="block"
@@ -219,8 +536,8 @@ const Library = () => {
           <span className={classes.spanBox}>
             <Iframe
               url="https://www.sdrive.app/embed/1ptBQD"
-              width="100px"
-              height="100px"
+              width="125px"
+              height="125px"
               id=""
               className=""
               display="block"
@@ -230,8 +547,8 @@ const Library = () => {
           <span className={classes.spanBox}>
             <Iframe
               url="https://www.sdrive.app/embed/1ptBQD"
-              width="100px"
-              height="100px"
+              width="125px"
+              height="125px"
               id=""
               className=""
               display="block"
@@ -241,8 +558,8 @@ const Library = () => {
           <span className={classes.spanBox}>
             <Iframe
               url="https://www.sdrive.app/embed/1ptBQD"
-              width="100px"
-              height="100px"
+              width="125px"
+              height="125px"
               id=""
               className=""
               display="block"
@@ -254,8 +571,8 @@ const Library = () => {
           <span className={classes.spanBox}>
             <Iframe
               url="https://www.sdrive.app/embed/1ptBQD"
-              width="100px"
-              height="100px"
+              width="125px"
+              height="125px"
               id=""
               className=""
               display="block"
@@ -265,8 +582,8 @@ const Library = () => {
           <span className={classes.spanBox}>
             <Iframe
               url="https://www.sdrive.app/embed/1ptBQD"
-              width="100px"
-              height="100px"
+              width="125px"
+              height="125px"
               id=""
               className=""
               display="block"
@@ -276,8 +593,8 @@ const Library = () => {
           <span className={classes.spanBox}>
             <Iframe
               url="https://www.sdrive.app/embed/1ptBQD"
-              width="100px"
-              height="100px"
+              width="125px"
+              height="125px"
               id=""
               className=""
               display="block"
@@ -287,8 +604,8 @@ const Library = () => {
           <span className={classes.spanBox}>
             <Iframe
               url="https://www.sdrive.app/embed/1ptBQD"
-              width="100px"
-              height="100px"
+              width="125px"
+              height="125px"
               id=""
               className=""
               display="block"
@@ -298,129 +615,15 @@ const Library = () => {
           <span className={classes.spanBox}>
             <Iframe
               url="https://www.sdrive.app/embed/1ptBQD"
-              width="100px"
-              height="100px"
+              width="125px"
+              height="125px"
               id=""
               className=""
               display="block"
               position="relative"
             />
           </span>
-        </div>
-        <div className={classes.content}>
-          <span className={classes.spanBox}>
-            <Iframe
-              url="https://www.sdrive.app/embed/1ptBQD"
-              width="100px"
-              height="100px"
-              id=""
-              className=""
-              display="block"
-              position="relative"
-            />
-          </span>
-          <span className={classes.spanBox}>
-            <Iframe
-              url="https://www.sdrive.app/embed/1ptBQD"
-              width="100px"
-              height="100px"
-              id=""
-              className=""
-              display="block"
-              position="relative"
-            />
-          </span>
-          <span className={classes.spanBox}>
-            <Iframe
-              url="https://www.sdrive.app/embed/1ptBQD"
-              width="100px"
-              height="100px"
-              id=""
-              className=""
-              display="block"
-              position="relative"
-            />
-          </span>
-          <span className={classes.spanBox}>
-            <Iframe
-              url="https://www.sdrive.app/embed/1ptBQD"
-              width="100px"
-              height="100px"
-              id=""
-              className=""
-              display="block"
-              position="relative"
-            />
-          </span>
-          <span className={classes.spanBox}>
-            <Iframe
-              url="https://www.sdrive.app/embed/1ptBQD"
-              width="100px"
-              height="100px"
-              id=""
-              className=""
-              display="block"
-              position="relative"
-            />
-          </span>
-        </div>
-        <div className={classes.content}>
-          <span className={classes.spanBox}>
-            <Iframe
-              url="https://www.sdrive.app/embed/1ptBQD"
-              width="100px"
-              height="100px"
-              id=""
-              className=""
-              display="block"
-              position="relative"
-            />
-          </span>
-          <span className={classes.spanBox}>
-            <Iframe
-              url="https://www.sdrive.app/embed/1ptBQD"
-              width="100px"
-              height="100px"
-              id=""
-              className=""
-              display="block"
-              position="relative"
-            />
-          </span>
-          <span className={classes.spanBox}>
-            <Iframe
-              url="https://www.sdrive.app/embed/1ptBQD"
-              width="100px"
-              height="100px"
-              id=""
-              className=""
-              display="block"
-              position="relative"
-            />
-          </span>
-          <span className={classes.spanBox}>
-            <Iframe
-              url="https://www.sdrive.app/embed/1ptBQD"
-              width="100px"
-              height="100px"
-              id=""
-              className=""
-              display="block"
-              position="relative"
-            />
-          </span>
-          <span className={classes.spanBox}>
-            <Iframe
-              url="https://www.sdrive.app/embed/1ptBQD"
-              width="100px"
-              height="100px"
-              id=""
-              className=""
-              display="block"
-              position="relative"
-            />
-          </span>
-        </div>
+        </div> */}
       </Grid>
       <Grid
         item
@@ -431,11 +634,41 @@ const Library = () => {
         className={classes.LibraryBoxs}
         style={{ background: "#fff" }}
       >
-        <p className={classes.headingStyle} style={{ color: "#fff" }}>
+        {/* <p className={classes.headingStyle} style={{ color: "#fff" }}>
           Media
-        </p>
+        </p> */}
+        <p className={classes.headingStyle}>Libraries</p>
         <p className={classes.headingStyle2}>MP3/MP4 I Produce Thumbnail</p>
-        <div className={classes.content}>
+        <div className={classes.cardContainer}>
+        {data ? (
+        // Render data in cards when it's available
+        data.data.libraries.map((item, index) => (
+          <div className={classes.card}>
+          <div className={classes.cardBody}>
+            <p className={classes.cardTitle}>
+            {item.song_title}
+            </p>
+            {/* <p className={classes.cardDescription}>
+            {item.description}
+            </p> */}
+            </div>
+            <iFrame
+                width="420px"
+                height="260px"
+                src={item.song_name}
+                title={item.song_title}
+                
+                allowFullScreen
+              ></iFrame>
+          </div>
+         
+        ))
+      ) : (
+        // Display a loading indicator or message when data is null
+        <p>Loading...</p>
+      )}
+      </div>
+        {/* <div className={classes.content}>
           <span className={classes.spanBox1} onClick={() => audio.play()}>
             <Image
               loader={myLoader}
@@ -486,8 +719,8 @@ const Library = () => {
               style={{ marginTop: "10px" }}
             />
           </span>
-        </div>
-        <div className={classes.content}>
+        </div> */}
+        {/* <div className={classes.content}>
           <span className={classes.spanBox1}>
             <Image
               loader={myLoader}
@@ -704,7 +937,7 @@ const Library = () => {
               style={{ marginTop: "10px" }}
             />
           </span>
-        </div>
+        </div> */}
       </Grid>
       <Grid
         item
@@ -717,7 +950,87 @@ const Library = () => {
       >
         <p className={classes.headingStyle}>Articles</p>
         <p className={classes.headingStyle2}>MP3/MP4 I Produce Thumbnail</p>
-        <div className={classes.content}>
+        <div className={classes.cardContainer}>
+        {data ? (
+        // Render data in cards when it's available
+        data.data.articles.map((item, index) => (
+          <div className={classes.card}>
+          <div className={classes.cardBody}>
+            <p className={classes.cardTitle}>
+            {item.title}
+            </p>
+            {/* <p className={classes.cardDescription}>
+            {item.description}
+            </p> */}
+            </div>
+            <Image
+            width={420}
+            height={260}
+              loader={myLoader}
+              src={item.image}
+              alt={item.title}
+             />
+          </div>
+         
+        ))
+      ) : (
+        // Display a loading indicator or message when data is null
+        <p>Loading...</p>
+      )}
+      </div>
+        {/* <div className={classes.content}>
+          <span className={classes.spanBox}>
+            <Image
+              loader={myLoader}
+              src={Article}
+              alt="Picture of the author"
+              width={500}
+              height={500}
+              style={{ marginTop: "10px" }}
+            />
+          </span>
+          <span className={classes.spanBox}>
+            <Image
+              loader={myLoader}
+              src={Article}
+              alt="Picture of the author"
+              width={500}
+              height={500}
+              style={{ marginTop: "10px" }}
+            />
+          </span>
+          <span className={classes.spanBox}>
+            <Image
+              loader={myLoader}
+              src={Article}
+              alt="Picture of the author"
+              width={500}
+              height={500}
+              style={{ marginTop: "10px" }}
+            />
+          </span>
+          <span className={classes.spanBox}>
+            <Image
+              loader={myLoader}
+              src={Article}
+              alt="Picture of the author"
+              width={500}
+              height={500}
+              style={{ marginTop: "10px" }}
+            />
+          </span>
+          <span className={classes.spanBox}>
+            <Image
+              loader={myLoader}
+              src={Article}
+              alt="Picture of the author"
+              width={500}
+              height={500}
+              style={{ marginTop: "10px" }}
+            />
+          </span>
+        </div> */}
+        {/* <div className={classes.content}>
           <span className={classes.spanBox}>
             <Image
               loader={myLoader}
@@ -924,61 +1237,12 @@ const Library = () => {
               style={{ marginTop: "10px" }}
             />
           </span>
-        </div>
-        <div className={classes.content}>
-          <span className={classes.spanBox}>
-            <Image
-              loader={myLoader}
-              src={Article}
-              alt="Picture of the author"
-              width={500}
-              height={500}
-              style={{ marginTop: "10px" }}
-            />
-          </span>
-          <span className={classes.spanBox}>
-            <Image
-              loader={myLoader}
-              src={Article}
-              alt="Picture of the author"
-              width={500}
-              height={500}
-              style={{ marginTop: "10px" }}
-            />
-          </span>
-          <span className={classes.spanBox}>
-            <Image
-              loader={myLoader}
-              src={Article}
-              alt="Picture of the author"
-              width={500}
-              height={500}
-              style={{ marginTop: "10px" }}
-            />
-          </span>
-          <span className={classes.spanBox}>
-            <Image
-              loader={myLoader}
-              src={Article}
-              alt="Picture of the author"
-              width={500}
-              height={500}
-              style={{ marginTop: "10px" }}
-            />
-          </span>
-          <span className={classes.spanBox}>
-            <Image
-              loader={myLoader}
-              src={Article}
-              alt="Picture of the author"
-              width={500}
-              height={500}
-              style={{ marginTop: "10px" }}
-            />
-          </span>
-        </div>
+        </div> */}
       </Grid>
     </Grid>
+    </div>
+    </>
+
   );
 };
 
