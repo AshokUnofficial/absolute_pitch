@@ -9,52 +9,6 @@ import Article from "../public/arcticle.jpg";
 import axios from 'axios';
 
 
-const dataTemp =  [
-  {
-    "id": "7",
-    "title": "Vhal no Dariyo ",
-    "youtube_link": "https://www.youtube.com/embed/261t7_T0NCo?si=WbabVcCD5teH0d5T",
-    "description": "I am from maharashtra... Once I visited gujrat (himmatnagar) and my gujrati friend use to listen this song everyday..and I'm such obsessed with this ... Now I'm living in maharashtra and  I listen this song everyday",
-    "date": "2023-08-25 11:29:55 AM"
-  },
-    {
-      "id": "6",
-      "title": "Vhal no Dariyo ",
-      "youtube_link": "https://www.youtube.com/embed/261t7_T0NCo?si=WbabVcCD5teH0d5T",
-      "description": "I am from maharashtra... Once I visited gujrat (himmatnagar) and my gujrati friend use to listen this song everyday..and I'm such obsessed with this ... Now I'm living in maharashtra and  I listen this song everyday",
-      "date": "2023-08-25 11:29:55 AM"
-    },
-    {
-      "id": "5",
-      "title": "Vhal no Dariyo ",
-      "youtube_link": "https://www.youtube.com/embed/261t7_T0NCo?si=WbabVcCD5teH0d5T",
-      "description": "I am from maharashtra... Once I visited gujrat (himmatnagar) and my gujrati friend use to listen this song everyday..and I'm such obsessed with this ... Now I'm living in maharashtra and  I listen this song everyday",
-      "date": "2023-08-25 11:29:34 AM"
-    },
-  {
-    "id": "7",
-    "title": "Vhal no Dariyo ",
-    "youtube_link": "https://www.youtube.com/embed/261t7_T0NCo?si=WbabVcCD5teH0d5T",
-    "description": "I am from maharashtra... Once I visited gujrat (himmatnagar) and my gujrati friend use to listen this song everyday..and I'm such obsessed with this ... Now I'm living in maharashtra and  I listen this song everyday",
-    "date": "2023-08-25 11:29:55 AM"
-  },
-    {
-      "id": "6",
-      "title": "Vhal no Dariyo ",
-      "youtube_link": "https://www.youtube.com/embed/261t7_T0NCo?si=WbabVcCD5teH0d5T",
-      "description": "I am from maharashtra... Once I visited gujrat (himmatnagar) and my gujrati friend use to listen this song everyday..and I'm such obsessed with this ... Now I'm living in maharashtra and  I listen this song everyday",
-      "date": "2023-08-25 11:29:55 AM"
-    },
-    {
-      "id": "5",
-      "title": "Vhal no Dariyo ",
-      "youtube_link": "https://www.youtube.com/embed/261t7_T0NCo?si=WbabVcCD5teH0d5T",
-      "description": "I am from maharashtra... Once I visited gujrat (himmatnagar) and my gujrati friend use to listen this song everyday..and I'm such obsessed with this ... Now I'm living in maharashtra and  I listen this song everyday",
-      "date": "2023-08-25 11:29:34 AM"
-    }
-  ]
-
-
 
 
 const myLoader = ({ src, width, quality }) => {

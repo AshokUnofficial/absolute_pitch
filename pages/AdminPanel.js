@@ -97,10 +97,19 @@ const AdminPanel = () => {
       </div>
       <div className={styles.rightSection}>
         <div className={styles.button_container_box}>
+          <Link href='/Tips'>
           <button className={styles.buttons_pill}>
             <Image src={PlusIcon} alt="button Icon" />
-            <span className={styles.button_text}>Tips</span>
-          </button>
+              <span className={styles.button_text}>Tips</span>
+            </button>
+          </Link>
+          <Link href='/Library'>
+            <button className={styles.buttons_pill}>
+              <Image src={EditIcon} alt="button Icon" />
+              <span className={styles.button_text}>Library</span>
+            </button>
+          </Link>
+
           <button className={styles.buttons_pill} onClick={feedBackOpen}>
             <Image src={PlusIcon} alt="button Icon" />
             <span className={styles.button_text}>Feedback Form</span>
