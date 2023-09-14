@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Grid,
   makeStyles,
@@ -13,6 +13,7 @@ import * as Yup from "yup";
 import Background from "../public/assets/images/blackboard.png";
 import Logo from "../public/assets/images/logo.png";
 import Cookies from "js-cookie";
+import Loader from "components/Loader";
 
 const useStyles = makeStyles({
   root: {
@@ -155,6 +156,16 @@ const SignUp = () => {
   const [name, setName] = useState("");
   const classes = useStyles();
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    if (Cookies.get('userId')) {
+      router.replace('/');
+    } else {
+      setIsLoading(false);
+    }
+  }, []);
+
   const RagisterAccountSubmit = async (values) => {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
@@ -186,7 +197,7 @@ const SignUp = () => {
           router.push({
             pathname: "/SigninPage",
           });
-          Cookies.set("userName",responseJson?.data?.user_details?.name);
+          Cookies.set("userName", responseJson?.data?.user_details?.name);
         }
       });
   };
@@ -203,143 +214,146 @@ const SignUp = () => {
     router.push("/SigninPage");
   };
   return (
-    <div className={classes.root}>
-      <div className={classes.FormContainer}>
-        <div className={classes.ImgContainer}>
-          <Image
-            src={Logo}
-            alt="Picture of the author"
-            width={300}
-            height={200}
-            style={{ marginTop: "2px", borderRadius: "20px" }}
-          />
-        </div>
-        <div className={classes.innerContainer}>
-          <div>
-            <h1 style={{ color: "#fff" }}>SIGNUP TO YOUR ACCOUNT</h1>
+    !isLoading ?
+      <div className={classes.root}>
+        <div className={classes.FormContainer}>
+          <div className={classes.ImgContainer}>
+            <Image
+              src={Logo}
+              alt="Picture of the author"
+              width={300}
+              height={200}
+              style={{ marginTop: "2px", borderRadius: "20px" }}
+            />
           </div>
-          <div>
-            <h3 style={{ color: "#fff" }} className={classes.typo_one}>
-              Hey,Enter your details to get signup to you account
-            </h3>
+          <div className={classes.innerContainer}>
+            <div>
+              <h1 style={{ color: "#fff" }}>SIGNUP TO YOUR ACCOUNT</h1>
+            </div>
+            <div>
+              <h3 style={{ color: "#fff" }} className={classes.typo_one}>
+                Hey,Enter your details to get signup to you account
+              </h3>
+            </div>
+            <Formik
+              initialValues={{
+                email: "",
+                passsword: "",
+                cpasssword: "",
+              }}
+              validationSchema={Yup.object().shape({
+                email: Yup.string()
+                  .max(50)
+                  .required("Email ID is required.")
+                  .email("Email ID is invalid."),
+                passsword: Yup.string()
+                  .required("No password provided.")
+                  .min(4, "Password is too short - should be 4 chars minimum.")
+                  .matches(
+                    /[a-zA-Z]/,
+                    "Password can only contain Latin letters."
+                  ),
+                cpasssword: Yup.string()
+                  .required("No password provided.")
+                  .min(4, "Password is too short - should be 4 chars minimum.")
+                  .matches(
+                    /[a-zA-Z]/,
+                    "Password can only contain Latin letters."
+                  ),
+              })}
+              onSubmit={async (values, { setSubmitting }) => {
+                const result = RagisterAccountSubmit(values, null, 2);
+              }}
+            >
+              {({
+                errors,
+                handleChange,
+                handleSubmit,
+                isSubmitting,
+                setFieldValue,
+                isValid,
+                touched,
+                values,
+              }) => (
+                <form id="my-form" onSubmit={handleSubmit}>
+                  <div className={classes.songBox}>
+                    <Grid container spacing={1}>
+                    </Grid>
+                    <Grid item md={12} xs={12} style={{ position: "relative" }}>
+                      <TextField
+                        required
+                        id="name"
+                        type="text"
+                        className={classes.inputField}
+                        error={Boolean(
+                          touched.name && errors.name
+                        )}
+                        helperText={
+                          touched.name && errors.name
+                        }
+                        label="Name"
+                        value={name}
+                        variant="filled"
+                        onChange={(e) => setName(e.target.value)}
+                        name="name"
+                        size="small"
+                      />
+                    </Grid>
+                    <Grid item md={12} xs={12} style={{ position: "relative" }}>
+                      <TextField
+                        required
+                        id="email"
+                        type="email"
+                        className={classes.inputField}
+                        label="Email"
+                        value={email}
+                        variant="filled"
+                        onChange={(e) => setEmail(e.target.value)}
+                        name="email"
+                        size="small"
+                      />
+                    </Grid>
+                    <Grid item md={12} xs={12} style={{ position: "relative" }}>
+                      <TextField
+                        required
+                        id="passsword"
+                        type="password"
+                        className={classes.inputField}
+                        label="Password"
+                        value={pass}
+                        variant="filled"
+                        onChange={(e) => setPass(e.target.value)}
+                        name="passsword"
+                        size="small"
+                      />
+
+                    </Grid>
+                  </div>
+
+                  <div>
+                    <Button
+                      className={classes.typo_design}
+                      style={{ width: "75%", marginTop: "150px" }}
+                      onClick={RagisterAccountSubmit}
+                      disabled={name === "" || pass === '' || email === '' || !validateEmail(email)}
+                      title={(name === "" || pass === '' || email === '' || !validateEmail(email)) ? "Please fill all the required field." : "Register"}
+                    >
+                      SIGN UP
+                    </Button>
+                  </div>
+                  <div>
+                    <h3 style={{ color: "#fff" }} className={classes.typo_one}>
+                      Dont have an account?<span onClick={SignupPge} style={{ cursor: 'pointer' }}>Sign In</span>
+                    </h3>
+                  </div>
+                </form>
+              )}
+            </Formik>
           </div>
-          <Formik
-            initialValues={{
-              email: "",
-              passsword: "",
-              cpasssword: "",
-            }}
-            validationSchema={Yup.object().shape({
-              email: Yup.string()
-                .max(50)
-                .required("Email ID is required.")
-                .email("Email ID is invalid."),
-              passsword: Yup.string()
-                .required("No password provided.")
-                .min(4, "Password is too short - should be 4 chars minimum.")
-                .matches(
-                  /[a-zA-Z]/,
-                  "Password can only contain Latin letters."
-                ),
-              cpasssword: Yup.string()
-                .required("No password provided.")
-                .min(4, "Password is too short - should be 4 chars minimum.")
-                .matches(
-                  /[a-zA-Z]/,
-                  "Password can only contain Latin letters."
-                ),
-            })}
-            onSubmit={async (values, { setSubmitting }) => {
-              const result = RagisterAccountSubmit(values, null, 2);
-            }}
-          >
-            {({
-              errors,
-              handleChange,
-              handleSubmit,
-              isSubmitting,
-              setFieldValue,
-              isValid,
-              touched,
-              values,
-            }) => (
-              <form id="my-form" onSubmit={handleSubmit}>
-                <div className={classes.songBox}>
-                  <Grid container spacing={1}>
-                  </Grid>
-                  <Grid item md={12} xs={12} style={{ position: "relative" }}>
-                    <TextField
-                      required
-                      id="name"
-                      type="text"
-                      className={classes.inputField}
-                      error={Boolean(
-                        touched.name && errors.name
-                      )}
-                      helperText={
-                        touched.name && errors.name
-                      }
-                      label="Name"
-                      value={name}
-                      variant="filled"
-                      onChange={(e) => setName(e.target.value)}
-                      name="name"
-                      size="small"
-                    />
-                  </Grid>
-                  <Grid item md={12} xs={12} style={{ position: "relative" }}>
-                    <TextField
-                      required
-                      id="email"
-                      type="email"
-                      className={classes.inputField}
-                      label="Email"
-                      value={email}
-                      variant="filled"
-                      onChange={(e) => setEmail(e.target.value)}
-                      name="email"
-                      size="small"
-                    />
-                  </Grid>
-                  <Grid item md={12} xs={12} style={{ position: "relative" }}>
-                    <TextField
-                      required
-                      id="passsword"
-                      type="password"
-                      className={classes.inputField}
-                      label="Password"
-                      value={pass}
-                      variant="filled"
-                      onChange={(e) => setPass(e.target.value)}
-                      name="passsword"
-                      size="small"
-                    />
-
-                  </Grid>
-                </div>
-
-                <div>
-                  <Button
-                    className={classes.typo_design}
-                    style={{ width: "75%", marginTop: "150px" }}
-                    onClick={RagisterAccountSubmit}
-                    disabled={name === "" || pass === '' || email === '' || !validateEmail(email)}
-                    title={(name === "" || pass === '' || email === '' || !validateEmail(email)) ? "Please fill all the required field." : "Register"}
-                  >
-                    SIGN UP
-                  </Button>
-                </div>
-                <div>
-                  <h3 style={{ color: "#fff" }} className={classes.typo_one}>
-                    Dont have an account?<span onClick={SignupPge} style={{ cursor: 'pointer' }}>Sign In</span>
-                  </h3>
-                </div>
-              </form>
-            )}
-          </Formik>
         </div>
       </div>
-    </div>
+      :
+      <Loader />
   );
 };
 

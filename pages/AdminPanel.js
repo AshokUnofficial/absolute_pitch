@@ -19,14 +19,15 @@ import downArrow from '../public/images/downArrow.svg';
 import Box from "@mui/material/Box";
 // import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import UserLog from "./UserLog";
-import Feedback from "./Feedback";
+import UserLog from "../src/UserLog";
+import Feedback from "../src/Feedback";
 // import LineChart from "./LineChart";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import styles from '../styles/AdminPanel.module.css';
 import Cookies from "js-cookie";
 import Link from "next/link";
+import Loader from "components/Loader";
 // import Cookies from "js-cookie";
 const NewChart = dynamic(() => import("../src/NewChart"), { ssr: false });
 const Calendar = dynamic(() => import("../src/Calendar"));
@@ -65,6 +66,7 @@ const AdminPanel = () => {
   const feedBackOpen = () => setFeedback(true);
   const feedBackClose = () => setFeedback(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   const open = Boolean(anchorEl);
 
   const handleClick = (event) => {
@@ -83,9 +85,15 @@ const AdminPanel = () => {
 
   useEffect(() => {
     setUserName(Cookies.get('userName'));
+    if (!Cookies.get('userId')) {
+      router.replace('/SigninPage');
+    } else {
+      setIsLoading(false);
+    }
   }, []);
 
   return (
+    !isLoading ? 
     <div className={`${styles.main_container}`}>
       <div className={styles.leftSection}>
         <div className={styles.button_container}>
@@ -169,6 +177,8 @@ const AdminPanel = () => {
         </Box>
       </Modal>
     </div >
+    :
+    <Loader/>
   );
 };
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Grid,
   makeStyles,
@@ -14,6 +14,7 @@ import { useRouter } from "next/router";
 import Background from "../public/assets/images/blackboard.png";
 import Logo from "../public/assets/images/logo.png";
 import Link from "next/link";
+import Loader from "components/Loader";
 const useStyles = makeStyles({
   root: {
     position: "relative",
@@ -152,8 +153,17 @@ const SignIn = () => {
   const classes = useStyles();
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
-  const [ userId, setUserId] = useState("");
+  const [userId, setUserId] = useState("");
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    if (Cookies.get('userId')) {
+      router.replace('/');
+    } else {
+      setIsLoading(false);
+    }
+  }, []);
 
   const LoginAccountSubmit = async (values) => {
     var myHeaders = new Headers();
@@ -182,130 +192,133 @@ const SignIn = () => {
         } else {
           // alert("Login Successfully");
           setUserId(responseJson?.data?.user_details?.id);
-          Cookies.set("userId",responseJson?.data?.user_details?.id);
-          Cookies.set("userName",responseJson?.data?.user_details?.name);
+          Cookies.set("userId", responseJson?.data?.user_details?.id);
+          Cookies.set("userName", responseJson?.data?.user_details?.name);
           router.push({
             pathname: "/",
           });
         }
       });
   };
-  
-  return (
-    <div className={classes.root}>
-      <div className={classes.FormContainer}>
-        <div className={classes.ImgContainer}>
-          <Image
-            src={Logo}
-            alt="Picture of the author"
-            width={300}
-            height={200}
-            style={{ marginTop: "2px", borderRadius: "20px" }}
-          />
-        </div>
-        <div className={classes.innerContainer}>
-          <div>
-            <h1 style={{ color: "#fff" }}>LOGIN TO YOUR ACCOUNT</h1>
-          </div>
-          <div>
-            <h3 style={{ color: "#fff" }} className={classes.typo_one}>
-              Hey,Enter your details to get login to you account
-            </h3>
-          </div>
-          <Formik
-            initialValues={{
-              email: "",
-              passsword: "",
-              cpasssword: "",
-            }}
-            validationSchema={Yup.object().shape({
-              email: Yup.string()
-                .max(50)
-                .required("Email ID is required.")
-                .email("Email ID is invalid."),
-              passsword: Yup.string()
-                .required("No password provided.")
-                .min(4, "Password is too short - should be 4 chars minimum.")
-                .matches(
-                  /[a-zA-Z]/,
-                  "Password can only contain Latin letters."
-                ),
-              cpasssword: Yup.string()
-                .required("No password provided.")
-                .min(4, "Password is too short - should be 4 chars minimum.")
-                .matches(
-                  /[a-zA-Z]/,
-                  "Password can only contain Latin letters."
-                ),
-            })}
-            onSubmit={async (values, { setSubmitting }) => {
-              const result = LoginAccountSubmit(values, null, 2);
-            }}
-          >
-            {({
-              errors,
-              handleChange,
-              handleSubmit,
-              isSubmitting,
-              setFieldValue,
-              isValid,
-              touched,
-              values,
-            }) => (
-              <form id="my-form">
-                <div className={classes.songBox}>
-                  <Grid container spacing={1}>
-                    <Grid item md={12} xs={12} style={{ position: "relative" }}>
-                      <TextField
-                        required
-                        id="email"
-                        type="text"
-                        className={classes.inputField}
-                        label="Enter Email"
-                        variant="filled"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        name="email"
-                        size="small"
-                      />
-                    </Grid>
-                    <Grid item md={12} xs={12} style={{ position: "relative" }}>
-                      <TextField
-                        required
-                        id="password"
-                        type="text"
-                        className={classes.inputField}
-                        label="Password"
-                        value={pass}
-                        variant="filled"
-                        onChange={(e) => setPass(e.target.value)}
-                        name="password"
-                        size="small"
-                      />
-                    </Grid>
-                  </Grid>
-                </div>
 
-                <div>
-                  <Button
-                    className={classes.typo_design}
-                    style={{ width: "75%", marginTop: "60px" }}
-                    onClick={LoginAccountSubmit}
-                  >
-                    LOGIN
-                  </Button>
-                </div>
-                <div>
-                <h3 style={{ color: "#fff" }} className={classes.typo_one}>
-                    Dont have an account?<Link href='/SignupPage' style={{color: '#fff !important', textDecoration: 'none'}}>Sign Up</Link>
-                  </h3>
-                </div>
-              </form>
-            )}
-          </Formik>
+  return (
+    !isLoading ?
+      <div className={classes.root}>
+        <div className={classes.FormContainer}>
+          <div className={classes.ImgContainer}>
+            <Image
+              src={Logo}
+              alt="Picture of the author"
+              width={300}
+              height={200}
+              style={{ marginTop: "2px", borderRadius: "20px" }}
+            />
+          </div>
+          <div className={classes.innerContainer}>
+            <div>
+              <h1 style={{ color: "#fff" }}>LOGIN TO YOUR ACCOUNT</h1>
+            </div>
+            <div>
+              <h3 style={{ color: "#fff" }} className={classes.typo_one}>
+                Hey,Enter your details to get login to you account
+              </h3>
+            </div>
+            <Formik
+              initialValues={{
+                email: "",
+                passsword: "",
+                cpasssword: "",
+              }}
+              validationSchema={Yup.object().shape({
+                email: Yup.string()
+                  .max(50)
+                  .required("Email ID is required.")
+                  .email("Email ID is invalid."),
+                passsword: Yup.string()
+                  .required("No password provided.")
+                  .min(4, "Password is too short - should be 4 chars minimum.")
+                  .matches(
+                    /[a-zA-Z]/,
+                    "Password can only contain Latin letters."
+                  ),
+                cpasssword: Yup.string()
+                  .required("No password provided.")
+                  .min(4, "Password is too short - should be 4 chars minimum.")
+                  .matches(
+                    /[a-zA-Z]/,
+                    "Password can only contain Latin letters."
+                  ),
+              })}
+              onSubmit={async (values, { setSubmitting }) => {
+                const result = LoginAccountSubmit(values, null, 2);
+              }}
+            >
+              {({
+                errors,
+                handleChange,
+                handleSubmit,
+                isSubmitting,
+                setFieldValue,
+                isValid,
+                touched,
+                values,
+              }) => (
+                <form id="my-form">
+                  <div className={classes.songBox}>
+                    <Grid container spacing={1}>
+                      <Grid item md={12} xs={12} style={{ position: "relative" }}>
+                        <TextField
+                          required
+                          id="email"
+                          type="text"
+                          className={classes.inputField}
+                          label="Enter Email"
+                          variant="filled"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          name="email"
+                          size="small"
+                        />
+                      </Grid>
+                      <Grid item md={12} xs={12} style={{ position: "relative" }}>
+                        <TextField
+                          required
+                          id="password"
+                          type="text"
+                          className={classes.inputField}
+                          label="Password"
+                          value={pass}
+                          variant="filled"
+                          onChange={(e) => setPass(e.target.value)}
+                          name="password"
+                          size="small"
+                        />
+                      </Grid>
+                    </Grid>
+                  </div>
+
+                  <div>
+                    <Button
+                      className={classes.typo_design}
+                      style={{ width: "75%", marginTop: "60px" }}
+                      onClick={LoginAccountSubmit}
+                    >
+                      LOGIN
+                    </Button>
+                  </div>
+                  <div>
+                    <h3 style={{ color: "#fff" }} className={classes.typo_one}>
+                      Dont have an account?<Link href='/SignupPage' style={{ color: '#fff !important', textDecoration: 'none' }}>Sign Up</Link>
+                    </h3>
+                  </div>
+                </form>
+              )}
+            </Formik>
+          </div>
         </div>
       </div>
-    </div>
+      :
+      <Loader />
   );
 };
 
