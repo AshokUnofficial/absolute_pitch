@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Grid, makeStyles } from "@material-ui/core";
 import MusicWheel from "./MusicWheel";
 import VideoPlayer from "./VideoPlayer";
-// import { makeStyles } from "@material-ui/core";
-import { Audio } from "react-loader-spinner";
 import Cookies from "js-cookie";
+import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
+const Loader = dynamic(() => import("components/Loader"));
+
 const useStyles = makeStyles({
   root: {
     position: "relative",
@@ -53,6 +55,7 @@ const useStyles = makeStyles({
   },
 });
 function LandingPage () {
+  const router = useRouter();
   const [data, setData] = useState();
   const [index, setIndex] = useState(0);
   const [songTitle, setSongTitle] = useState("Title");
@@ -76,6 +79,8 @@ function LandingPage () {
   const [remainingTime, setRemainingTime] = useState(0);
   const [totalCount, setTotalCount] = useState(0);
   const [totalSongs, setTotalSongs] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+
   const nordArray = {
     A: 0,
     Ab: 0,
@@ -117,6 +122,14 @@ function LandingPage () {
   if (!Cookies.get("nordArray")) {
     Cookies.set("nordArray", nordArray);
   }
+
+  useEffect(() => {
+    if (!Cookies.get('userId')) {
+      router.replace('/SigninPage');
+    } else {
+      setIsLoading(false);
+    }
+  }, []);
 
   // ***********Handle song start here **************
   function handleSong (songsData, ind) {
@@ -254,59 +267,63 @@ function LandingPage () {
   }
 
   const classes = useStyles();
+
   return (
-    <Grid container spacing={0} className={classes.containerBox}>
-      <Grid item xs={12} md={6} sm={12} sx={12} className={classes.leftSection}>
-        <MusicWheel
-          handleSong={handleSong}
-          musicData={data}
-          musicIndex={index}
-          id="childid"
-          songTitle={songTitle}
-          setSongTitle={setSongTitle}
-          songName={songName}
-          composer={composer}
-          setComposer={setComposer}
-          songNote={songNote}
-          setSongNote={setSongNote}
-          allImageCount={allImageCount}
-          duration={duration}
-          setDuration={setDuration}
-          durationLast={currentSongTime}
-          imageCount={imageCount}
-          setImageCount={setImageCount}
-          playSongposition={playSongposition}
-          setAllImageCount={setAllImageCount}
-          setTotalSeconds={setTotalSeconds}
-          remainingTime={remainingTime}
-          setPlaySongposition={setPlaySongposition}
-          allsongTime={allsongTime}
-          setAllSongsDuration={setAllSongsDuration}
-          setIndex={setIndex}
-          setData={setData}
-          setTotalSongs={setTotalSongs}
-          setDurationLast={setDurationLast}
-        />
+    !isLoading ?
+      <Grid container spacing={0} className={classes.containerBox}>
+        <Grid item xs={12} md={6} sm={12} sx={12} className={classes.leftSection}>
+          <MusicWheel
+            handleSong={handleSong}
+            musicData={data}
+            musicIndex={index}
+            id="childid"
+            songTitle={songTitle}
+            setSongTitle={setSongTitle}
+            songName={songName}
+            composer={composer}
+            setComposer={setComposer}
+            songNote={songNote}
+            setSongNote={setSongNote}
+            allImageCount={allImageCount}
+            duration={duration}
+            setDuration={setDuration}
+            durationLast={currentSongTime}
+            imageCount={imageCount}
+            setImageCount={setImageCount}
+            playSongposition={playSongposition}
+            setAllImageCount={setAllImageCount}
+            setTotalSeconds={setTotalSeconds}
+            remainingTime={remainingTime}
+            setPlaySongposition={setPlaySongposition}
+            allsongTime={allsongTime}
+            setAllSongsDuration={setAllSongsDuration}
+            setIndex={setIndex}
+            setData={setData}
+            setTotalSongs={setTotalSongs}
+            setDurationLast={setDurationLast}
+          />
+        </Grid>
+        <Grid item xs={12} md={6} sm={12} className={classes.rightSection}>
+          <VideoPlayer
+            handleSong={handleSong}
+            musicData={data}
+            musicIndex={index}
+            TotleTimeAndImage={TotleTimeAndImage}
+            setAllSongsDuration={setAllSongsDuration}
+            setAllImageCount={setAllImageCount}
+            totalCount={totalCount}
+            songTitle={songTitle}
+            composer={composer}
+            songNote={songNote}
+            duration={duration}
+            imageCount={imageCount}
+            playSongposition={playSongposition}
+            totalSongs={totalSongs}
+          />
+        </Grid>
       </Grid>
-      <Grid item xs={12} md={6} sm={12} className={classes.rightSection}>
-        <VideoPlayer
-          handleSong={handleSong}
-          musicData={data}
-          musicIndex={index}
-          TotleTimeAndImage={TotleTimeAndImage}
-          setAllSongsDuration={setAllSongsDuration}
-          setAllImageCount={setAllImageCount}
-          totalCount={totalCount}
-          songTitle={songTitle}
-          composer={composer}
-          songNote={songNote}
-          duration={duration}
-          imageCount={imageCount}
-          playSongposition={playSongposition}
-          totalSongs={totalSongs}
-        />
-      </Grid>
-    </Grid>
+      :
+      <Loader />
   );
 }
 

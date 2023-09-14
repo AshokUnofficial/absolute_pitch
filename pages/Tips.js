@@ -117,22 +117,18 @@ const Library = () => {
 
   useEffect(() => {
     // Define the URL to fetch
-    const apiUrl = 'https://mylatinhome.com/absolute/appdata/webservice.php?library=1';
+    const apiUrl = 'https://mylatinhome.com/absolute/appdata/webservice.php?tips=1';
 
     // Fetch data from the API
     fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => {
-        setData(data); // Store the fetched data in the 'data' state variable
+        setData(data.data); // Store the fetched data in the 'data' state variable
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
       });
   }, []); 
-  
-  
-
-
 
   let path = "https://mylatinhome.com/absolute/note-sound/Am.wav";
   const [audio] = useState(typeof Audio !== "undefined" && new Audio(path));
@@ -161,7 +157,7 @@ const Library = () => {
         <div className={classes.cardContainer}>
         {data ? (
         // Render data in cards when it's available
-        data.data.video.map((item, index) => (
+        data.map((item, index) => (
           <div className={classes.card}>
           <div className={classes.cardBody}>
             <p className={classes.cardTitle}>
