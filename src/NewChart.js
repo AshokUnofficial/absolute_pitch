@@ -14,7 +14,7 @@ const NewChart = () => {
     const userId = Cookies.get("userId");
     myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
     var urlencoded = new URLSearchParams();
-    urlencoded.append("report-graph", "1");
+    urlencoded.append("report-graph-new", "1");
     urlencoded.append("user_id", userId);
 
     var requestOptions = {
