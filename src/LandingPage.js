@@ -172,7 +172,7 @@ function LandingPage () {
     }
     const getNextSong = document.getElementById("childid").children[ind];
     getNextSong?.scrollIntoView();
-    GetSongNord(songsData[ind].note_or_cord, 0);
+    GetSongNord(songsData[ind].note_or_cord, 0, songsData[ind].no_of_images);
   }
   //****** Handle song End here *************
 
@@ -202,7 +202,7 @@ function LandingPage () {
   }
 
   // *********** TotleTimeAndImage End here **************
-  function GetSongNord (note_or_cord, type = 0) {
+  function GetSongNord (note_or_cord, type = 0, images) {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
     myHeaders.append("Cookie", "PHPSESSID=6f62aaae4d06c1d0536d68ffef95a969");
@@ -213,6 +213,7 @@ function LandingPage () {
     urlencoded.append("action", note_or_cord);
     urlencoded.append("log", "music start");
     urlencoded.append("type", type);
+    urlencoded.append("image", images);
 
     var requestOptions = {
       method: 'POST',
