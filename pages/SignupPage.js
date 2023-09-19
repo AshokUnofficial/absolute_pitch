@@ -22,7 +22,8 @@ const useStyles = makeStyles({
     margin: "0",
     backgroundImage: `url(${Background.src})`,
     // border:'2px solid black',
-    height: "100vh",
+    // height: "100vh",
+    height: "max-content",
     justifyContent: "center",
     alignItems: "center",
     display: "flex",
@@ -48,7 +49,10 @@ const useStyles = makeStyles({
     border: "4px solid #fff",
     borderRadius: "20px",
     marginTop: "10%",
-    padding: "20px 0px 0px 200px",
+    padding: "20px",
+    display: "flex",
+    flexDirection: "column",
+    // padding: "20px 0px 0px 200px",
     // width: "30%",
   },
   typo_one: {
@@ -133,7 +137,8 @@ const useStyles = makeStyles({
     fontFamily: "Nunito Sans",
     fontStyle: "normal",
     fontWeight: "600",
-    fontSize: "36px",
+    // fontSize: "36px",
+    fontSize: "22px",
     lineHeight: "30px",
     textAlign: "center",
     alignItems: "center",
@@ -333,7 +338,7 @@ const SignUp = () => {
                   <div>
                     <Button
                       className={classes.typo_design}
-                      style={{ width: "75%", marginTop: "150px" }}
+                      style={{ width: "75%", marginTop: "165px" }}
                       onClick={RagisterAccountSubmit}
                       disabled={name === "" || pass === '' || email === '' || !validateEmail(email)}
                       title={(name === "" || pass === '' || email === '' || !validateEmail(email)) ? "Please fill all the required field." : "Register"}

@@ -22,7 +22,8 @@ const useStyles = makeStyles({
     margin: "0",
     backgroundImage: `url(${Background.src})`,
     // border:'2px solid black',
-    height: "100vh",
+    // height: "100vh",
+    height: "max-content",
     justifyContent: "center",
     alignItems: "center",
     display: "flex",
@@ -48,7 +49,10 @@ const useStyles = makeStyles({
     border: "4px solid #fff",
     borderRadius: "20px",
     marginTop: "10%",
-    padding: "20px 0px 0px 200px",
+    padding: "20px",
+    display: "flex",
+    flexDirection: "column",
+    // padding: "20px 0px 0px 200px",
     // width: "30%",
   },
   inputField: {
@@ -132,7 +136,8 @@ const useStyles = makeStyles({
     fontFamily: "Nunito Sans",
     fontStyle: "normal",
     fontWeight: "600",
-    fontSize: "36px",
+    // fontSize: "36px",
+    fontSize: "26px",
     lineHeight: "30px",
     textAlign: "center",
     alignItems: "center",
@@ -300,7 +305,7 @@ const SignIn = () => {
                   <div>
                     <Button
                       className={classes.typo_design}
-                      style={{ width: "75%", marginTop: "60px" }}
+                      style={{ width: "75%", marginTop: "100px" }}
                       onClick={LoginAccountSubmit}
                     >
                       LOGIN

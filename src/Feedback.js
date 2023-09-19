@@ -8,6 +8,9 @@ import Tempo from "../public/assets/images/Tempo 1st.png";
 import Mix from "../public/assets/images/Mix.png";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
+import Mix1 from "../public/assets/images/Mix 1st.png";
+import Mix2 from "../public/assets/images/Mix 2nd.png";
+import AdminImg from "../public/assets/images/adminPanel.png";
 import {
   Grid,
   makeStyles,
@@ -241,6 +244,9 @@ const Feedback = ({ setFeedback }) => {
   const [disLike, setDislike] = useState(false);
   const [testimonialApprove, setTestimonialApprove] = useState(false);
   const [formSuccess, setFormSuccess] = useState(false);
+  const [sessions, setSessions] = useState('');
+  const [sessionTime, setSessionTime] = useState('');
+  const [daysPerWeek, setDaysPerWeek] = useState('');
   const [error, setError] = useState({
     classics: false,
     Original: false,
@@ -301,7 +307,7 @@ const Feedback = ({ setFeedback }) => {
               <div className={classes.songBox}>
                 <Grid container spacing={3}>
                   <Grid item md={2} xs={2} style={{ display: "flex", padding: "22px 10px 10px 10px" }}>
-                    <Image src={DurationDefault} style={{ backgroundColor: "black" }} height={100} />
+                    <Image src={Mix1} style={{ backgroundColor: "black" }} height={100} />
                   </Grid>
                   <Grid item md={10} xs={10} style={{ position: "relative" }}>
                     <TextField
@@ -314,7 +320,7 @@ const Feedback = ({ setFeedback }) => {
                       maxRows={2}
                       minRows={2}
                       className={classes.inputField}
-                      label="Classics"
+                      label="How can we make the Classes even batter"
                       variant="filled"
                       value={classics}
                       onChange={(e) => setClassics(e.target.value)}
@@ -327,7 +333,7 @@ const Feedback = ({ setFeedback }) => {
               <div className={classes.songBox}>
                 <Grid container spacing={3}>
                   <Grid item md={2} xs={2} style={{ display: "flex", padding: "22px 10px 10px 10px" }}>
-                    <Image src={Intencity} style={{ backgroundColor: "black" }} height={100} />
+                    <Image src={Mix2} style={{ backgroundColor: "black" }} height={100} />
                   </Grid>
                   <Grid item md={10} xs={10} style={{ position: "relative" }}>
                     <TextField
@@ -339,7 +345,7 @@ const Feedback = ({ setFeedback }) => {
                       maxRows={2}
                       minRows={2}
                       className={classes.inputField}
-                      label="Originals"
+                      label="How can we make the Originals even batter"
                       placeholder="Anything You Would Like Us To Change"
                       value={Original}
                       variant="filled"
@@ -353,10 +359,54 @@ const Feedback = ({ setFeedback }) => {
               <div className={classes.songBox}>
                 <Grid container spacing={3}>
                   <Grid item md={2} xs={2} style={{ display: "flex", padding: "22px 10px 10px 10px" }}>
-                    <Image src={Tempo} style={{ backgroundColor: "black" }} height={100} />
+                    <Image src={AdminImg} style={{ backgroundColor: "black" }} height={100} />
                   </Grid>
                   <Grid item md={10} xs={10} style={{ position: "relative" }}>
-                    <TextField
+                  <div>
+      <h3>What Works Best?</h3>
+      <Grid container spacing={2}>
+        <Grid item xs={3}>
+          <TextField
+            required
+            id="sessions"
+            type="text"
+            className={classes.inputField}
+            label="Sessions per day"
+            variant="filled"
+            value={sessions}
+            onChange={(e) => setSessions(e.target.value)}
+            size="small"
+          />
+        </Grid>
+        <Grid item xs={3}>
+          <TextField
+            required
+            id="session-time"
+            type="text"
+            className={classes.inputField}
+            label="Session Time?"
+            variant="filled"
+            value={sessionTime}
+            onChange={(e) => setSessionTime(e.target.value)}
+            size="small"
+          />
+        </Grid>
+        <Grid item xs={3}>
+          <TextField
+            required
+            id="days-per-week"
+            type="text"
+            className={classes.inputField}
+            label="Days Per Week?"
+            variant="filled"
+            value={daysPerWeek}
+            onChange={(e) => setDaysPerWeek(e.target.value)}
+            size="small"
+          />
+        </Grid>
+      </Grid>
+    </div>
+                    {/* <TextField
                       required
                       error={error.buttons}
                       id="name"
@@ -372,8 +422,10 @@ const Feedback = ({ setFeedback }) => {
                       onChange={(e) => setButtons(e.target.value)}
                       name="name"
                       size="small"
-                    />
+                    /> */}
                   </Grid>
+                
+
                 </Grid>
               </div>
               <div className={classes.songBox}>
@@ -383,10 +435,10 @@ const Feedback = ({ setFeedback }) => {
                       id="name"
                       type="text"
                       multiline
-                      maxRows={6}
-                      minRows={6}
+                      maxRows={4}
+                      minRows={4}
                       className={classes.inputField}
-                      label="Anything You Would Like Us To Change"
+                      label="Changes You Notice in Your Child From Regular Exposure to Absolute Pitch"
                       variant="filled"
                       value={about}
                       onChange={(e) => setAbout(e.target.value)}
