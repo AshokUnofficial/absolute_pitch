@@ -10,7 +10,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import Background from "../public/assets/images/blackboard.png";
+import Background from "../public/assets/images/blackboard.jpg";
 import Logo from "../public/assets/images/logo.png";
 import Cookies from "js-cookie";
 import Loader from "components/Loader";

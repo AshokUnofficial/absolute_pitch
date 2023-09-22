@@ -11,7 +11,7 @@ import { Formik } from "formik";
 import Cookies from "js-cookie";
 import * as Yup from "yup";
 import { useRouter } from "next/router";
-import Background from "../public/assets/images/blackboard.png";
+import Background from "../public/assets/images/blackboard.jpg";
 import Logo from "../public/assets/images/logo.png";
 import Link from "next/link";
 import Loader from "components/Loader";
