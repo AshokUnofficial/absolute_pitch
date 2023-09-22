@@ -16,17 +16,24 @@ import Cookies from "js-cookie";
 import Loader from "components/Loader";
 
 const useStyles = makeStyles({
+  body: {
+    height: "100%",
+    margin: "0",
+    padding: "0",
+  },
   root: {
+
     position: "relative",
     maxWidth: "100%",
     margin: "0",
     backgroundImage: `url(${Background.src})`,
     // border:'2px solid black',
-    // height: "100vh",
-    height: "max-content",
+    height: "100vh",
+    // height: "max-content",
     justifyContent: "center",
     alignItems: "center",
     display: "flex",
+       // padding: "10px",
     // border: "2px solid red",
   },
   FormContainer: {
@@ -41,14 +48,16 @@ const useStyles = makeStyles({
     justifyContent: "center",
     alignItems: "center",
     display: "flex",
-    height: "150px",
+    height: "100px",
     //  border:'2px solid black'
   },
   innerContainer: {
+   
+    height: '500px',
     display: "block",
     border: "4px solid #fff",
     borderRadius: "20px",
-    marginTop: "10%",
+    // marginTop: "10%",
     padding: "20px",
     display: "flex",
     flexDirection: "column",
@@ -56,14 +65,22 @@ const useStyles = makeStyles({
     // width: "30%",
   },
   typo_one: {
-    fontFamily: "Nunito Sans",
+    // fontFamily: "Nunito Sans",
     fontStyle: "normal",
-    fontSize: "25px",
+    fontSize: "22px",
     lineHeight: "30px",
     // textAlign: "center",
     // alignItems: "center",
   },
+  typo_one_link: {
+    color: "#6666d9 !important",
+    transition: 'color 0.3s', // Add a smooth transition for color change
+    '&:hover': {
+      color: '#d35252 !important', // Change to your desired hover color
+    },
+  },
   inputField: {
+    height: "40px",
     width: "75%",
     border: " 2px solid Navy !important",
     borderRadius: "10px",
@@ -126,6 +143,7 @@ const useStyles = makeStyles({
     "& .MuiInputLabel-filled": {
       transform: "translate(30px, 30px) scale(1)",
       fontSize: "20px",
+      margin: "-5px",
     },
   },
   songBox: {
@@ -134,16 +152,17 @@ const useStyles = makeStyles({
     // border: "2px solid yellow",
   },
   typo_design: {
-    fontFamily: "Nunito Sans",
+    height: "50px",
+    // fontFamily: "Nunito Sans",
     fontStyle: "normal",
     fontWeight: "600",
     // fontSize: "36px",
-    fontSize: "22px",
+    fontSize: "26px",
     lineHeight: "30px",
     textAlign: "center",
     alignItems: "center",
     marginTop: "10px",
-    color: "#000000",
+    color: "#fff",
     background: "#14de7c",
     color: "#fff",
     borderRadius: "20px",
@@ -215,9 +234,9 @@ const SignUp = () => {
     }
   };
 
-  const SignupPge = () => {
-    router.push("/SigninPage");
-  };
+  // const SignupPge = () => {
+  //   router.push("/SigninPage");
+  // };
   return (
     !isLoading ?
       <div className={classes.root}>
@@ -226,17 +245,17 @@ const SignUp = () => {
             <Image
               src={Logo}
               alt="Picture of the author"
-              width={300}
-              height={200}
+              width={100}
+              height={100}
               style={{ marginTop: "2px", borderRadius: "20px" }}
             />
           </div>
           <div className={classes.innerContainer}>
             <div>
-              <h1 style={{ color: "#fff" }}>SIGNUP TO YOUR ACCOUNT</h1>
+              <h1 style={{ color: "#fff" , margin: "0px" }}>SIGNUP TO YOUR ACCOUNT</h1>
             </div>
             <div>
-              <h3 style={{ color: "#fff" }} className={classes.typo_one}>
+              <h3 style={{ color: "#fff" , margin: "10px 0px" }} className={classes.typo_one}>
                 Hey,Enter your details to get signup to you account
               </h3>
             </div>
@@ -282,9 +301,9 @@ const SignUp = () => {
               }) => (
                 <form id="my-form" onSubmit={handleSubmit}>
                   <div className={classes.songBox}>
-                    <Grid container spacing={1}>
-                    </Grid>
-                    <Grid item md={12} xs={12} style={{ position: "relative" }}>
+                    <Grid container spacing={1} style={{ height: "max-content", gap: "10px" }}>
+               
+                    <Grid item md={12} xs={12} style={{ position: "relative" , display: "flex" , justifyContent: "center"  }}>
                       <TextField
                         required
                         id="name"
@@ -304,7 +323,7 @@ const SignUp = () => {
                         size="small"
                       />
                     </Grid>
-                    <Grid item md={12} xs={12} style={{ position: "relative" }}>
+                    <Grid item md={12} xs={12} style={{ position: "relative" , display: "flex" , justifyContent: "center" }}>
                       <TextField
                         required
                         id="email"
@@ -318,7 +337,7 @@ const SignUp = () => {
                         size="small"
                       />
                     </Grid>
-                    <Grid item md={12} xs={12} style={{ position: "relative" }}>
+                    <Grid item md={12} xs={12} style={{ position: "relative"  , display: "flex" , justifyContent: "center" }}>
                       <TextField
                         required
                         id="passsword"
@@ -333,24 +352,35 @@ const SignUp = () => {
                       />
 
                     </Grid>
-                  </div>
-
-                  <div>
+                    <Grid item md={12} xs={12} style={{ position: "relative" , display: "flex" , justifyContent: "center" }}>
+                  {/* <div> */}
                     <Button
                       className={classes.typo_design}
-                      style={{ width: "75%", marginTop: "165px" }}
+                      style={{ width: "75%", marginTop: "12px" }}
                       onClick={RagisterAccountSubmit}
                       disabled={name === "" || pass === '' || email === '' || !validateEmail(email)}
                       title={(name === "" || pass === '' || email === '' || !validateEmail(email)) ? "Please fill all the required field." : "Register"}
                     >
                       SIGN UP
                     </Button>
-                  </div>
+                  {/* </div> */}
+                  </Grid>
+                  <Grid item md={12} xs={12} style={{ position: "relative" , display: "flex" , justifyContent: "center"}}>
                   <div>
-                    <h3 style={{ color: "#fff" }} className={classes.typo_one}>
-                      Dont have an account?<span onClick={SignupPge} style={{ cursor: 'pointer' }}>Sign In</span>
+                    <h3 style={{ color: "#fff", margin: "0px" }} className={classes.typo_one}>
+                      Dont have an account?<a href='/SigninPage' className={classes.typo_one_link}>Sign In</a>
                     </h3>
+                    
                   </div>
+                    </Grid>
+                    </Grid>
+                  </div>
+
+       
+                 
+                  
+                  
+                  
                 </form>
               )}
             </Formik>

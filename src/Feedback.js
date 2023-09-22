@@ -75,6 +75,7 @@ const useStyles = makeStyles({
     textAlign: "center",
     alignItems: "center",
     marginTop: "10px",
+    marginBottom: "10px",
     color: "#000000",
     background: "Navy",
     color: "#fff",
@@ -194,7 +195,8 @@ const useStyles = makeStyles({
     },
     "& .MuiInputLabel-filled": {
       // transform: "translate(30px, 30px) scale(1)",
-      fontSize: "19px",
+      // fontSize: "19px",
+      fontSize: "16px",
     },
   },
   songBox: {
@@ -307,7 +309,7 @@ const Feedback = ({ setFeedback }) => {
               <div className={classes.songBox}>
                 <Grid container spacing={3}>
                   <Grid item md={2} xs={2} style={{ display: "flex", padding: "22px 10px 10px 10px" }}>
-                    <Image src={Mix1} style={{ backgroundColor: "black" }} height={100} />
+                    <Image src={Mix1} style={{ backgroundColor: "black", borderRadius: "10px" }} height={100} />
                   </Grid>
                   <Grid item md={10} xs={10} style={{ position: "relative" }}>
                     <TextField
@@ -333,7 +335,7 @@ const Feedback = ({ setFeedback }) => {
               <div className={classes.songBox}>
                 <Grid container spacing={3}>
                   <Grid item md={2} xs={2} style={{ display: "flex", padding: "22px 10px 10px 10px" }}>
-                    <Image src={Mix2} style={{ backgroundColor: "black" }} height={100} />
+                    <Image src={Mix2} style={{ backgroundColor: "black", borderRadius: "10px" }} height={100} />
                   </Grid>
                   <Grid item md={10} xs={10} style={{ position: "relative" }}>
                     <TextField
@@ -359,7 +361,7 @@ const Feedback = ({ setFeedback }) => {
               <div className={classes.songBox}>
                 <Grid container spacing={3}>
                   <Grid item md={2} xs={2} style={{ display: "flex", padding: "22px 10px 10px 10px" }}>
-                    <Image src={AdminImg} style={{ backgroundColor: "black" }} height={100} />
+                    <Image src={AdminImg} style={{ backgroundColor: "black", borderRadius: "10px" }} height={100} />
                   </Grid>
                   <Grid item md={10} xs={10} style={{ position: "relative" }}>
                   <div>
