@@ -12,6 +12,8 @@ import Cookies from "js-cookie";
 import * as Yup from "yup";
 import { useRouter } from "next/router";
 import Background from "../public/assets/images/blackboard.jpg";
+import john from "../public/assets/images/john.gif";
+import jackson from "../public/assets/images/jackson.gif";
 import Logo from "../public/assets/images/logo.png";
 import Link from "next/link";
 import Loader from "components/Loader";
@@ -25,11 +27,13 @@ const useStyles = makeStyles({
     position: "relative",
     maxWidth: "100%",
     margin: "0",
+    // gap: "50px",
     backgroundImage: `url(${Background.src})`,
+    backgroundSize: 'cover',
     // border:'2px solid black',
     height: "100vh",
     // height: "-webkit-fill-available",
-    justifyContent: "center",
+    justifyContent: "space-evenly",
     alignItems: "center",
     display: "flex",
     // padding: "10px",
@@ -140,6 +144,18 @@ const useStyles = makeStyles({
     fontSize: "22px",
     lineHeight: "30px",
   },
+  sideimgp: {
+    // fontFamily: 'Dancing Script',
+
+    fontStyle: "normal",
+    fontWeight: "600",
+    // fontSize: "36px",
+    fontSize: "26px",
+    lineHeight: "30px",
+    textAlign: "center",
+    alignItems: "center",
+    color: "white",
+  },
  
   typo_one_link: {
     color: "#6666d9 !important",
@@ -148,6 +164,8 @@ const useStyles = makeStyles({
       color: '#d35252 !important', // Change to your desired hover color
     },
   },
+
+ 
  
   typo_design: {
     height: "50px",
@@ -229,7 +247,19 @@ const SignIn = () => {
   return (
     !isLoading ?
       <div className={classes.root}>
+         <div className={classes.sideimg}>
+             <Image
+              
+              src={jackson}
+              alt="Picture of the author"
+              width={200}
+              height={200}
+              style={{ mixBlendMode: 'plus-lighter' }}
+            />
+            <p className={classes.sideimgp}> Mickael Jackson</p>
+            </div>
         <div className={classes.FormContainer}>
+       
           <div className={classes.ImgContainer}>
             <Image
               src={Logo}
@@ -334,7 +364,7 @@ const SignIn = () => {
                     <Grid item md={12} xs={12} style={{ position: "relative" , display: "flex" , justifyContent: "center"}}>
                     <div>
                     <h3 style={{ color: "#fff" }} className={classes.typo_one}>
-                      Dont have an account?<a href='/SignupPage' className={classes.typo_one_link}>Sign Up</a>
+                      Dont have an account?  <a href='/SignupPage' className={classes.typo_one_link}>Sign Up</a>
                     </h3>
                   </div>
                   </Grid>
@@ -348,6 +378,17 @@ const SignIn = () => {
             </Formik>
           </div>
         </div>
+        <div className={classes.sideimg}>
+             <Image
+              
+              src={john}
+              alt="Picture of the author"
+              width={200}
+              height={200}
+              style={{ mixBlendMode: 'plus-lighter' }}
+            />
+            <p className={classes.sideimgp}>Elton John</p>
+            </div>
       </div>
       :
       <Loader />

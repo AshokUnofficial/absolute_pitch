@@ -11,6 +11,8 @@ import { useRouter } from "next/router";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import Background from "../public/assets/images/blackboard.jpg";
+import john from "../public/assets/images/john.gif";
+import jackson from "../public/assets/images/jackson.gif";
 import Logo from "../public/assets/images/logo.png";
 import Cookies from "js-cookie";
 import Loader from "components/Loader";
@@ -26,11 +28,14 @@ const useStyles = makeStyles({
     position: "relative",
     maxWidth: "100%",
     margin: "0",
+    // gap: "50px",
+
     backgroundImage: `url(${Background.src})`,
+    backgroundSize: 'cover',
     // border:'2px solid black',
     height: "100vh",
     // height: "max-content",
-    justifyContent: "center",
+    justifyContent: "space-evenly",
     alignItems: "center",
     display: "flex",
        // padding: "10px",
@@ -151,6 +156,19 @@ const useStyles = makeStyles({
     height: "17vh",
     // border: "2px solid yellow",
   },
+
+  sideimgp: {
+    // fontFamily: 'Dancing Script',
+
+    fontStyle: "normal",
+    fontWeight: "600",
+    // fontSize: "36px",
+    fontSize: "26px",
+    lineHeight: "30px",
+    textAlign: "center",
+    alignItems: "center",
+    color: "white",
+  },
   typo_design: {
     height: "50px",
     // fontFamily: "Nunito Sans",
@@ -240,6 +258,17 @@ const SignUp = () => {
   return (
     !isLoading ?
       <div className={classes.root}>
+        <div className={classes.sideimg}>
+             <Image
+              
+              src={jackson}
+              alt="Picture of the author"
+              width={200}
+              height={200}
+              style={{ mixBlendMode: 'plus-lighter' }}
+            />
+            <p className={classes.sideimgp}> Mickael Jackson</p>
+            </div>
         <div className={classes.FormContainer}>
           <div className={classes.ImgContainer}>
             <Image
@@ -368,7 +397,7 @@ const SignUp = () => {
                   <Grid item md={12} xs={12} style={{ position: "relative" , display: "flex" , justifyContent: "center"}}>
                   <div>
                     <h3 style={{ color: "#fff", margin: "0px" }} className={classes.typo_one}>
-                      Dont have an account?<a href='/SigninPage' className={classes.typo_one_link}>Sign In</a>
+                      Dont have an account?  <a href='/SigninPage' className={classes.typo_one_link}>Sign In</a>
                     </h3>
                     
                   </div>
@@ -386,6 +415,17 @@ const SignUp = () => {
             </Formik>
           </div>
         </div>
+        <div className={classes.sideimg}>
+             <Image
+              
+              src={john}
+              alt="Picture of the author"
+              width={200}
+              height={200}
+              style={{ mixBlendMode: 'plus-lighter' }}
+            />
+            <p className={classes.sideimgp}>Elton John</p>
+            </div>
       </div>
       :
       <Loader />
