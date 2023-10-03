@@ -208,7 +208,7 @@ const SignUp = () => {
     };
 
     fetch(
-      "https://mylatinhome.com/absolute/appdata/webservice.php",
+      "https://mylatinhome.com/absolutepitch/appdata/webservice.php",
       requestOptions
     )
       .then((response) => response.json())
