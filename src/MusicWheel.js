@@ -1265,7 +1265,7 @@ function MusicWheel (props) {
     };
 
     fetch(
-      `/api/route?user_id=${Cookies.get('userId')}`,
+      `http://localhost:3000/api/route?user_id=${Cookies.get('userId')}`,
       requestOptions
     )
       .then((response) => response.json())
