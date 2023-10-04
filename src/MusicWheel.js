@@ -1265,7 +1265,7 @@ function MusicWheel (props) {
     };
 
     fetch(
-      `http://localhost:3000/api/route?user_id=${Cookies.get('userId')}`,
+      `https://mylatinhome.com/absolutepitch/user_plan_status.php?user_id=${Cookies.get('userId')}`,
       requestOptions
     )
       .then((response) => response.json())
