@@ -245,7 +245,7 @@ const SignIn = () => {
             </div>
             <div>
               <h3 style={{ color: "#fff" , margin: "10px 0px" }} className={classes.typo_one}>
-                Hey,Enter your details to get login to you account
+                Hey, Enter your details to get login to you account
               </h3>
             </div>
             <Formik
@@ -333,16 +333,14 @@ const SignIn = () => {
                     </Grid>
                     <Grid item md={12} xs={12} style={{ position: "relative" , display: "flex" , justifyContent: "center"}}>
                     <div>
+                      <a href="https://mylatinhome.com/absolutepitch/plans_listing.php" target="_blank" style={{display: 'block', width: '100%', color: '#fff', textAlign: 'center', cursor: 'pointer', textDecoration: 'underline', textUnderlineOffset: '6px'}}>Pick a <span style={{color: '#6666d9'}}>plan</span> that suits your needs.</a>
                     <h3 style={{ color: "#fff" }} className={classes.typo_one}>
-                      Dont have an account?<a href='/SignupPage' className={classes.typo_one_link}>Sign Up</a>
+                      Dont have an account?&nbsp;<a href='/SignupPage' className={classes.typo_one_link}>Sign Up</a>
                     </h3>
                   </div>
                   </Grid>
                     </Grid>
                   </div>
-
-                  
-                
                 </form>
               )}
             </Formik>

@@ -367,7 +367,9 @@ const SignUp = () => {
                   </Grid>
                   <Grid item md={12} xs={12} style={{ position: "relative" , display: "flex" , justifyContent: "center"}}>
                   <div>
-                    <h3 style={{ color: "#fff", margin: "0px" }} className={classes.typo_one}>
+                  <a href="https://mylatinhome.com/absolutepitch/plans_listing.php" target="_blank" style={{display: 'block', width: '100%', color: '#fff', textAlign: 'center', cursor: 'pointer', textDecoration: 'underline', textUnderlineOffset: '6px'}}>Pick a <span style={{color: '#6666d9'}}>plan</span> that suits your needs.</a>
+                  
+                    <h3 style={{ color: "#fff", margin: "0px", paddingTop: '10px' }} className={classes.typo_one}>
                       Dont have an account?<a href='/SigninPage' className={classes.typo_one_link}>Sign In</a>
                     </h3>
                     

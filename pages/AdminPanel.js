@@ -105,12 +105,6 @@ const AdminPanel = () => {
         </div>
         <div className={styles.rightSection}>
           <div className={styles.button_container_box}>
-            <a target="_blank" href='https://mylatinhome.com/absolutepitch/plans_listing.php' style={{textDecoration: "none"}}>
-              <button className={styles.buttons_pill}>
-                <Image src={PlusIcon} alt="button Icon" />
-                <span className={styles.button_text}>Plans</span>
-              </button>
-            </a>
             <Link href='/Tips'>
               <button className={styles.buttons_pill}>
                 <Image src={PlusIcon} alt="button Icon" />
