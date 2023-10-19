@@ -24,7 +24,7 @@ const Calendar = () => {
         };
 
         fetch(
-            "https://mylatinhome.com/absolutepitch/appdata/webservice.php",
+            "https://absolutepitch.website/itch/appdata/webservice.php",
             requestOptions
         )
             .then((response) => response.json())
