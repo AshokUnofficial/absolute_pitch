@@ -222,7 +222,7 @@ function LandingPage () {
       redirect: 'follow'
     };
 
-    fetch("https://mylatinhome.com/absolutepitch/appdata/webservice.php", requestOptions)
+    fetch("https://absolutepitch.website/appdata/webservice.php", requestOptions)
       .then(response => response.text())
       .then(result => {
         if (!JSON.parse(sessionStorage.getItem('session'))) {

@@ -53,12 +53,12 @@ const useStyles = makeStyles({
     justifyContent: "center",
     alignItems: "center",
     display: "flex",
-    height: "100px",
+    height: "50px",
     //  border:'2px solid black'
   },
   innerContainer: {
    
-    height: '500px',
+    height: '560px',
     display: "block",
     border: "4px solid #fff",
     borderRadius: "20px",
@@ -85,11 +85,11 @@ const useStyles = makeStyles({
     },
   },
   inputField: {
-    height: "40px",
+    height: "28px",
     width: "75%",
     border: " 2px solid Navy !important",
     borderRadius: "10px",
-    marginTop: "12px",
+    marginTop: "0px",
     padding: "10px 0px 10px 0px",
     background: "#fff",
     "&:active": {
@@ -195,6 +195,8 @@ const useStyles = makeStyles({
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
+  const [dob, setDob] = useState("");
+  const [gender, setGender] = useState("male"); // Set a default value
   const [name, setName] = useState("");
   const classes = useStyles();
   const router = useRouter();
@@ -217,6 +219,8 @@ const SignUp = () => {
     urlencoded.append("email", email);
     urlencoded.append("password", pass);
     urlencoded.append("name", name);
+    urlencoded.append("dob", dob);
+    urlencoded.append("gender", gender);
 
     var requestOptions = {
       method: "POST",
@@ -226,7 +230,7 @@ const SignUp = () => {
     };
 
     fetch(
-      "https://mylatinhome.com/absolutepitch/appdata/webservice.php",
+      "https://absolutepitch.website/appdata/webservice.php",
       requestOptions
     )
       .then((response) => response.json())
@@ -274,8 +278,8 @@ const SignUp = () => {
             <Image
               src={Logo}
               alt="Picture of the author"
-              width={100}
-              height={100}
+              width={50}
+              height={50}
               style={{ marginTop: "2px", borderRadius: "20px" }}
             />
           </div>
@@ -293,6 +297,8 @@ const SignUp = () => {
                 email: "",
                 passsword: "",
                 cpasssword: "",
+                dob: "",      
+                gender: "", 
               }}
               validationSchema={Yup.object().shape({
                 email: Yup.string()
@@ -313,6 +319,10 @@ const SignUp = () => {
                     /[a-zA-Z]/,
                     "Password can only contain Latin letters."
                   ),
+                  dob: Yup.string()
+      .required("Date of Birth is required."),
+    gender: Yup.string()
+      .required("Gender is required."),
               })}
               onSubmit={async (values, { setSubmitting }) => {
                 const result = RagisterAccountSubmit(values, null, 2);
@@ -352,7 +362,7 @@ const SignUp = () => {
                         size="small"
                       />
                     </Grid>
-                    <Grid item md={12} xs={12} style={{ position: "relative" , display: "flex" , justifyContent: "center" }}>
+                    <Grid item md={12} xs={12} style={{ position: "relative" , display: "flex" , justifyContent: "center", }}>
                       <TextField
                         required
                         id="email"
@@ -381,6 +391,46 @@ const SignUp = () => {
                       />
 
                     </Grid>
+                    <Grid item md={12} xs={12} style={{ position: "relative", display: "flex", justifyContent: "center" }}>
+  <TextField
+    required
+    id="dob"
+    type="date"   // Use type="date" for Date of Birth
+    className={classes.inputField}
+    label=""
+    value={dob}
+    variant="filled"
+    onChange={(e) => setDob(e.target.value)}
+    name="dob"
+    size="small"
+  />
+</Grid>
+
+<Grid item md={12} xs={12} style={{ position: "relative", display: "flex", justifyContent: "space-evenly" , color: 'white' }}>
+  <label>Gender:</label>
+  <div>
+    <input
+      type="radio"
+      id="male"
+      name="gender"
+      value="male"
+      checked={gender === "male"}
+      onChange={() => setGender("male")}
+    />
+    <label htmlFor="male">Male</label>
+  </div>
+  <div>
+    <input
+      type="radio"
+      id="female"
+      name="gender"
+      value="female"
+      checked={gender === "female"}
+      onChange={() => setGender("female")}
+    />
+    <label htmlFor="female">Female</label>
+  </div>
+</Grid>
                     <Grid item md={12} xs={12} style={{ position: "relative" , display: "flex" , justifyContent: "center" }}>
                   {/* <div> */}
                     <Button
@@ -396,7 +446,7 @@ const SignUp = () => {
                   </Grid>
                   <Grid item md={12} xs={12} style={{ position: "relative" , display: "flex" , justifyContent: "center"}}>
                   <div>
-                  <a href="https://mylatinhome.com/absolutepitch/plans_listing.php" target="_blank" style={{display: 'block', width: '100%', color: '#fff', textAlign: 'center', cursor: 'pointer', textDecoration: 'underline', textUnderlineOffset: '6px'}}>Pick a <span style={{color: '#6666d9'}}>plan</span> that suits your needs.</a>
+                  <a href="https://absolutepitch.website/plans_listing.php" target="_blank" style={{display: 'block', width: '100%', color: '#fff', textAlign: 'center', cursor: 'pointer', textDecoration: 'underline', textUnderlineOffset: '6px'}}>Pick a <span style={{color: '#6666d9'}}>plan</span> that suits your needs.</a>
                   
                     <h3 style={{ color: "#fff", margin: "0px", paddingTop: '10px' }} className={classes.typo_one}>
                       Dont have an account?<a href='/SigninPage' className={classes.typo_one_link}>Sign In</a>
