@@ -713,9 +713,9 @@ function MusicWheel (props) {
   const customProps = { id: props.id };
   const nordMap = { "+": "M", "-": "m", "#": "b" };
   const soundData = [
-    "https://mylatinhome.com/absolutepitch/note-sound/A.wav",
-    "https://mylatinhome.com/absolutepitch/note-sound/Am.wav",
-    "https://mylatinhome.com/absolutepitch/note-sound/Ab.wav",
+    "https://absolutepitch.website/note-sound/A.wav",
+    "https://absolutepitch.website/note-sound/Am.wav",
+    "https://absolutepitch.website/note-sound/Ab.wav",
   ];
 
   const getClassNamesFor = (id) => {
@@ -1221,7 +1221,7 @@ function MusicWheel (props) {
     };
 
     fetch(
-      "https://mylatinhome.com/absolutepitch/appdata/webservice.php",
+      "https://absolutepitch.website/appdata/webservice.php",
       requestOptions
     )
       .then((response) => response.json())
@@ -1265,7 +1265,7 @@ function MusicWheel (props) {
     };
 
     fetch(
-      `https://mylatinhome.com/absolutepitch/user_plan_status.php?user_id=${Cookies.get('userId')}`,
+      `https://absolutepitch.website/user_plan_status.php?user_id=${Cookies.get('userId')}`,
       requestOptions
     )
       .then((response) => response.json())
