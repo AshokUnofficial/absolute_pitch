@@ -25,7 +25,7 @@ const NewChart = () => {
     };
 
     fetch(
-      "https://mylatinhome.com/absolute/appdata/webservice.php",
+      "https://absolutepitch.website/itch/appdata/webservice.php",
       requestOptions
     )
       .then((response) => response.json())

@@ -93,92 +93,92 @@ const AdminPanel = () => {
   }, []);
 
   return (
-    !isLoading ? 
-    <div className={`${styles.main_container}`}>
-      <div className={styles.leftSection}>
-        <div className={styles.button_container}>
-          <Image src={PanelButton} alt="panel button" />
-        </div>
-        <div className={styles.calendar_container}>
-          <Calendar />
-        </div>
-      </div>
-      <div className={styles.rightSection}>
-        <div className={styles.button_container_box}>
-          <Link href='/Tips'>
-          <button className={styles.buttons_pill}>
-            <Image src={PlusIcon} alt="button Icon" />
-              <span className={styles.button_text}>Tips</span>
-            </button>
-          </Link>
-          <Link href='/Library'>
-            <button className={styles.buttons_pill}>
-              <Image src={EditIcon} alt="button Icon" />
-              <span className={styles.button_text}>Library</span>
-            </button>
-          </Link>
-
-          <button className={styles.buttons_pill} onClick={feedBackOpen}>
-            <Image src={PlusIcon} alt="button Icon" />
-            <span className={styles.button_text}>Feedback Form</span>
-          </button>
-          <Link href='/'>
-            <button className={styles.buttons_pill}>
-              <Image src={EditIcon} alt="button Icon" />
-              <span className={styles.button_text}>Go To Player</span>
-            </button>
-          </Link>
-          <Button
-            id="basic-button"
-            aria-controls={open ? 'basic-menu' : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? 'true' : undefined}
-            onClick={handleClick}
-            className={styles.buttons_pill}
-          >
-            <Image src={UserIcon} alt="button Icon" />
-            <span className={styles.button_text} style={{ margin: '0 5px' }}>{userName}</span>
-            <Image src={downArrow} alt="button Icon" />
-          </Button>
-          <Menu
-            id="basic-menu"
-            anchorEl={anchorEl}
-            open={open}
-            onClose={handleClose}
-            MenuListProps={{
-              'aria-labelledby': 'basic-button',
-            }}
-          >
-            <MenuItem className={styles.menu_link} LinkComponent={'span'} onClick={handleClose}>Profile</MenuItem>
-            <MenuItem className={styles.menu_link} LinkComponent={'span'} onClick={handleClose}>My account</MenuItem>
-            <MenuItem className={styles.menu_link} LinkComponent={'span'} onClick={handleLogout}>Logout</MenuItem>
-          </Menu>
-        </div>
-        <div className={styles.user_log}>
-          {/* <h2>{`${userName}'s Player Log`}</h2> */}
-          <UserLog />
-        </div>
-
-        <div className={styles.graph_container}>
-          <NewChart />
-        </div>
-      </div>
-      <Modal
-        open={feedback}
-        onClose={handleClose}
-      >
-        <Box sx={style}>
-          <div style={{height: '50px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 15px', color: '#4c4c4c'}}>
-            <h2>We Want To Be Even Better</h2>
-            <span style={{ float: 'right', borderRadius: '50%', fontSize: '40px', width: '4%', justifyContent: 'center', alignItems: 'center', textAlign: 'center', cursor: 'pointer' }} onClick={feedBackClose}>X</span>
+    !isLoading ?
+      <div className={`${styles.main_container}`}>
+        <div className={styles.leftSection}>
+          <div className={styles.button_container}>
+            <Image src={PanelButton} alt="panel button" />
           </div>
+          <div className={styles.calendar_container}>
+            <Calendar />
+          </div>
+        </div>
+        <div className={styles.rightSection}>
+          <div className={styles.button_container_box}>
+            <Link href='/Tips'>
+              <button className={styles.buttons_pill}>
+                <Image src={PlusIcon} alt="button Icon" />
+                <span className={styles.button_text}>Tips</span>
+              </button>
+            </Link>
+            <Link href='/Library'>
+              <button className={styles.buttons_pill}>
+                <Image src={EditIcon} alt="button Icon" />
+                <span className={styles.button_text}>Library</span>
+              </button>
+            </Link>
+
+            <button className={styles.buttons_pill} onClick={feedBackOpen}>
+              <Image src={PlusIcon} alt="button Icon" />
+              <span className={styles.button_text}>Feedback Form</span>
+            </button>
+            <Link href='/'>
+              <button className={styles.buttons_pill}>
+                <Image src={EditIcon} alt="button Icon" />
+                <span className={styles.button_text}>Go To Player</span>
+              </button>
+            </Link>
+            <Button
+              id="basic-button"
+              aria-controls={open ? 'basic-menu' : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? 'true' : undefined}
+              onClick={handleClick}
+              className={styles.buttons_pill}
+            >
+              <Image src={UserIcon} alt="button Icon" />
+              <span className={styles.button_text} style={{ margin: '0 5px' }}>{userName}</span>
+              <Image src={downArrow} alt="button Icon" />
+            </Button>
+            <Menu
+              id="basic-menu"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              MenuListProps={{
+                'aria-labelledby': 'basic-button',
+              }}
+            >
+              <MenuItem className={styles.menu_link} LinkComponent={'span'} onClick={handleClose}>Profile</MenuItem>
+              <MenuItem className={styles.menu_link} LinkComponent={'span'} onClick={handleClose}>My account</MenuItem>
+              <MenuItem className={styles.menu_link} LinkComponent={'span'} onClick={handleLogout}>Logout</MenuItem>
+            </Menu>
+          </div>
+          <div className={styles.user_log}>
+            {/* <h2>{`${userName}'s Player Log`}</h2> */}
+            <UserLog />
+          </div>
+
+          <div className={styles.graph_container}>
+            <NewChart />
+          </div>
+        </div>
+        <Modal
+          open={feedback}
+          onClose={handleClose}
+        >
+          <Box sx={style}>
+            <div style={{ height: '50px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 15px', color: '#4c4c4c' }}>
+              <h2>We Want To Be Even Better</h2>
+              <span style={{ float: 'right', borderRadius: '50%', fontSize: '40px', width: '4%', justifyContent: 'center', alignItems: 'center', textAlign: 'center', cursor: 'pointer' }} onClick={feedBackClose}>X</span>
+            </div>
             <hr />
-          <Feedback setFeedback={setFeedback} />
-        </Box>
-      </Modal>
-    </div >
-    :
-    <Loader/>
+            <Feedback setFeedback={setFeedback} />
+          </Box>
+        </Modal>
+      </div >
+      :
+      <Loader />
   );
 };
 

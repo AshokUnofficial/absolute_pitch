@@ -107,6 +107,7 @@ function MusicWheel (props) {
   const [tempoIndex, setTempoIndex] = useState(0);
   const [intensityIndex, setIntensityIndex] = useState(0);
   const [packageDataIndex, setPackageDataIndex] = useState(1);
+  const [hasActivePlan, setHasActivePlan] = useState(false);
   const [imageTypeIndex, setImageTypeIndex] = useState("");
   const [groups, setGroups] = useState("");
   const [packageActive, setPackageActive] = useState("F");
@@ -712,9 +713,9 @@ function MusicWheel (props) {
   const customProps = { id: props.id };
   const nordMap = { "+": "M", "-": "m", "#": "b" };
   const soundData = [
-    "https://mylatinhome.com/absolute/note-sound/A.wav",
-    "https://mylatinhome.com/absolute/note-sound/Am.wav",
-    "https://mylatinhome.com/absolute/note-sound/Ab.wav",
+    "https://mylatinhome.com/absolutepitch/note-sound/A.wav",
+    "https://mylatinhome.com/absolutepitch/note-sound/Am.wav",
+    "https://mylatinhome.com/absolutepitch/note-sound/Ab.wav",
   ];
 
   const getClassNamesFor = (id) => {
@@ -849,44 +850,54 @@ function MusicWheel (props) {
     }
 
     else if (type == "Package") {
-      if (packageDataIndex == packageData.length - 1) {
-        setPackageDataIndex(1);
-        setPackageActive('F');
-        setImageTypeActive(false);
-        setGroups("F1,F2");
-        setImageTypeIndex("");
-        setDisable(true);
-      } else {
-        setPackageDataIndex(prev => prev + 1);
-        if (packageDataIndex == "1" || !packageDataIndex) {
-          setImageTypeActive(1);
-          setImageTypeIndex("Letter");
-          setGroups("G1,G2,G3,G4");
-          setSubscriptionActivePlan(2);
-          setPackageActive("");
-        }
-        if (packageDataIndex == "2") {
-          setImageTypeActive(1);
-          setImageTypeIndex("Letter");
-          setGroups("O1,O2,O3,O4");
-          setSubscriptionActivePlan(2);
-          setPackageActive("");
-        }
-        if (packageDataIndex == "3") {
-          setGroups("G1,G2,G3,G4,O1,O2,O3,O4");
-          setSubscriptionActivePlan(3);
-          setImageTypeActive(1);
-          setImageTypeIndex("Letter");
-        }
-        if (packageDataIndex == "4") {
-          setGroups("G1,G2,G3,G4,O1,O2,O3,O4");
-          setSubscriptionActivePlan(3);
-          setImageTypeIndex("Letter");
-          setImageTypeActive(1);
-        }
+      if (!hasActivePlan) {
+        setPackageDataIndex(2);
+        setImageTypeActive(1);
+        setImageTypeIndex("Letter");
+        setGroups("G1,G2,G3,G4");
+        setSubscriptionActivePlan(2);
+        setPackageActive("");
+      }
+      else {
+        if (packageDataIndex == packageData.length - 1) {
+          setPackageDataIndex(1);
+          setPackageActive('F');
+          setImageTypeActive(false);
+          setGroups("F1,F2");
+          setImageTypeIndex("");
+          setDisable(true);
+        } else {
+          setPackageDataIndex(prev => prev + 1);
+          if (packageDataIndex == "1" || !packageDataIndex) {
+            setImageTypeActive(1);
+            setImageTypeIndex("Letter");
+            setGroups("G1,G2,G3,G4");
+            setSubscriptionActivePlan(2);
+            setPackageActive("");
+          }
+          if (packageDataIndex == "2") {
+            setImageTypeActive(1);
+            setImageTypeIndex("Letter");
+            setGroups("O1,O2,O3,O4");
+            setSubscriptionActivePlan(2);
+            setPackageActive("");
+          }
+          if (packageDataIndex == "3") {
+            setGroups("G1,G2,G3,G4,O1,O2,O3,O4");
+            setSubscriptionActivePlan(3);
+            setImageTypeActive(1);
+            setImageTypeIndex("Letter");
+          }
+          if (packageDataIndex == "4") {
+            setGroups("G1,G2,G3,G4,O1,O2,O3,O4");
+            setSubscriptionActivePlan(3);
+            setImageTypeIndex("Letter");
+            setImageTypeActive(1);
+          }
 
-        // setNord({ c1: [], c2: [], c3: [] });
-        // setNordData([]);
+          // setNord({ c1: [], c2: [], c3: [] });
+          // setNordData([]);
+        }
       }
     }
 
@@ -1070,7 +1081,7 @@ function MusicWheel (props) {
 
   useEffect(() => {
     props.setTotalSongs(totalSongs);
-  },[totalSongs]);
+  }, [totalSongs]);
 
   function handleClickSong (songsData, ind) {
     // props.timeData(0);
@@ -1187,7 +1198,7 @@ function MusicWheel (props) {
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
     myHeaders.append("Cookie", "PHPSESSID=ckmj4nc6enk1u3e0rle62m3l64");
-    console.log(groups)
+    console.log(groups);
 
     const nord_or_cord = getNord();
     var urlencoded = new URLSearchParams();
@@ -1210,7 +1221,7 @@ function MusicWheel (props) {
     };
 
     fetch(
-      "https://mylatinhome.com/absolute/appdata/webservice.php",
+      "https://mylatinhome.com/absolutepitch/appdata/webservice.php",
       requestOptions
     )
       .then((response) => response.json())
@@ -1242,6 +1253,32 @@ function MusicWheel (props) {
   }
 
   useEffect(() => {
+    var myHeaders = new Headers();
+    myHeaders.append("Accept", "application/json");
+    myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+    myHeaders.append("Cookie", "PHPSESSID=ckmj4nc6enk1u3e0rle62m3l64");
+
+    var requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow",
+    };
+
+    fetch(
+      `https://mylatinhome.com/absolutepitch/user_plan_status.php?user_id=${Cookies.get('userId')}`,
+      requestOptions
+    )
+      .then((response) => response.json())
+      .then((responseJson) => {
+        if (responseJson.success) {
+          setHasActivePlan(responseJson.plan_status === "expired" ? false : true);
+        } else {
+          alert("Something went wrong!");
+        }
+      });
+  }, []);
+
+  useEffect(() => {
     totalduraion.current = Number(totalduraion.current) - Number(props.durationLast);
 
     setTimeout(() => {
@@ -1250,7 +1287,7 @@ function MusicWheel (props) {
     }, 1000);
 
     const adminPannelBtn = document.querySelector('#admin-pannel');
-    const btnText = Cookies.get('userName') ? Cookies.get('userName') : "Admin"
+    const btnText = Cookies.get('userName') ? Cookies.get('userName') : "Admin";
     adminPannelBtn.innerHTML = btnText;
   }, []);
 
@@ -1258,9 +1295,9 @@ function MusicWheel (props) {
     <div className={classes.circleCard}>
       <div className={classes.resetBtn} style={{ padding: '10px', marginLeft: '0', color: '#0d6efd', justifyContent: 'space-between', width: '100%', boxSizing: 'border-box', alignItems: 'center' }}>
         <a href="/Tips" style={{ textDecoration: 'none', color: 'inherit' }} >
-        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" className="bi bi-question-circle-fill" viewBox="0 0 16 16">
-          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.496 6.033h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286a.237.237 0 0 0 .241.247zm2.325 6.443c.61 0 1.029-.394 1.029-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94 0 .533.425.927 1.01.927z" />
-        </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" className="bi bi-question-circle-fill" viewBox="0 0 16 16">
+            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.496 6.033h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286a.237.237 0 0 0 .241.247zm2.325 6.443c.61 0 1.029-.394 1.029-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94 0 .533.425.927 1.01.927z" />
+          </svg>
         </a>
         <div className={classes.resetBtn}>
           <Grid
