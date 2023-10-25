@@ -232,6 +232,13 @@ const useStyles = makeStyles({
     minHeight: 'unset !important',
     margin: '0 !important'
   },
+  imgSection: {
+    minWidth: "80% !important",
+    maxWidth: "80% !important",
+    width: "90% !important",
+    height: "90% !important",
+    padding: "10px !important",
+  },
 });
 const Feedback = ({ setFeedback }) => {
   const classes = useStyles();
@@ -259,31 +266,38 @@ const Feedback = ({ setFeedback }) => {
   });
 
   const Data = (e) => {
-    if (!classics || !Original || !buttons || !name || !email || !testimonialApprove) {
+    console.log(name, 'classics')
+    if (!classics || !Original || !name || !email || !testimonialApprove || !sessions || !sessionTime || !daysPerWeek) {
       setError({
         classics: !classics,
         Original: !Original,
-        buttons: !buttons,
         email: !email,
         name: !name,
-        testimonialApprove: !testimonialApprove
+        testimonialApprove: !testimonialApprove,
+        sessions: !sessions,
+        sessionTime: !sessionTime,
+        daysPerWeek: !daysPerWeek,
       });
       return false;
     }
+
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
     var urlencoded = new URLSearchParams();
     urlencoded.append("feedback", "1");
-    urlencoded.append("user_id", Cookies.get("userId"));
+    urlencoded.append("get-user-info", "1");
+    urlencoded.append("user_id", "1");
     urlencoded.append("classic", classics);
     urlencoded.append("original", Original);
-    urlencoded.append("button", buttons);
     urlencoded.append("email", email);
     urlencoded.append("name", name);
     urlencoded.append("testimonialApprove", testimonialApprove);
     urlencoded.append("anything", about);
     urlencoded.append("testimonial", testimonial);
+    urlencoded.append("sessions", sessions);
+    urlencoded.append("sessionTime", sessionTime);
+    urlencoded.append("daysPerWeek", daysPerWeek);
 
     var requestOptions = {
       method: "POST",
@@ -293,23 +307,25 @@ const Feedback = ({ setFeedback }) => {
     };
 
     fetch(
-      "https://absolutepitch.website/itch/appdata/webservice.php",
+      "https://absolutepitch.website/appdata/webservice.php",
       requestOptions
     )
       .then((response) => response.json())
       .then((result) => result.success ? setFormSuccess(true) : alert('Something went wrong! Please try again.'))
       .catch((error) => console.log("error", error));
   };
+
+
   return (
     <>
       {!formSuccess ?
-        <form id="my-form" style={{ overflowX: "auto", height: '92%' }}>
+        <form id="my-form" onSubmit={Data} style={{ overflowX: "auto", height: '92%' }}>
           <Grid container spacing={0} className={classes.containerBox}>
             <Grid item xs={12} md={12} sm={12} className={classes.rightSection}>
               <div className={classes.songBox}>
                 <Grid container spacing={3}>
                   <Grid item md={2} xs={2} style={{ display: "flex", padding: "22px 10px 10px 10px" }}>
-                    <Image src={Mix1} style={{ backgroundColor: "black", borderRadius: "10px" }} height={100} />
+                    <Image src={Mix1} style={{ backgroundColor: "black", borderRadius: "10px" }} height={100} className={classes.imgSection} />
                   </Grid>
                   <Grid item md={10} xs={10} style={{ position: "relative" }}>
                     <TextField
@@ -335,7 +351,7 @@ const Feedback = ({ setFeedback }) => {
               <div className={classes.songBox}>
                 <Grid container spacing={3}>
                   <Grid item md={2} xs={2} style={{ display: "flex", padding: "22px 10px 10px 10px" }}>
-                    <Image src={Mix2} style={{ backgroundColor: "black", borderRadius: "10px" }} height={100} />
+                    <Image src={Mix2} style={{ backgroundColor: "black", borderRadius: "10px" }} height={100} className={classes.imgSection} />
                   </Grid>
                   <Grid item md={10} xs={10} style={{ position: "relative" }}>
                     <TextField
@@ -361,53 +377,53 @@ const Feedback = ({ setFeedback }) => {
               <div className={classes.songBox}>
                 <Grid container spacing={3}>
                   <Grid item md={2} xs={2} style={{ display: "flex", padding: "22px 10px 10px 10px" }}>
-                    <Image src={AdminImg} style={{ backgroundColor: "black", borderRadius: "10px" }} height={100} />
+                    <Image src={AdminImg} style={{ backgroundColor: "black", borderRadius: "10px" }} height={100} className={classes.imgSection} />
                   </Grid>
                   <Grid item md={10} xs={10} style={{ position: "relative" }}>
-                  <div>
-      <h3>What Works Best?</h3>
-      <Grid container spacing={2}>
-        <Grid item xs={3}>
-          <TextField
-            required
-            id="sessions"
-            type="text"
-            className={classes.inputField}
-            label="Sessions per day"
-            variant="filled"
-            value={sessions}
-            onChange={(e) => setSessions(e.target.value)}
-            size="small"
-          />
-        </Grid>
-        <Grid item xs={3}>
-          <TextField
-            required
-            id="session-time"
-            type="text"
-            className={classes.inputField}
-            label="Session Time?"
-            variant="filled"
-            value={sessionTime}
-            onChange={(e) => setSessionTime(e.target.value)}
-            size="small"
-          />
-        </Grid>
-        <Grid item xs={3}>
-          <TextField
-            required
-            id="days-per-week"
-            type="text"
-            className={classes.inputField}
-            label="Days Per Week?"
-            variant="filled"
-            value={daysPerWeek}
-            onChange={(e) => setDaysPerWeek(e.target.value)}
-            size="small"
-          />
-        </Grid>
-      </Grid>
-    </div>
+                    <div>
+                      <h3>What Works Best?</h3>
+                      <Grid container spacing={2}>
+                        <Grid item xs={3}>
+                          <TextField
+                            required
+                            id="sessions"
+                            type="text"
+                            className={classes.inputField}
+                            label="Sessions per day"
+                            variant="filled"
+                            value={sessions}
+                            onChange={(e) => setSessions(e.target.value)}
+                            size="small"
+                          />
+                        </Grid>
+                        <Grid item xs={3}>
+                          <TextField
+                            required
+                            id="session-time"
+                            type="text"
+                            className={classes.inputField}
+                            label="Session Time?"
+                            variant="filled"
+                            value={sessionTime}
+                            onChange={(e) => setSessionTime(e.target.value)}
+                            size="small"
+                          />
+                        </Grid>
+                        <Grid item xs={3}>
+                          <TextField
+                            required
+                            id="days-per-week"
+                            type="text"
+                            className={classes.inputField}
+                            label="Days Per Week?"
+                            variant="filled"
+                            value={daysPerWeek}
+                            onChange={(e) => setDaysPerWeek(e.target.value)}
+                            size="small"
+                          />
+                        </Grid>
+                      </Grid>
+                    </div>
                     {/* <TextField
                       required
                       error={error.buttons}
@@ -426,7 +442,7 @@ const Feedback = ({ setFeedback }) => {
                       size="small"
                     /> */}
                   </Grid>
-                
+
 
                 </Grid>
               </div>

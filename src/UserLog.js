@@ -194,7 +194,7 @@ const UserLog = () => {
     };
 
     fetch(
-      "https://absolutepitch.website/itch/appdata/webservice.php",
+      "https://absolutepitch.website/appdata/webservice.php",
       requestOptions
     )
       .then((response) => response.json())
@@ -227,7 +227,7 @@ const UserLog = () => {
     };
 
     fetch(
-      "https://absolutepitch.website/itch/appdata/webservice.php",
+      "https://absolutepitch.website/appdata/webservice.php",
       requestOptions
     )
       .then((response) => response.json())

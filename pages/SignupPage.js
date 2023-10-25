@@ -143,11 +143,11 @@ const useStyles = makeStyles({
     },
     "& .MuiFilledInput-input": {
       padding: "15px 20px 12px 25px !important",
-      fontSize: "25px",
+      fontSize: "23px",
     },
     "& .MuiInputLabel-filled": {
       transform: "translate(30px, 30px) scale(1)",
-      fontSize: "20px",
+      fontSize: "18px",
       margin: "-5px",
     },
   },
