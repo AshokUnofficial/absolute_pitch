@@ -67,7 +67,7 @@ const useStyles = makeStyles({
     // width: "30%",
   },
   inputField: {
-    height: "40px",
+    height: "28px",
     width: "75%",
     border: " 2px solid Navy !important",
     borderRadius: "10px",
@@ -129,7 +129,7 @@ const useStyles = makeStyles({
     },
     "& .MuiInputLabel-filled": {
       transform: "translate(30px, 30px) scale(1)",
-      fontSize: "20px",
+      fontSize: "18px",
       margin: "-5px",
     },
   },
