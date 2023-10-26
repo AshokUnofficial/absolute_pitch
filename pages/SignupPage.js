@@ -271,7 +271,7 @@ const SignUp = () => {
               height={200}
               style={{ mixBlendMode: 'plus-lighter' }}
             />
-            <p className={classes.sideimgp}> Mickael Jackson</p>
+            <p className={classes.sideimgp}> Michael Jackson</p>
             </div>
         <div className={classes.FormContainer}>
           <div className={classes.ImgContainer}>

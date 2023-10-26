@@ -226,18 +226,22 @@ const useStyles = makeStyles({
     cursor: "pointer",
   },
   imgBox: {
-    width: "90% !important",
-    height: "300px !important",
+    width: "100% !important",
+    height: "max-content !important",
     minWidth: 'unset !important',
     minHeight: 'unset !important',
     margin: '0 !important'
   },
   imgSection: {
-    minWidth: "80% !important",
-    maxWidth: "80% !important",
-    width: "90% !important",
-    height: "90% !important",
+    minWidth: "125px !important",
+    maxWidth: "100px !important",
+    minHeight: "100% !important",
+    maxHeight: "100% !important",
+    background: "#616161 !important",
+    width: "100% !important",
+    height: "100% !important",
     padding: "10px !important",
+    
   },
 });
 const Feedback = ({ setFeedback }) => {
@@ -381,7 +385,7 @@ const Feedback = ({ setFeedback }) => {
                   </Grid>
                   <Grid item md={10} xs={10} style={{ position: "relative" }}>
                     <div>
-                      <h3>What Works Best?</h3>
+                      <h3>What Works Best? for BOBBY 65 Months Boy </h3>
                       <Grid container spacing={2}>
                         <Grid item xs={3}>
                           <TextField
