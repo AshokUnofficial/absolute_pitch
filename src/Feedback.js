@@ -342,7 +342,7 @@ const Feedback = ({ setFeedback }) => {
                       maxRows={2}
                       minRows={2}
                       className={classes.inputField}
-                      label="How can we make the Classes even batter"
+                      label=" How can we make the Classics even better?"
                       variant="filled"
                       value={classics}
                       onChange={(e) => setClassics(e.target.value)}
@@ -367,7 +367,7 @@ const Feedback = ({ setFeedback }) => {
                       maxRows={2}
                       minRows={2}
                       className={classes.inputField}
-                      label="How can we make the Originals even batter"
+                      label="How can we make the Originals even better? "
                       placeholder="Anything You Would Like Us To Change"
                       value={Original}
                       variant="filled"
@@ -385,7 +385,7 @@ const Feedback = ({ setFeedback }) => {
                   </Grid>
                   <Grid item md={10} xs={10} style={{ position: "relative" }}>
                     <div>
-                      <h3>What Works Best? for BOBBY 65 Months Boy </h3>
+                      <h3>What works best for Bobby a Boy 65 months old.</h3>
                       <Grid container spacing={2}>
                         <Grid item xs={3}>
                           <TextField

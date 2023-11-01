@@ -53,12 +53,12 @@ const useStyles = makeStyles({
     justifyContent: "center",
     alignItems: "center",
     display: "flex",
-    height: "50px",
+    height: "120px",
     //  border:'2px solid black'
   },
   innerContainer: {
    
-    height: '560px',
+    height: '535px',
     display: "block",
     border: "4px solid #fff",
     borderRadius: "20px",
@@ -270,6 +270,7 @@ const SignUp = () => {
               width={200}
               height={200}
               style={{ mixBlendMode: 'plus-lighter' }}
+              loop={false}
             />
             <p className={classes.sideimgp}> Michael Jackson</p>
             </div>
@@ -278,8 +279,8 @@ const SignUp = () => {
             <Image
               src={Logo}
               alt="Picture of the author"
-              width={50}
-              height={50}
+              width={120}
+              height={120}
               style={{ marginTop: "2px", borderRadius: "20px" }}
             />
           </div>

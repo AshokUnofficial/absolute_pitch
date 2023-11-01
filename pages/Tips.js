@@ -117,7 +117,7 @@ const Library = () => {
 
   useEffect(() => {
     // Define the URL to fetch
-    const apiUrl = 'https://absolutepitch.website/itch/appdata/webservice.php?tips=1';
+    const apiUrl = 'https://absolutepitch.website/appdata/webservice.php?tips=1';
 
     // Fetch data from the API
     fetch(apiUrl)
@@ -130,7 +130,7 @@ const Library = () => {
       });
   }, []); 
 
-  let path = "https://absolutepitch.website/itch/note-sound/Am.wav";
+  let path = "https://absolutepitch.website/note-sound/Am.wav";
   const [audio] = useState(typeof Audio !== "undefined" && new Audio(path));
   const [openModel, setOpenModel] = useState(false);
   const classes = useStyles();
