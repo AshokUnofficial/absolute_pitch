@@ -8,9 +8,9 @@ const dataBase = {
     },
      nordMap : { "+": "M", "-": "m", "#": "b" },
      soundData : [
-      "https://absolutepitch.website/itch/note-sound/A.wav",
-      "https://absolutepitch.website/itch/note-sound/Am.wav",
-      "https://absolutepitch.website/itch/note-sound/Ab.wav",
+      "https://absolutepitch.website/note-sound/A.wav",
+      "https://absolutepitch.website/note-sound/Am.wav",
+      "https://absolutepitch.website/note-sound/Ab.wav",
     ],
      tempoData : ["", "Calm", "Lively", "Mellow", "Moderate"],
      intensityData : ["", "HI", "LI", "MI"],

@@ -51,7 +51,7 @@ const useStyles = makeStyles({
     justifyContent: "center",
     alignItems: "center",
     display: "flex",
-    height: "100px",
+    height: "150px",
     //  border:'2px solid black'
   },
   innerContainer: {
@@ -264,8 +264,8 @@ const SignIn = () => {
             <Image
               src={Logo}
               alt="Picture of the author"
-              width={100}
-              height={100}
+              width={150}
+              height={150}
               style={{ marginTop: "2px", borderRadius: "20px" }}
             />
           </div>
