@@ -244,6 +244,8 @@ const SignUp = () => {
             pathname: "/SigninPage",
           });
           Cookies.set("userName", responseJson?.data?.user_details?.name);
+          Cookies.set("dob", responseJson?.data?.user_details?.dob);
+          Cookies.set("gender", responseJson?.data?.user_details?.gender);
         }
       });
   };
