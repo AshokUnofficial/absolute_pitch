@@ -319,7 +319,16 @@ const Feedback = ({ setFeedback }) => {
       .catch((error) => console.log("error", error));
   };
 
+  const cookieGender = Cookies.get("gender"); 
+  const genderString = cookieGender === "Male" ? "Boy" : "Girl";
 
+  const cookieName = Cookies.get("userName").split(' ')[0];
+  const cookieDob = Cookies.get("dob");
+  const dob = new Date(cookieDob);
+  const currentDate = new Date();
+  // Calculate the difference in months
+  const monthsAge = (currentDate.getFullYear() - dob.getFullYear()) * 12 + (currentDate.getMonth() - dob.getMonth());
+  
   return (
     <>
       {!formSuccess ?
@@ -385,7 +394,7 @@ const Feedback = ({ setFeedback }) => {
                   </Grid>
                   <Grid item md={10} xs={10} style={{ position: "relative" }}>
                     <div>
-                      <h3>What works best for Bobby a Boy 65 months old.</h3>
+                      <h3>{`What works best for ${cookieName} a ${genderString} ${monthsAge} months old.`}</h3>
                       <Grid container spacing={2}>
                         <Grid item xs={3}>
                           <TextField
