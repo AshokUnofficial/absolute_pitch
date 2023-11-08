@@ -233,8 +233,8 @@ const useStyles = makeStyles({
     margin: '0 !important'
   },
   imgSection: {
-    minWidth: "125px !important",
-    maxWidth: "100px !important",
+    minWidth: "130px !important",
+    maxWidth: "130px !important",
     minHeight: "100% !important",
     maxHeight: "100% !important",
     background: "#616161 !important",
@@ -271,19 +271,19 @@ const Feedback = ({ setFeedback }) => {
 
   const Data = (e) => {
     console.log(name, 'classics')
-    if (!classics || !Original || !name || !email || !testimonialApprove || !sessions || !sessionTime || !daysPerWeek) {
-      setError({
-        classics: !classics,
-        Original: !Original,
-        email: !email,
-        name: !name,
-        testimonialApprove: !testimonialApprove,
-        sessions: !sessions,
-        sessionTime: !sessionTime,
-        daysPerWeek: !daysPerWeek,
-      });
-      return false;
-    }
+    // if (!classics || !Original || !name || !email || !testimonialApprove || !sessions || !sessionTime || !daysPerWeek) {
+    //   setError({
+    //     classics: !classics,
+    //     Original: !Original,
+    //     email: !email,
+    //     name: !name,
+    //     testimonialApprove: !testimonialApprove,
+    //     sessions: !sessions,
+    //     sessionTime: !sessionTime,
+    //     daysPerWeek: !daysPerWeek,
+    //   });
+    //   return false;
+    // }
 
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
@@ -338,11 +338,10 @@ const Feedback = ({ setFeedback }) => {
               <div className={classes.songBox}>
                 <Grid container spacing={3}>
                   <Grid item md={2} xs={2} style={{ display: "flex", padding: "22px 10px 10px 10px" }}>
-                    <Image src={Mix1} style={{ backgroundColor: "black", borderRadius: "10px" }} height={100} className={classes.imgSection} />
+                    <Image src={Mix1} style={{ backgroundColor: "black", borderRadius: "10px" }} height={130} width={130} className={classes.imgSection} />
                   </Grid>
                   <Grid item md={10} xs={10} style={{ position: "relative" }}>
                     <TextField
-                      required
                       error={error.classics}
                       id="name"
                       type="text"
@@ -364,11 +363,10 @@ const Feedback = ({ setFeedback }) => {
               <div className={classes.songBox}>
                 <Grid container spacing={3}>
                   <Grid item md={2} xs={2} style={{ display: "flex", padding: "22px 10px 10px 10px" }}>
-                    <Image src={Mix2} style={{ backgroundColor: "black", borderRadius: "10px" }} height={100} className={classes.imgSection} />
+                    <Image src={Mix2} style={{ backgroundColor: "black", borderRadius: "10px" }} height={130} width={130} className={classes.imgSection} />
                   </Grid>
                   <Grid item md={10} xs={10} style={{ position: "relative" }}>
                     <TextField
-                      required
                       error={error.Original}
                       id="name"
                       type="text"
@@ -390,7 +388,7 @@ const Feedback = ({ setFeedback }) => {
               <div className={classes.songBox}>
                 <Grid container spacing={3}>
                   <Grid item md={2} xs={2} style={{ display: "flex", padding: "22px 10px 10px 10px" }}>
-                    <Image src={AdminImg} style={{ backgroundColor: "black", borderRadius: "10px" }} height={100} className={classes.imgSection} />
+                    <Image src={AdminImg} style={{ backgroundColor: "black", borderRadius: "10px" }} height={130} width={130} className={classes.imgSection} />
                   </Grid>
                   <Grid item md={10} xs={10} style={{ position: "relative" }}>
                     <div>
@@ -398,7 +396,6 @@ const Feedback = ({ setFeedback }) => {
                       <Grid container spacing={2}>
                         <Grid item xs={3}>
                           <TextField
-                            required
                             id="sessions"
                             type="text"
                             className={classes.inputField}
@@ -411,7 +408,6 @@ const Feedback = ({ setFeedback }) => {
                         </Grid>
                         <Grid item xs={3}>
                           <TextField
-                            required
                             id="session-time"
                             type="text"
                             className={classes.inputField}
@@ -424,7 +420,6 @@ const Feedback = ({ setFeedback }) => {
                         </Grid>
                         <Grid item xs={3}>
                           <TextField
-                            required
                             id="days-per-week"
                             type="text"
                             className={classes.inputField}
@@ -501,7 +496,6 @@ const Feedback = ({ setFeedback }) => {
                     <TextField
                       id="name"
                       type="text"
-                      required
                       error={error.email}
                       className={classes.inputField}
                       style={{ paddingTop: "10px" }}
@@ -517,7 +511,6 @@ const Feedback = ({ setFeedback }) => {
                     <TextField
                       id="name"
                       type="text"
-                      required
                       error={error.name}
                       className={classes.inputField}
                       style={{ paddingTop: "10px" }}
@@ -534,7 +527,6 @@ const Feedback = ({ setFeedback }) => {
                       label="I Approve The Public Use Of This Testimonial"
                       control={
                         <Checkbox
-                          required
                           size="medium"
                           checked={testimonialApprove}
                           onChange={(e) => setTestimonialApprove(e.target.checked)}
@@ -547,7 +539,7 @@ const Feedback = ({ setFeedback }) => {
                   </Grid>
                   <Grid item md={12} xs={12} style={{ position: "relative", textAlign: 'center', display: 'flex', justifyContent: 'space-between' }}>
                     <div className={classes.systemBox} style={{ position: "relative", textAlign: 'center', display: 'flex' }}>
-                      <div className={classes.IconBox}>
+                      {/* <div className={classes.IconBox}>
                         <ThumbUpIcon
                           className={classes.iconDesign}
                           style={{
@@ -571,7 +563,7 @@ const Feedback = ({ setFeedback }) => {
                           }
                           }
                         />
-                      </div>
+                      </div> */}
                     </div>
                     <Button
                       className={classes.typo_design}

@@ -112,6 +112,10 @@ whiteSpace: "pre-wrap",
   fontWeight: "bold",
  
   },
+  cardImage: {
+    display: "flex",
+    justifyContent: "center",
+  },
 });
 
 const Library = () => {
@@ -183,7 +187,7 @@ const Library = () => {
         style={{ background: "#fff" }}
       >
         <p className={classes.headingStyle}>Media</p>
-        <p className={classes.headingStyle2}>YoutUbe/Rumble Links Thumbnail</p>
+        {/* <p className={classes.headingStyle2}>YoutUbe/Rumble Links Thumbnail</p> */}
 
 
         <div className={classes.cardContainer}>
@@ -591,8 +595,8 @@ const Library = () => {
         {/* <p className={classes.headingStyle} style={{ color: "#fff" }}>
           Media
         </p> */}
-        <p className={classes.headingStyle}>Libraries</p>
-        <p className={classes.headingStyle2}>MP3/MP4 I Produce Thumbnail</p>
+        <p className={classes.headingStyle}>Research</p>
+        {/* <p className={classes.headingStyle2}>MP3/MP4 I Produce Thumbnail</p> */}
         <div className={classes.cardContainer}>
         {data ? (
         // Render data in cards when it's available
@@ -674,224 +678,7 @@ const Library = () => {
             />
           </span>
         </div> */}
-        {/* <div className={classes.content}>
-          <span className={classes.spanBox1}>
-            <Image
-              loader={myLoader}
-              src={Logo}
-              alt="Picture of the author"
-              width={500}
-              height={400}
-              style={{ marginTop: "10px" }}
-            />
-          </span>
-          <span className={classes.spanBox1}>
-            <Image
-              loader={myLoader}
-              src={Logo}
-              alt="Picture of the author"
-              width={500}
-              height={400}
-              style={{ marginTop: "10px" }}
-            />
-          </span>
-          <span className={classes.spanBox1}>
-            <Image
-              loader={myLoader}
-              src={Logo}
-              alt="Picture of the author"
-              width={500}
-              height={400}
-              style={{ marginTop: "10px" }}
-            />
-          </span>
-          <span className={classes.spanBox1}>
-            <Image
-              loader={myLoader}
-              src={Logo}
-              alt="Picture of the author"
-              width={500}
-              height={400}
-              style={{ marginTop: "10px" }}
-            />
-          </span>
-          <span className={classes.spanBox1}>
-            <Image
-              loader={myLoader}
-              src={Logo}
-              alt="Picture of the author"
-              width={500}
-              height={400}
-              style={{ marginTop: "10px" }}
-            />
-          </span>
-        </div>
-        <div className={classes.content}>
-          <span className={classes.spanBox1}>
-            <Image
-              loader={myLoader}
-              src={Logo}
-              alt="Picture of the author"
-              width={500}
-              height={400}
-              style={{ marginTop: "10px" }}
-            />
-          </span>
-          <span className={classes.spanBox1}>
-            <Image
-              loader={myLoader}
-              src={Logo}
-              alt="Picture of the author"
-              width={500}
-              height={400}
-              style={{ marginTop: "10px" }}
-            />
-          </span>
-          <span className={classes.spanBox1}>
-            <Image
-              loader={myLoader}
-              src={Logo}
-              alt="Picture of the author"
-              width={500}
-              height={400}
-              style={{ marginTop: "10px" }}
-            />
-          </span>
-          <span className={classes.spanBox1}>
-            <Image
-              loader={myLoader}
-              src={Logo}
-              alt="Picture of the author"
-              width={500}
-              height={400}
-              style={{ marginTop: "10px" }}
-            />
-          </span>
-          <span className={classes.spanBox1}>
-            <Image
-              loader={myLoader}
-              src={Logo}
-              alt="Picture of the author"
-              width={500}
-              height={400}
-              style={{ marginTop: "10px" }}
-            />
-          </span>
-        </div>
-        <div className={classes.content}>
-          <span className={classes.spanBox1}>
-            {" "}
-            <Image
-              loader={myLoader}
-              src={Logo}
-              alt="Picture of the author"
-              width={500}
-              height={400}
-              style={{ marginTop: "10px" }}
-            />
-          </span>
-          <span className={classes.spanBox1}>
-            {" "}
-            <Image
-              loader={myLoader}
-              src={Logo}
-              alt="Picture of the author"
-              width={500}
-              height={400}
-              style={{ marginTop: "10px" }}
-            />
-          </span>
-          <span className={classes.spanBox1}>
-            {" "}
-            <Image
-              loader={myLoader}
-              src={Logo}
-              alt="Picture of the author"
-              width={500}
-              height={400}
-              style={{ marginTop: "10px" }}
-            />
-          </span>
-          <span className={classes.spanBox1}>
-            {" "}
-            <Image
-              loader={myLoader}
-              src={Logo}
-              alt="Picture of the author"
-              width={500}
-              height={400}
-              style={{ marginTop: "10px" }}
-            />
-          </span>
-          <span className={classes.spanBox1}>
-            {" "}
-            <Image
-              loader={myLoader}
-              src={Logo}
-              alt="Picture of the author"
-              width={500}
-              height={400}
-              style={{ marginTop: "10px" }}
-            />
-          </span>
-        </div>
-        <div className={classes.content}>
-          <span className={classes.spanBox1}>
-            {" "}
-            <Image
-              loader={myLoader}
-              src={Logo}
-              alt="Picture of the author"
-              width={500}
-              height={400}
-              style={{ marginTop: "10px" }}
-            />
-          </span>
-          <span className={classes.spanBox1}>
-            {" "}
-            <Image
-              loader={myLoader}
-              src={Logo}
-              alt="Picture of the author"
-              width={500}
-              height={400}
-              style={{ marginTop: "10px" }}
-            />
-          </span>
-          <span className={classes.spanBox1}>
-            {" "}
-            <Image
-              loader={myLoader}
-              src={Logo}
-              alt="Picture of the author"
-              width={500}
-              height={400}
-              style={{ marginTop: "10px" }}
-            />
-          </span>
-          <span className={classes.spanBox1}>
-            {" "}
-            <Image
-              loader={myLoader}
-              src={Logo}
-              alt="Picture of the author"
-              width={500}
-              height={400}
-              style={{ marginTop: "10px" }}
-            />
-          </span>
-          <span className={classes.spanBox1}>
-            {" "}
-            <Image
-              loader={myLoader}
-              src={Logo}
-              alt="Picture of the author"
-              width={500}
-              height={400}
-              style={{ marginTop: "10px" }}
-            />
-          </span>
-        </div> */}
+      
       </Grid>
       <Grid
         item
@@ -903,7 +690,7 @@ const Library = () => {
         style={{ background: "#fff" }}
       >
         <p className={classes.headingStyle}>Articles</p>
-        <p className={classes.headingStyle2}>MP3/MP4 I Produce Thumbnail</p>
+        {/* <p className={classes.headingStyle2}>MP3/MP4 I Produce Thumbnail</p> */}
         <div className={classes.cardContainer}>
         {data ? (
         // Render data in cards when it's available
@@ -917,13 +704,15 @@ const Library = () => {
             {item.description}
             </p> */}
             </div>
+            <div className={classes.cardImage}>
             <Image
-            width={420}
-            height={260}
+            width={250}
+            height={250}
               loader={myLoader}
               src={item.image}
               alt={item.title}
              />
+             </div>
           </div>
          
         ))
