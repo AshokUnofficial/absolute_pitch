@@ -245,6 +245,7 @@ const useStyles = makeStyles({
   },
 });
 const Feedback = ({ setFeedback }) => {
+  const [fullForm, setFullForm] = useState(null);
   const classes = useStyles();
   const [classics, setClassics] = useState("");
   const [Original, setOriginal] = useState("");
@@ -270,6 +271,7 @@ const Feedback = ({ setFeedback }) => {
   });
 
   const Data = (e) => {
+    e.preventDefault();
     console.log(name, 'classics')
     // if (!classics || !Original || !name || !email || !testimonialApprove || !sessions || !sessionTime || !daysPerWeek) {
     //   setError({
@@ -286,28 +288,28 @@ const Feedback = ({ setFeedback }) => {
     // }
 
     var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+    myHeaders.append("Content-Type", "multipart/form-data");
 
-    var urlencoded = new URLSearchParams();
-    urlencoded.append("feedback", "1");
-    urlencoded.append("get-user-info", "1");
-    urlencoded.append("user_id", "1");
-    urlencoded.append("classic", classics);
-    urlencoded.append("original", Original);
-    urlencoded.append("email", email);
-    urlencoded.append("name", name);
-    urlencoded.append("testimonialApprove", testimonialApprove);
-    urlencoded.append("anything", about);
-    urlencoded.append("testimonial", testimonial);
-    urlencoded.append("sessions", sessions);
-    urlencoded.append("sessionTime", sessionTime);
-    urlencoded.append("daysPerWeek", daysPerWeek);
+    var formData = new FormData();
+    formData.append("feedback", 1);
+    formData.append("user_id", 1);
+    formData.append("classic", classics);
+    formData.append("original", Original);
+    formData.append("email", email);
+    formData.append("name", name);
+    formData.append("testimonialApprove", testimonialApprove);
+    formData.append("anything", about);
+    formData.append("testimonial", testimonial);
+    formData.append("sessions", sessions);
+    formData.append("sessionTime", sessionTime);
+    formData.append("daysPerWeek", daysPerWeek);
+console.log(Array.from(formData.entries()), 'formData');
 
+    console.log(formData, 'formData')
     var requestOptions = {
       method: "POST",
       headers: myHeaders,
-      body: urlencoded,
-      redirect: "follow",
+      body: formData,
     };
 
     fetch(
@@ -332,7 +334,7 @@ const Feedback = ({ setFeedback }) => {
   return (
     <>
       {!formSuccess ?
-        <form id="my-form" onSubmit={Data} style={{ overflowX: "auto", height: '92%' }}>
+        <form id="my-form" encType="mutlipart/form-data" method="POST" name="fileinfo" onSubmit={Data} style={{ overflowX: "auto", height: '92%' }}>
           <Grid container spacing={0} className={classes.containerBox}>
             <Grid item xs={12} md={12} sm={12} className={classes.rightSection}>
               <div className={classes.songBox}>
@@ -568,7 +570,8 @@ const Feedback = ({ setFeedback }) => {
                     <Button
                       className={classes.typo_design}
                       style={{ width: "30%" }}
-                      onClick={Data}
+                      // onClick={Data}
+                      type="submit"
                     >
                       SEND
                     </Button>

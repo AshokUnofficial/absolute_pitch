@@ -57,6 +57,12 @@ const style = {
     height: '90%',
   },
   p: 1,
+  rightSection: {
+    width: 'max-content',
+  },
+  button_container_box: {
+  width: 'max-content',
+  },
 };
 
 const AdminPanel = () => {
@@ -105,6 +111,12 @@ const AdminPanel = () => {
         </div>
         <div className={styles.rightSection}>
           <div className={styles.button_container_box}>
+          <Link href='/whitepaper'>
+              <button className={styles.buttons_pill}>
+                <Image src={PlusIcon} alt="button Icon" />
+                <span className={styles.button_text}>White Paper</span>
+              </button>
+            </Link>
             <Link href='/Tips'>
               <button className={styles.buttons_pill}>
                 <Image src={PlusIcon} alt="button Icon" />
