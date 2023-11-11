@@ -174,6 +174,8 @@ const AdminPanel = () => {
           <div className={styles.graph_container}>
             <NewChart />
           </div>
+          <p style={{backgroundColor:"white", padding:"10px", borderRadius:"10px" , margin:"0px"}}>US Patent Pending #12-121-784  A Method For Uploading Musical Pitch In The Brain</p>
+
         </div>
         <Modal
           open={feedback}
