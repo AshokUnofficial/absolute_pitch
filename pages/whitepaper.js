@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Grid } from "@material-ui/core";
+import styles from '../styles/AdminPanel.module.css';
+
 // import { makeStyles } from "@material-ui/core";
 import { Typography, Box, Modal, makeStyles, Button } from "@material-ui/core";
 import Image from "next/image";
@@ -17,12 +19,27 @@ const useStyles = makeStyles({
   root: {
     position: "relative",
     maxWidth: "100%",
+    width: "100%",
+    background: "#fff",
     
   
   },
   mainContainer: {
-    height: "100",
+    marginTop: "-30px",
+    height: "90vh",
+    paddingTop: "100px",
     background: "#fff !important",
+  
+  },
+  cardSection: {
+    display: "flex",
+    justifyContent: "center",
+    backgroundColor: "#fff",
+    height: "max-content",
+    padding: "50px 100px 50px 100px",
+    borderRadius: "10px",
+    marginLeft: "auto",
+    marginRight: "auto",
   },
   card: {
     boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.16)",
@@ -40,132 +57,24 @@ const useStyles = makeStyles({
     backgroundColor: "#5a8dee !important",
     color: "#fff",
   },
-  formSubmit: {
-    padding: "13px 30px",
-    fontSize: "15px",
-    letterSpacing: "0.3px",
-    fontWeight: "400",
-  },
-  kbDataBox: {
-    width: "100%",
-    flex: 1,
-  },
-  kbModalDataTitle: {
-    marginBottom: "10px",
-  },
-  kbDataTitle: {
-    h6: {
-      marginBottom: "0",
-      fontSize: "15px",
-      fontWeight: "600",
-    },
-  },
-  kbFileUpload: {
-    marginBottom: "20px",
-  },
-  fileUploadBox: {
-    border: "1px dashed #b6bed1",
-    backgroundColor: "#f0f2f7",
-    borderRadius: "4px",
-    minHeight: "150px",
-    position: "relative",
-    overflow: "hidden",
-    padding: "15px",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    color: "#8194aa",
-    fontWeight: "400",
-    fontSize: "15px",
-  },
-  fileUploadInput: {
-    position: "absolute",
-    width: "100%",
-    height: "100%",
-    top: "0",
-    left: "0",
-    opacity: "0",
-    cursor: "pointer",
-  },
-  fileLink: {
-    color: "#475f7b",
-    textDecoration: "underline",
-    marginLeft: "3px",
-  },
-  fileLinkHover: {
-    textDecoration: "none",
-  },
-  fileAtcBox: {
-    display: "flex",
-    alignItems: "center",
-    marginBottom: "15px",
-  },
-  fileImage: {
-    width: "130px",
-    height: "85px",
-    backgroundSize: "cover",
+  button: {
+    backgroundColor: "#5a8dee",
+    color: "#fff",
+    padding: "10px 30px",
     borderRadius: "5px",
-    marginRight: "15px",
-    backgroundColor: "#eaecf1",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    fontSize: "30px",
-    color: "#475f7b",
-    padding: "3px",
-  },
-  fileImageImg: {
-    maxWidth: "100%",
-    maxHeight: "100%",
-    borderRadius: "4px",
-  },
-  fileDetail: {
-    flex: 1,
-    width: "calc(100% - 210px)",
-  },
-  fileDetailH6: {
-    wordBreak: "break-all",
-    fontSize: "13px",
-    fontWeight: "500",
-    lineHeight: "20px",
-    marginBottom: "8px",
-  },
-  fileDetailP: {
-    fontSize: "12px",
-    color: "#8194aa",
-    lineHeight: "initial",
-    fontWeight: "400",
-    marginBottom: "8px",
-  },
-  fileActions: {
-    display: "flex",
-    flexWrap: "wrap",
-    alignItems: "center",
-  },
-  fileActionBtn: {
-    fontSize: "12px",
-    color: "#8194aa",
-    lineHeight: "20px",
-    fontWeight: "400",
-    marginBottom: "0",
-    padding: "0",
-    backgroundColor: "transparent",
     border: "none",
-    textDecoration: "underline",
-    marginRight: "15px",
     cursor: "pointer",
+    marginTop: "20px",
+    "&:hover": {
+      backgroundColor: "#5a8dee",
+
   },
-  fileActionBtnHover: {
-    color: "#3d546f",
-    textDecoration: "underline",
-  },
-  fileAtcBoxLastChild: {
-    marginBottom: "0",
   },
 
 
   
 });
+
 
 const Library = () => {
   
@@ -212,7 +121,7 @@ const Library = () => {
 console.log(formData, 'file');
     const requestOptions = {
       method: "POST",
-      headers: myHeaders,
+      // headers: myHeaders,
       body: formData,
     };
 
@@ -248,7 +157,7 @@ console.log(formData, 'file');
   return (
     <>
 
-<div className={classes.mainContainer}>
+<div className={styles.mainContainer}>
       {/* <div className="fileupload-view">
                 <div className="row justify-content-center m-0">
                     <div className="col-md-6">
@@ -405,11 +314,17 @@ console.log(formData, 'file');
           </div>
         </div>
       </div> */}
+              <div className={`${styles.main_container}`}>
+<div className={classes.cardSection}>
          <form>
-          <h1>React File Upload</h1>
-          <input type="file" onChange={handleChange}/>
-          <button type="submit" onClick={postFileToAPI}>Upload</button>
+          <h1>White paper </h1>
+          <p>Upload your file here</p>
+          <p>Please upload only .docx format</p>
+          <input type="file" onChange={handleChange} />
+          <button type="submit" onClick={postFileToAPI} className={classes.button}>Upload</button>
         </form>
+        </div>
+        </div>
     </div>
     </>
 

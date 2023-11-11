@@ -249,7 +249,8 @@ const Feedback = ({ setFeedback }) => {
   const classes = useStyles();
   const [classics, setClassics] = useState("");
   const [Original, setOriginal] = useState("");
-  const [buttons, setButtons] = useState("");
+  const [buttons, setButtons] = useState("demo");
+  const [wheel, setWheel] = useState("demo");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [testimonial, setTestimonial] = useState("");
@@ -272,54 +273,41 @@ const Feedback = ({ setFeedback }) => {
 
   const Data = (e) => {
     e.preventDefault();
-    console.log(name, 'classics')
-    // if (!classics || !Original || !name || !email || !testimonialApprove || !sessions || !sessionTime || !daysPerWeek) {
-    //   setError({
-    //     classics: !classics,
-    //     Original: !Original,
-    //     email: !email,
-    //     name: !name,
-    //     testimonialApprove: !testimonialApprove,
-    //     sessions: !sessions,
-    //     sessionTime: !sessionTime,
-    //     daysPerWeek: !daysPerWeek,
-    //   });
-    //   return false;
-    // }
 
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "multipart/form-data");
-
     var formData = new FormData();
     formData.append("feedback", 1);
     formData.append("user_id", 1);
     formData.append("classic", classics);
     formData.append("original", Original);
-    formData.append("email", email);
-    formData.append("name", name);
-    formData.append("testimonialApprove", testimonialApprove);
+    formData.append("button", buttons);
+    formData.append("wheel", wheel);
     formData.append("anything", about);
     formData.append("testimonial", testimonial);
     formData.append("sessions", sessions);
     formData.append("sessionTime", sessionTime);
     formData.append("daysPerWeek", daysPerWeek);
-console.log(Array.from(formData.entries()), 'formData');
 
-    console.log(formData, 'formData')
+    // Check if the FormData entries are correct
+    console.log(Array.from(formData.entries()), 'formData');
+
     var requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: formData,
+        method: "POST",
+        // Remove the Content-Type header setting
+        // headers: myHeaders,
+        body: formData,
     };
 
-    fetch(
-      "https://absolutepitch.website/appdata/webservice.php",
-      requestOptions
-    )
-      .then((response) => response.json())
-      .then((result) => result.success ? setFormSuccess(true) : alert('Something went wrong! Please try again.'))
-      .catch((error) => console.log("error", error));
-  };
+    fetch("https://absolutepitch.website/appdata/webservice.php", requestOptions)
+        .then((response) => {
+            console.log(response); // Log the entire response
+            return response.json();
+        })
+        .then((result) => result.success ? setFormSuccess(true) : alert('Something went wrong! Please try again.'))
+        .catch((error) => console.log("error", error));
+};
+
 
   const cookieGender = Cookies.get("gender"); 
   const genderString = cookieGender === "Male" ? "Boy" : "Girl";
