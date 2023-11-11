@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Grid } from "@material-ui/core";
 import styles from '../styles/AdminPanel.module.css';
-
+import router from 'next/router';
 // import { makeStyles } from "@material-ui/core";
 import { Typography, Box, Modal, makeStyles, Button } from "@material-ui/core";
 import Image from "next/image";
@@ -139,9 +139,9 @@ console.log(formData, 'file');
         } else {
 
           alert('Uploaded Successfully');
-        //   router.push({
-        //     pathname: "/SigninPage",
-        //   });
+          router.push({
+            pathname: "/AdminPanel",
+          });
         }
       } else {
         // Handle error responses from the API
