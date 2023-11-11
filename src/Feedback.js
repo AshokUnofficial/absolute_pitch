@@ -245,10 +245,12 @@ const useStyles = makeStyles({
   },
 });
 const Feedback = ({ setFeedback }) => {
+  const [fullForm, setFullForm] = useState(null);
   const classes = useStyles();
   const [classics, setClassics] = useState("");
   const [Original, setOriginal] = useState("");
-  const [buttons, setButtons] = useState("");
+  const [buttons, setButtons] = useState("demo");
+  const [wheel, setWheel] = useState("demo");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [testimonial, setTestimonial] = useState("");
@@ -270,54 +272,42 @@ const Feedback = ({ setFeedback }) => {
   });
 
   const Data = (e) => {
-    console.log(name, 'classics')
-    // if (!classics || !Original || !name || !email || !testimonialApprove || !sessions || !sessionTime || !daysPerWeek) {
-    //   setError({
-    //     classics: !classics,
-    //     Original: !Original,
-    //     email: !email,
-    //     name: !name,
-    //     testimonialApprove: !testimonialApprove,
-    //     sessions: !sessions,
-    //     sessionTime: !sessionTime,
-    //     daysPerWeek: !daysPerWeek,
-    //   });
-    //   return false;
-    // }
+    e.preventDefault();
 
     var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+    myHeaders.append("Content-Type", "multipart/form-data");
+    var formData = new FormData();
+    formData.append("feedback", 1);
+    formData.append("user_id", 1);
+    formData.append("classic", classics);
+    formData.append("original", Original);
+    formData.append("button", buttons);
+    formData.append("wheel", wheel);
+    formData.append("anything", about);
+    formData.append("testimonial", testimonial);
+    formData.append("sessions", sessions);
+    formData.append("sessionTime", sessionTime);
+    formData.append("daysPerWeek", daysPerWeek);
 
-    var urlencoded = new URLSearchParams();
-    urlencoded.append("feedback", "1");
-    urlencoded.append("get-user-info", "1");
-    urlencoded.append("user_id", "1");
-    urlencoded.append("classic", classics);
-    urlencoded.append("original", Original);
-    urlencoded.append("email", email);
-    urlencoded.append("name", name);
-    urlencoded.append("testimonialApprove", testimonialApprove);
-    urlencoded.append("anything", about);
-    urlencoded.append("testimonial", testimonial);
-    urlencoded.append("sessions", sessions);
-    urlencoded.append("sessionTime", sessionTime);
-    urlencoded.append("daysPerWeek", daysPerWeek);
+    // Check if the FormData entries are correct
+    console.log(Array.from(formData.entries()), 'formData');
 
     var requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: urlencoded,
-      redirect: "follow",
+        method: "POST",
+        // Remove the Content-Type header setting
+        // headers: myHeaders,
+        body: formData,
     };
 
-    fetch(
-      "https://absolutepitch.website/appdata/webservice.php",
-      requestOptions
-    )
-      .then((response) => response.json())
-      .then((result) => result.success ? setFormSuccess(true) : alert('Something went wrong! Please try again.'))
-      .catch((error) => console.log("error", error));
-  };
+    fetch("https://absolutepitch.website/appdata/webservice.php", requestOptions)
+        .then((response) => {
+            console.log(response); // Log the entire response
+            return response.json();
+        })
+        .then((result) => result.success ? setFormSuccess(true) : alert('Something went wrong! Please try again.'))
+        .catch((error) => console.log("error", error));
+};
+
 
   const cookieGender = Cookies.get("gender"); 
   const genderString = cookieGender === "Male" ? "Boy" : "Girl";
@@ -332,7 +322,7 @@ const Feedback = ({ setFeedback }) => {
   return (
     <>
       {!formSuccess ?
-        <form id="my-form" onSubmit={Data} style={{ overflowX: "auto", height: '92%' }}>
+        <form id="my-form" encType="mutlipart/form-data" method="POST" name="fileinfo" onSubmit={Data} style={{ overflowX: "auto", height: '92%' }}>
           <Grid container spacing={0} className={classes.containerBox}>
             <Grid item xs={12} md={12} sm={12} className={classes.rightSection}>
               <div className={classes.songBox}>
@@ -568,7 +558,8 @@ const Feedback = ({ setFeedback }) => {
                     <Button
                       className={classes.typo_design}
                       style={{ width: "30%" }}
-                      onClick={Data}
+                      // onClick={Data}
+                      type="submit"
                     >
                       SEND
                     </Button>
