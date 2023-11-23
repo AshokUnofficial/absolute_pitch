@@ -358,6 +358,7 @@ const Library = () => {
         <p className={classes.headingStyle}>Research</p>
         {/* <p className={classes.headingStyle2}>MP3/MP4 I Produce Thumbnail</p> */}
         <div className={classes.cardContainer}>
+          {console.log(data)}
         {data ? (
         // Render data in cards when it's available
         data.data.libraries.map((item, index) => (

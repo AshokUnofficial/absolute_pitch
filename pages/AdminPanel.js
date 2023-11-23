@@ -111,6 +111,15 @@ const AdminPanel = () => {
         </div>
         <div className={styles.rightSection}>
           <div className={styles.button_container_box}>
+          <Link href='/'>
+              <button className={styles.buttons_pill}   style={{
+    background: "#4aff4a",
+    border: "1px solid white",
+  }}>
+                <Image src={EditIcon} alt="button Icon" />
+                <span className={styles.button_text}>Go To Player</span>
+              </button>
+            </Link>
           <Link href='/whitepaper'>
               <button className={styles.buttons_pill}>
                 <Image src={PlusIcon} alt="button Icon" />
@@ -134,12 +143,12 @@ const AdminPanel = () => {
               <Image src={PlusIcon} alt="button Icon" />
               <span className={styles.button_text}>Feedback Form</span>
             </button>
-            <Link href='/'>
+            {/* <Link href='/'>
               <button className={styles.buttons_pill}>
                 <Image src={EditIcon} alt="button Icon" />
                 <span className={styles.button_text}>Go To Player</span>
               </button>
-            </Link>
+            </Link> */}
             <Button
               id="basic-button"
               aria-controls={open ? 'basic-menu' : undefined}
