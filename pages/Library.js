@@ -7,6 +7,7 @@ import Iframe from "react-iframe";
 import Logo from "../public/logo.png";
 import Article from "../public/arcticle.jpg";
 import axios from 'axios';
+import Link from "next/link";
 
 
 
@@ -405,6 +406,8 @@ const Library = () => {
         {data ? (
         // Render data in cards when it's available
         data.data.articles.map((item, index) => (
+          <a target={"_blank"} style={{textDecoration: "none", color: "black"}} href={item.article_link}>
+
           <div className={classes.card1}>
           <div className={classes.cardBody1}>
             <p className={classes.cardTitle}>
@@ -424,6 +427,8 @@ const Library = () => {
              />
              </div>
           </div>
+          </a>
+
          
         ))
       ) : (

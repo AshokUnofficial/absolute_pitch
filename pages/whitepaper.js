@@ -33,6 +33,7 @@ const useStyles = makeStyles({
   },
   cardSection: {
     display: "flex",
+    flexDirection: "column",
     justifyContent: "center",
     backgroundColor: "#fff",
     height: "max-content",
@@ -77,7 +78,8 @@ const useStyles = makeStyles({
 
 
 const Library = () => {
-  
+  const [responseJson, setResponseJson] = useState(null);
+
 
   const classes = useStyles();
 
@@ -137,11 +139,12 @@ console.log(formData, 'file');
         if (responseJson.valid === 0) {
           alert(responseJson?.message);
         } else {
+          setResponseJson(responseJson); // Update the state with the responseJson
 
           alert('Uploaded Successfully');
-          router.push({
-            pathname: "/AdminPanel",
-          });
+          // router.push({
+          //   pathname: "/AdminPanel",
+          // });
         }
       } else {
         // Handle error responses from the API
@@ -323,8 +326,15 @@ console.log(formData, 'file');
           <input type="file" onChange={handleChange} />
           <button type="submit" onClick={postFileToAPI} className={classes.button}>Upload</button>
         </form>
+        {responseJson && (
+  <a className={classes.button} style={{width: 'max-content', textDecoration: 'none'}} href={responseJson.data.paper_link} target="_blank" rel="noopener noreferrer">
+    Open Document
+  </a>
+)}
         </div>
-        </div>
+
+      </div>
+
     </div>
     </>
 
