@@ -9,6 +9,10 @@ import Iframe from "react-iframe";
 import Logo from "../public/logo.png";
 import Article from "../public/arcticle.jpg";
 import axios from 'axios';
+import mammoth from "mammoth";
+import DocViewer from "react-doc-viewer";
+
+
 // import shortid from "https://cdn.skypack.dev/shortid@2.2.16";
 
 
@@ -79,7 +83,7 @@ const useStyles = makeStyles({
 
 const Library = () => {
   const [responseJson, setResponseJson] = useState(null);
-
+  const [htmlContent, setHtmlContent] = useState(null);
 
   const classes = useStyles();
 
@@ -94,16 +98,73 @@ const Library = () => {
 //   function handleChange(event) {
 //     setFile(event.target.files[0])
 //   }
+
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const myHeaders = new Headers();
+      myHeaders.append("Content-Type", "multipart/form-data");
+
+      const formData = new FormData();
+      formData.append("white-paper", 1);
+      // Add your file to formData here if needed
+
+      const requestOptions = {
+        method: "POST",
+        // headers: myHeaders,
+        body: formData,
+      };
+
+      const response = await fetch(
+        "https://absolutepitch.website/appdata/webservice.php",
+        requestOptions
+      );
+
+      if (response.ok) {
+        const responseJson = await response.json();
+        console.log(responseJson, "response=======");
+
+        if (responseJson.valid === 0) {
+          alert(responseJson?.message);
+        } else {
+          setResponseJson(responseJson);
+          const result = await mammoth.extractRawText({
+            arrayBuffer: responseJson.data.link,
+          });
+
+          setHtmlContent(result.value);
+        
+          // alert("Uploaded Successfully");
+        }
+      } 
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  };
+
+  // Call the API when the component mounts
+  fetchData();
+}, []); // The empty dependency array ensures this effect runs only once, similar to componentDidMount
+
+
+
+
+
+
+
+
+
   const handleChange = (event) => {
     const selectedFile = event.target.files[0];
+    setFile(selectedFile);
 
-    if (selectedFile && selectedFile.type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
-      setFile(selectedFile);
-    } else {
-      alert("Please select a .docx file.");
-      event.target.value = null; // Clear the file input
-      setFile(null);
-    }
+    // if (selectedFile && selectedFile.type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
+    //   setFile(selectedFile);
+    // } else {
+    //   alert("Please select a .docx file.");
+    //   event.target.value = null; 
+    //   setFile(null);
+    // }
   };
   // Function to post the selected file to the API
   const postFileToAPI = async (event) => {
@@ -139,19 +200,15 @@ console.log(formData, 'file');
         if (responseJson.valid === 0) {
           alert(responseJson?.message);
         } else {
-          setResponseJson(responseJson); // Update the state with the responseJson
+          setResponseJson(responseJson);
 
           alert('Uploaded Successfully');
-          // router.push({
-          //   pathname: "/AdminPanel",
-          // });
+       
         }
       } else {
-        // Handle error responses from the API
         console.error("Failed to upload the file");
       }
     } catch (error) {
-      // Handle network errors or other exceptions
       console.error("An error occurred:", error);
     }
   };
@@ -161,176 +218,23 @@ console.log(formData, 'file');
     <>
 
 <div className={styles.mainContainer}>
-      {/* <div className="fileupload-view">
-                <div className="row justify-content-center m-0">
-                    <div className="col-md-6">
-                        <div className="card mt-5">
-                            <div className="card-body">
-                                <div className="kb-data-box">
-                                    <div className="kb-modal-data-title">
-                                        <div className="kb-data-title">
-                                            <h6>Multiple File Upload With Preview</h6>
-                                        </div>
-                                    </div>
-                                    <form onSubmit={FileUploadSubmit}>
-                                        <div className="kb-file-upload">
-                                            <div className="file-upload-box">
-                                                <input type="file" id="fileupload" className="file-upload-input" onChange={InputChange} multiple />
-                                                <span>Drag and drop or <span className="file-link">Choose your files</span></span>
-                                            </div>
-                                        </div>
-                                        <div className="kb-attach-box mb-3">
-                                            {
-                                                selectedfile.map((data, index) => {
-                                                    const { id, filename, filetype, fileimage, datetime, filesize } = data;
-                                                    return (
-                                                        <div className="file-atc-box" key={id}>
-                                                            {
-                                                                filename.match(/.(jpg|jpeg|png|gif|svg)$/i) ?
-                                                                    <div className="file-image"> <img src={fileimage} alt="" /></div> :
-                                                                    <div className="file-image"><i className="far fa-file-alt"></i></div>
-                                                            }
-                                                            <div className="file-detail">
-                                                                <h6>{filename}</h6>
-                                                                <p></p>
-                                                                <p><span>Size : {filesize}</span><span className="ml-2">Modified Time : {datetime}</span></p>
-                                                                <div className="file-actions">
-                                                                    <button type="button" className="file-action-btn" onClick={() => DeleteSelectFile(id)}>Delete</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    )
-                                                })
-                                            }
-                                        </div>
-                                        <div className="kb-buttons-box">
-                                            <button type="submit" className="btn btn-primary form-submit">Upload</button>
-                                        </div>
-                                    </form>
-                                    {Files.length > 0 ?
-                                        <div className="kb-attach-box">
-                                            <hr />
-                                            {
-                                                Files.map((data, index) => {
-                                                    const { id, filename, filetype, fileimage, datetime, filesize } = data;
-                                                    return (
-                                                        <div className="file-atc-box" key={index}>
-                                                            {
-                                                                filename.match(/.(jpg|jpeg|png|gif|svg)$/i) ?
-                                                                    <div className="file-image"> <img src={fileimage} alt="" /></div> :
-                                                                    <div className="file-image"><i className="far fa-file-alt"></i></div>
-                                                            }
-                                                            <div className="file-detail">
-                                                                <h6>{filename}</h6>
-                                                                <p><span>Size : {filesize}</span><span className="ml-3">Modified Time : {datetime}</span></p>
-                                                                <div className="file-actions">
-                                                                    <button className="file-action-btn" onClick={() => DeleteFile(id)}>Delete</button>
-                                                                    <a href={fileimage}  className="file-action-btn" download={filename}>Download</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    )
-                                                })
-                                            }
-                                        </div>
-                                        : ''}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> */}
-    {/* <div className="row justify-content-center m-0">
-        <div className="col-md-6">
-          <div className={classes.card}>
-            <div className={classes.cardBody}>
-              <div className={classes.kbDataBox}>
-                <div className={classes.kbModalDataTitle}>
-                  <div className={classes.kbDataTitle}>
-                    <h6>Multiple File Upload With Preview</h6>
-                  </div>
-                </div>
-                <form onSubmit={FileUploadSubmit}>
-                  <div className={classes.kbFileUpload}>
-                    <div className={classes.fileUploadBox}>
-                      <input type="file" id="fileupload" className={classes.fileUploadInput} onChange={InputChange} multiple />
-                      <span>Drag and drop or <span className={classes.fileLink}>Choose your files</span></span>
-                    </div>
-                  </div>
-                  <div className="kb-attach-box mb-3">
-                    {selectedfile.map((data, index) => {
-                      const { id, filename, filetype, fileimage, datetime, filesize } = data;
-                      return (
-                        <div className={classes.fileAtcBox} key={id}>
-                          {filename.match(/.(jpg|jpeg|png|gif|svg)$/i) ? (
-                            <div className={classes.fileImage}>
-                              <img src={fileimage} alt="" />
-                            </div>
-                          ) : (
-                            <div className={classes.fileImage}><i className="far fa-file-alt"></i></div>
-                          )}
-                          <div className={classes.fileDetail}>
-                            <h6>{filename}</h6>
-                            <p></p>
-                            <p><span>Size : {filesize}</span><span className="ml-2">Modified Time : {datetime}</span></p>
-                            <div className={classes.fileActions}>
-                              <button type="button" className={classes.fileActionBtn} onClick={() => DeleteSelectFile(id)}>Delete</button>
-                            </div>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                  <div className="kb-buttons-box">
-                    <button type="submit" className="btn btn-primary form-submit">Upload</button>
-                  </div>
-                </form>
-                {Files.length > 0 ? (
-                  <div className="kb-attach-box">
-                    <hr />
-                    {Files.map((data, index) => {
-                      const { id, filename, filetype, fileimage, datetime, filesize } = data;
-                      return (
-                        <div className={classes.fileAtcBox} key={index}>
-                          {filename.match(/.(jpg|jpeg|png|gif|svg)$/i) ? (
-                            <div className={classes.fileImage}>
-                              <img src={fileimage} alt="" />
-                            </div>
-                          ) : (
-                            <div className={classes.fileImage}><i className="far fa-file-alt"></i></div>
-                          )}
-                          <div className={classes.fileDetail}>
-                            <h6>{filename}</h6>
-                            <p><span>Size : {filesize}</span><span className="ml-3">Modified Time : {datetime}</span></p>
-                            <div className={classes.fileActions}>
-                              <button className={classes.fileActionBtn} onClick={() => DeleteFile(id)}>Delete</button>
-                              <a href={fileimage} className={classes.fileActionBtn} download={filename}>Download</a>
-                            </div>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                ) : ''}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> */}
               <div className={`${styles.main_container}`}>
 <div className={classes.cardSection}>
          <form>
           <h1>White paper </h1>
-          <p>Upload your file here</p>
-          <p>Please upload only .docx format</p>
+          <p>See your file here</p>
+          {/* <p>Please upload only .docx format</p>
           <input type="file" onChange={handleChange} />
-          <button type="submit" onClick={postFileToAPI} className={classes.button}>Upload</button>
+          <button type="submit" onClick={postFileToAPI} className={classes.button}>Upload</button> */}
         </form>
-        {responseJson && (
+        {/* {responseJson && (
+            <DocViewer
+              documents={[{ uri: responseJson.data.paper_link }]}
+            />
+          )} */}
   <a className={classes.button} style={{width: 'max-content', textDecoration: 'none'}} href={responseJson.data.paper_link} target="_blank" rel="noopener noreferrer">
     Open Document
   </a>
-)}
         </div>
 
       </div>
