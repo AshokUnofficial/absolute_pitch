@@ -10,7 +10,8 @@ import Logo from "../public/logo.png";
 import Article from "../public/arcticle.jpg";
 import axios from 'axios';
 import mammoth from "mammoth";
-import DocViewer from "react-doc-viewer";
+// import DocViewer from "react-doc-viewer";
+import DocViewer, { DocViewerRenderers } from "react-doc-viewer";
 
 
 // import shortid from "https://cdn.skypack.dev/shortid@2.2.16";
@@ -35,13 +36,16 @@ const useStyles = makeStyles({
     background: "#fff !important",
   
   },
+  main_container: {
+    height: "max-content",
+  },
   cardSection: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     backgroundColor: "#fff",
     height: "max-content",
-    padding: "50px 100px 50px 100px",
+    padding: "50px 50px 50px 50px",
     borderRadius: "10px",
     marginLeft: "auto",
     marginRight: "auto",
@@ -84,13 +88,14 @@ const useStyles = makeStyles({
 const Library = () => {
   const [responseJson, setResponseJson] = useState(null);
   const [htmlContent, setHtmlContent] = useState(null);
+  const [docxFile, setDocxFile] = useState(null);
 
   const classes = useStyles();
 
   const handleClose = (text) => {
     setOpenModel(false);
   };
-
+  console.log(responseJson, 'responseJson');
   
 
   const [file, setFile] = useState()
@@ -147,9 +152,25 @@ useEffect(() => {
 }, []); // The empty dependency array ensures this effect runs only once, similar to componentDidMount
 
 
+useEffect(() => {
+  async function fetchData() {
+    try {
+      // Fetch your DOCX file as a Blob
+      const docxResponse = await fetch(file);
+      const docxBlob = await docxResponse.blob();
 
+      setDocxFile([{ uri: URL.createObjectURL(docxBlob) }]);
+    } catch (error) {
+      console.error('Error fetching DOCX:', error);
+    }
+  }
 
+  fetchData();
+}, []);
 
+const docs = [
+  {uri: file}
+]
 
 
 
@@ -227,14 +248,22 @@ console.log(formData, 'file');
           <input type="file" onChange={handleChange} />
           <button type="submit" onClick={postFileToAPI} className={classes.button}>Upload</button> */}
         </form>
-        {/* {responseJson && (
-            <DocViewer
-              documents={[{ uri: responseJson.data.paper_link }]}
-            />
-          )} */}
+     
+            <div>
+      {responseJson  ? (
+        <iframe style={{width: '800px', height: '430px'}} src={`https://docs.google.com/gview?url=${responseJson.data.paper_link}&embedded=true`}></iframe>
+      ) : (
+        <p>Loading</p>
+      )}
+    </div>
+          {/* {responseJson ? (
   <a className={classes.button} style={{width: 'max-content', textDecoration: 'none'}} href={responseJson.data.paper_link} target="_blank" rel="noopener noreferrer">
     Open Document
   </a>
+) : (
+  <p>loading</p>
+)
+  } */}
         </div>
 
       </div>
