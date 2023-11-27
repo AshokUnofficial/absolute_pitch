@@ -49,6 +49,7 @@ const useStyles = makeStyles({
     borderRadius: "10px",
     marginLeft: "auto",
     marginRight: "auto",
+    height:"auto",
   },
   card: {
     boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.16)",
@@ -242,8 +243,7 @@ console.log(formData, 'file');
               <div className={`${styles.main_container}`}>
 <div className={classes.cardSection}>
          <form>
-          <h1>White paper </h1>
-          <p>See your file here</p>
+          <h1>White Paper </h1>
           {/* <p>Please upload only .docx format</p>
           <input type="file" onChange={handleChange} />
           <button type="submit" onClick={postFileToAPI} className={classes.button}>Upload</button> */}
