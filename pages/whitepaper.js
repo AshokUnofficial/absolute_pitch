@@ -46,6 +46,7 @@ const useStyles = makeStyles({
     backgroundColor: "#fff",
     height: "max-content",
     padding: "50px 50px 50px 50px",
+    width: "90%",
     borderRadius: "10px",
     marginLeft: "auto",
     marginRight: "auto",
@@ -242,8 +243,7 @@ console.log(formData, 'file');
               <div className={`${styles.main_container}`}>
 <div className={classes.cardSection}>
          <form>
-          <h1>White paper </h1>
-          <p>See your file here</p>
+          <h1>White Paper </h1>
           {/* <p>Please upload only .docx format</p>
           <input type="file" onChange={handleChange} />
           <button type="submit" onClick={postFileToAPI} className={classes.button}>Upload</button> */}
@@ -251,7 +251,7 @@ console.log(formData, 'file');
      
             <div>
       {responseJson  ? (
-        <iframe style={{width: '800px', height: '430px'}} src={`https://docs.google.com/gview?url=${responseJson.data.paper_link}&embedded=true`}></iframe>
+        <iframe style={{width: '-webkit-fill-available', height: '430px'}} src={`https://docs.google.com/gview?url=${responseJson.data.paper_link}&embedded=true`}></iframe>
       ) : (
         <p>Loading</p>
       )}
