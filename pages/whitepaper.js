@@ -31,13 +31,14 @@ const useStyles = makeStyles({
   },
   mainContainer: {
     marginTop: "-30px",
-    height: "90vh",
+    // height: "90vh",
     paddingTop: "100px",
     background: "#fff !important",
   
   },
   main_container: {
     height: "max-content",
+    padding: "10px",
   },
   cardSection: {
     display: "flex",
@@ -46,7 +47,7 @@ const useStyles = makeStyles({
     backgroundColor: "#fff",
     height: "max-content",
     padding: "50px 50px 50px 50px",
-    width: "90%",
+    width: "100%",
     borderRadius: "10px",
     marginLeft: "auto",
     marginRight: "auto",
