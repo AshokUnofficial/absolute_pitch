@@ -50,6 +50,7 @@ const useStyles = makeStyles({
     borderRadius: "10px",
     marginLeft: "auto",
     marginRight: "auto",
+    height:"auto",
   },
   card: {
     boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.16)",
