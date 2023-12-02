@@ -63,6 +63,10 @@ const style = {
   button_container_box: {
   width: 'max-content',
   },
+
+  menu_link:{
+    padding: '10px'
+  }
 };
 
 const AdminPanel = () => {
@@ -169,10 +173,17 @@ const AdminPanel = () => {
               MenuListProps={{
                 'aria-labelledby': 'basic-button',
               }}
+              
             >
+              <div
+                            style={{display: 'flex', flexDirection: 'column', paddingLeft: '10px', paddingRight: '10px'}}
+                            >
+
               <MenuItem className={styles.menu_link} LinkComponent={'span'} onClick={handleClose}>Profile</MenuItem>
               <MenuItem className={styles.menu_link} LinkComponent={'span'} onClick={handleClose}>My account</MenuItem>
               <MenuItem className={styles.menu_link} LinkComponent={'span'} onClick={handleLogout}>Logout</MenuItem>
+              </div>
+
             </Menu>
           </div>
           <div className={styles.user_log}>
