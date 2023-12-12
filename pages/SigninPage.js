@@ -271,13 +271,13 @@ const SignIn = () => {
           </div>
           <div className={classes.innerContainer}>
             <div>
-              <h1 style={{ color: "#fff" , margin: "0px"}}>LOGIN TO YOUR ACCOUNT</h1>
+              <h1 style={{ color: "#fff" , margin: "0px", textAlign: "center"}}>Welcome!  Sign in to access your account</h1>
             </div>
-            <div>
+            {/* <div>
               <h3 style={{ color: "#fff" , margin: "10px 0px" }} className={classes.typo_one}>
                 Hey, Enter your details to get login to you account
               </h3>
-            </div>
+            </div> */}
             <Formik
               initialValues={{
                 email: "",
@@ -362,11 +362,11 @@ const SignIn = () => {
                     {/* </div> */}
                     </Grid>
                     <Grid item md={12} xs={12} style={{ position: "relative" , display: "flex" , justifyContent: "center"}}>
-                    <div>
+                    {/* <div>
                     <h3 style={{ color: "#fff" }} className={classes.typo_one}>
                       Dont have an account?&nbsp;<a href='/SignupPage' className={classes.typo_one_link}>Sign Up</a>
                     </h3>
-                  </div>
+                  </div> */}
                   </Grid>
                     </Grid>
                   </div>

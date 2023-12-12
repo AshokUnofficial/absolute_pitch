@@ -288,7 +288,7 @@ const SignUp = () => {
           </div>
           <div className={classes.innerContainer}>
             <div>
-              <h1 style={{ color: "#fff" , margin: "0px" }}>SIGNUP TO YOUR ACCOUNT</h1>
+              <h1 style={{ color: "#fff" , margin: "0px" }}>Welcome!  Sign up to access your account</h1>
             </div>
             <div>
               <h3 style={{ color: "#fff" , margin: "10px 0px" }} className={classes.typo_one}>
@@ -448,13 +448,13 @@ const SignUp = () => {
                   {/* </div> */}
                   </Grid>
                   <Grid item md={12} xs={12} style={{ position: "relative" , display: "flex" , justifyContent: "center"}}>
-                  <div>
+                  {/* <div>
                   
                     <h3 style={{ color: "#fff", margin: "0px", paddingTop: '10px' }} className={classes.typo_one}>
                       Dont have an account?<a href='/SigninPage' className={classes.typo_one_link}>Sign In</a>
                     </h3>
                     
-                  </div>
+                  </div> */}
                     </Grid>
                     </Grid>
                   </div>
