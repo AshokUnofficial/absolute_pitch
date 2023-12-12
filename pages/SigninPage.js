@@ -55,7 +55,7 @@ const useStyles = makeStyles({
     //  border:'2px solid black'
   },
   innerContainer: {
-    height: '450px',
+    height: '400px',
     display: "block",
     border: "4px solid #fff",
     borderRadius: "20px",
@@ -320,7 +320,7 @@ const SignIn = () => {
               }) => (
                 <form id="my-form">
                   <div className={classes.songBox}>
-                    <Grid container spacing={1} style={{ height: "max-content", gap: "10px" }}>
+                    <Grid container spacing={1} style={{ height: "max-content", gap: "25px" , marginTop: "20px" }}>
                       <Grid item md={12} xs={12} style={{ position: "relative" , display: "flex" , justifyContent: "center" }}>
                         <TextField
                           required
