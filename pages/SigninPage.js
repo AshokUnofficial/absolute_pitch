@@ -72,7 +72,7 @@ const useStyles = makeStyles({
     border: " 2px solid Navy !important",
     borderRadius: "10px",
     marginTop: "12px",
-    padding: "10px 0px 10px 0px",
+    padding: "10px 0px 25px 0px",
     background: "#fff",
     "&:active": {
       border: " 2px solid #fff !important",
@@ -271,7 +271,8 @@ const SignIn = () => {
           </div>
           <div className={classes.innerContainer}>
             <div>
-              <h1 style={{ color: "#fff" , margin: "0px", textAlign: "center"}}>Welcome!  Sign in to access your account</h1>
+              <h1 style={{ color: "#fff" , margin: "0px", textAlign: "center"}}>Welcome!
+              <br/>  Sign in to access your account</h1>
             </div>
             {/* <div>
               <h3 style={{ color: "#fff" , margin: "10px 0px" }} className={classes.typo_one}>
