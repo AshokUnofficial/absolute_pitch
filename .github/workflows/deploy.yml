@@ -26,6 +26,6 @@ jobs:
 
       - name: Copy build to server
         run: |
-          scp -v -o StrictHostKeyChecking=no -r out/* ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }}:/var/www/html
+          scp -v -r out/* ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }}:/var/www/html
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
