@@ -1,4 +1,4 @@
-name: Deploy App
+name: Deploy Build to Server
 
 on:
   push:
@@ -13,17 +13,19 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Install dependencies and build
-        run: |
-          npm install --force
-          npm run build
-
-      - name: Deploy to server
-        uses: appleboy/ssh-action@master
+      - name: Install Node.js
+        uses: actions/setup-node@v3
         with:
-          host: ${{ secrets.SERVER_IP }}
-          username: ${{ secrets.SERVER_USERNAME }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          script: |
-            cd /var/www/absolute_pitch
-            sudo cp -r out/* /var/www/html
+          node-version: '12'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
+      - name: Copy build to server
+        run: |
+          scp -r out/* ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }}:/var/www/html
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
