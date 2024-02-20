@@ -18,14 +18,7 @@ jobs:
         uses: shimataro/ssh-key-action@v2
         with:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          known_hosts: |
-            # Paste the retrieved SSH host keys here
-            # 3.228.104.37:22 SSH-2.0-OpenSSH_8.9p1 Ubuntu-3ubuntu0.4
-            |1|6Abg0zBG2Em+hpxQ44UMouuQebk=|kZY/qKFQshBTmWRf2CF+2ZXsA/I= ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDEVIurL/I72iz1vfvP7JXrTrJSvakSoFtfKMcv/S6Uc4Ww53bMs+V9UejfVcjtLdDCh3NeRV5mlN83yKxpZEQGXpVLoh+3FPYqTJ2kVdEKYaQmP3Dkgf2f8CtbcVBKwFBBuMk0L+zNV4x/IjookvrHK4XDeO92jQHYCL9o8noh4CSZXwy9m1iWO+e3CLY0LcuWI8mbduSja8ftZIqPXzAQ+s5oIWtySS09nv65SFSeKRo9qvKBY1bQvbxHhUBEqsa9Ai5yu3vL4cnwD8U0/Pgqzlj8CBdcfqcfuQxGjpIJKFsLLSSMGVlck5fNzLWd2Ne1d7gbyWA3WW9RxZapTAnb7fc+xHwt9geTZgKR6S5VpyAdLSEo1MNlnTl17zBGUDkARK4yh0Ji0SGFtrTOyXZzevrp9R90KGdFWyAtDOzaOhOKe1gv9pu3ACdItUIKH1dqMlHTxA+jsG5iL2vRR9FAS5QVA0L5kBzCrMsfN2ikppoCvFYOTdeax/iasg+OC50=
-            # 3.228.104.37:22 SSH-2.0-OpenSSH_8.9p1 Ubuntu-3ubuntu0.4
-            |1|smjNJJmWPzR4pB+S/NlupO9M3z0=|BrW2rWMg9VbgC9ik1+2fi1pDnew= ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBLg3lkxCsTMuRYFyjzEmxxVRGbkJA8rYAEwCU3uoz+jNxp9nlmUEn9oAHAI3BzV+hK7CUNW5Pjcns2F+sa/ZnXM=
-            # 3.228.104.37:22 SSH-2.0-OpenSSH_8.9p1 Ubuntu-3ubuntu0.4
-            |1|v8E6anrNi2OlUUTWgcONX+o/pw4=|8OFaJfkReXIbJfbQtOrMbRwFwEw= ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBBlTbt4/szlGDQwIQs3o7+h0Dincwa/G1AWBWEcq0dv
+          known_hosts: '|1|avigti/hOCPezwY8jl/FrjnbAsU=|XRMhM3/ObcUGQunlyUifm2UPdss= ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBEmKSENjQEezOmxkZMy7opKgwFB9nkt5YRrYMjNuG5N87uRgg6CLrbo5wAdT/y6v0mKV0U2w0WZ2YB/++Tpockg='
 
       # Your other steps here...
       - name: Install Node.js
