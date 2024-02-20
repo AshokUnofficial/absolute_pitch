@@ -16,9 +16,8 @@ jobs:
       # Install SSH Key
       - name: Install SSH Key
         uses: shimataro/ssh-key-action@v2
-        with:
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          known_hosts: '|1|avigti/hOCPezwY8jl/FrjnbAsU=|XRMhM3/ObcUGQunlyUifm2UPdss= ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBEmKSENjQEezOmxkZMy7opKgwFB9nkt5YRrYMjNuG5N87uRgg6CLrbo5wAdT/y6v0mKV0U2w0WZ2YB/++Tpockg='
+          run:
+                ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
       # Your other steps here...
       - name: Install Node.js
