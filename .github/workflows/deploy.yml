@@ -17,6 +17,7 @@ jobs:
         uses: shimataro/ssh-key-action@v2
         with:
           key: ${{ secrets.SERVER_SSH_KEY }}
+          known_hosts: ''
 
       - name: Install Node.js
         uses: actions/setup-node@v3
