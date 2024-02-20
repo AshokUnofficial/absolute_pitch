@@ -19,10 +19,10 @@ jobs:
           node-version: '12'
 
       - name: Install dependencies
-        run: npm install
+        run: mkdir out/
 
       - name: Build
-        run: npm run build
+        run: touch out/test.html
 
       - name: Copy build to server
         run: |
