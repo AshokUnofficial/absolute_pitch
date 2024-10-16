@@ -12,7 +12,7 @@ import staff from "../public/assets/images/staff.jpg";
 import keys from "../public/assets/images/keys.jpg";
 import playBtn from "../public/assets/images/playerButton.jpg";
 import Duration from "../public/assets/images/Duration.png";
-import Mix from "../public/assets/images/Mix.png";
+import Mix from "../public/assets/images/Mix_1.png";
 import Mix1 from "../public/assets/images/Mix 1st.png";
 import Mix2 from "../public/assets/images/Mix 2nd.png";
 import Mix3 from "../public/assets/images/Mix 3rd.png";
@@ -88,7 +88,7 @@ const conditionalRowStyles = [
   // You can also pass a callback to style for additional customization
 ];
 const Completionist = () => <span>00:00</span>;
-function MusicWheel (props) {
+function MusicWheel(props) {
   const router = useRouter();
   const totalduraion = useRef(0);
   const classes = useStyles();
@@ -738,7 +738,7 @@ function MusicWheel (props) {
     setSortConfig({ key, direction });
   };
 
-  function changeHandler (c, ind) {
+  function changeHandler(c, ind) {
     // if (imageTypeIndex == "") {
     //   alert("Please seect any ImageType Key");
     // }
@@ -785,7 +785,7 @@ function MusicWheel (props) {
     //}
   }
 
-  function subscriptionPlan (type) {
+  function subscriptionPlan(type) {
     if (type == "Free") {
       setSubscriptionActivePlan(1);
       if (packageDataIndex == packageData.length - 1) {
@@ -833,7 +833,7 @@ function MusicWheel (props) {
     }
   }
 
-  async function btnHandler (type, e, ind) {
+  async function btnHandler(type, e, ind) {
     // if (imageTypeIndex == "") {
     //      alert("Please seect any ImageType Key");
     //    } else {
@@ -1061,7 +1061,7 @@ function MusicWheel (props) {
     }
   }
 
-  function toggleActiveStyle (ind) {
+  function toggleActiveStyle(ind) {
     if (ind == 1) {
       setImageTypeActive(ind);
     } else if (ind == 2) {
@@ -1083,7 +1083,7 @@ function MusicWheel (props) {
     props.setTotalSongs(totalSongs);
   }, [totalSongs]);
 
-  function handleClickSong (songsData, ind) {
+  function handleClickSong(songsData, ind) {
     // props.timeData(0);
     // highlightNord(songsData, ind)
     if (songsData.length > 0) {
@@ -1091,7 +1091,7 @@ function MusicWheel (props) {
     }
   }
 
-  function secondsToHms (Seconds) {
+  function secondsToHms(Seconds) {
     let d = Number(Seconds);
     var m = Math.floor((d % 3600) / 60);
     var s = Math.floor((d % 3600) % 60);
@@ -1130,7 +1130,7 @@ function MusicWheel (props) {
   //   tick();
   // }
 
-  function highlightNord (songsData, ind) {
+  function highlightNord(songsData, ind) {
     const current_song = songsData[ind];
     let selected_nord = current_song["note_or_cord"];
     const last_nord = selected_nord[selected_nord.length - 1];
@@ -1160,7 +1160,7 @@ function MusicWheel (props) {
     }
   }
 
-  function getNord () {
+  function getNord() {
     var str2 = nordData;
     let final_result = [];
     for (let i = 0; i < nordData.length; i++) {
@@ -1188,12 +1188,12 @@ function MusicWheel (props) {
     return final_result;
   }
 
-  function ResetCounter () {
+  function ResetCounter() {
     // secondsToHms(totalduraion);
     props.setAllImageCount(0);
   }
 
-  function fetchSongsData () {
+  function fetchSongsData() {
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
@@ -1294,11 +1294,6 @@ function MusicWheel (props) {
   return (
     <div className={classes.circleCard}>
       <div className={classes.resetBtn} style={{ padding: '10px', marginLeft: '0', color: '#0d6efd', justifyContent: 'space-between', width: '100%', boxSizing: 'border-box', alignItems: 'center' }}>
-        <a href="/Tips" style={{ textDecoration: 'none', color: 'inherit' }} >
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" className="bi bi-question-circle-fill" viewBox="0 0 16 16">
-            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.496 6.033h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286a.237.237 0 0 0 .241.247zm2.325 6.443c.61 0 1.029-.394 1.029-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94 0 .533.425.927 1.01.927z" />
-          </svg>
-        </a>
         <div className={classes.resetBtn}>
           <Grid
             container
@@ -1391,6 +1386,14 @@ function MusicWheel (props) {
             </Grid>
           </Grid>
         </div>
+        <a href="/Tips" target="_blank" style={{
+          textDecoration: 'none', color: 'inherit', marginRight: "16px",
+          marginLeft: "-73px"
+        }} >
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" className="bi bi-question-circle-fill" viewBox="0 0 16 16">
+            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.496 6.033h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286a.237.237 0 0 0 .241.247zm2.325 6.443c.61 0 1.029-.394 1.029-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94 0 .533.425.927 1.01.927z" />
+          </svg>
+        </a>
         <button
           id="admin-pannel"
           style={{
@@ -1418,94 +1421,10 @@ function MusicWheel (props) {
         >
           Admin
         </button>
-        {/* <Grid
-          container
-          spacing={1}
-          style={{ marginTop: "5px", border: "none" }}
-        >
-          <Grid item xs={3} md={3}>
-            <button
-              className={`${
-                subscriptionActivePlan == "1"
-                  ? classes.activeKey
-                  : classes.topButtons
-              }`}
-              // onClick={(e) => {
-              //   alert("Free Clicked");
-              // }}
-              onClick={(e) => {
-                subscriptionPlan("Free", e);
-              }}
-              style={{
-                // background: "#fff",
-                padding: "4px",
-                borderRadius: "5px",
-              }}
-            >
-              Free
-            </button>
-          </Grid>
-          <Grid item xs={4} md={3}>
-            <button
-              className={`${
-                subscriptionActivePlan == "2"
-                  ? classes.activeKey
-                  : classes.topButtons
-              }`}
-              onClick={(e) => {
-                setPackageDataIndex(2);
-                subscriptionPlan("Letter", e);
-              }}
-              style={{
-                // background: "#fff",
-                padding: "4px",
-                borderRadius: "5px",
-              }}
-            >
-              Basic
-            </button>
-          </Grid>
-          <Grid item xs={4} md={3}>
-            <button
-              className={`${
-                subscriptionActivePlan == "3"
-                  ? classes.activeKey
-                  : classes.topButtons
-              }`}
-              onClick={(e) => {
-                setPackageDataIndex(2);
-                subscriptionPlan("Premium", e);
-              }}
-              style={{
-                // background: "#fff",
-                padding: "4px",
-                borderRadius: "5px",
-              }}
-            >
-              Premium
-            </button>
-          </Grid>
-          <Grid item xs={4} md={3}>
-            <div
-              
-              style={{
-                background: "#fff",
-                padding: "1px",
-                borderRadius: "5px",
-                
-              }}
-            >
-              <Link href="/">
-                <a onClick={(e) => handleClick(e, "/Library")}>UserLog</a>
-              </Link>
-            </div>
-          </Grid>
-        </Grid> */}
       </div>
 
       <div style={{ position: 'relative' }}>
         <Grid container spacing={1} justifyContent='center'>
-          {/* <Grid item xs={2} md={2} className={classes.tempoBtnContainer}> */}
           <button
             className={`${classes.packageBtn} ${freeActive ? classes.disableBtn : ""
               }`}

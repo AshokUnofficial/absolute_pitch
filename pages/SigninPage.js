@@ -156,7 +156,7 @@ const useStyles = makeStyles({
     alignItems: "center",
     color: "white",
   },
- 
+
   typo_one_link: {
     color: "#6666d9 !important",
     transition: 'color 0.3s', // Add a smooth transition for color change
@@ -165,8 +165,8 @@ const useStyles = makeStyles({
     },
   },
 
- 
- 
+
+
   typo_design: {
     height: "50px",
     // fontFamily: "Nunito Sans",
@@ -247,19 +247,19 @@ const SignIn = () => {
   return (
     !isLoading ?
       <div className={classes.root}>
-         <div className={classes.sideimg}>
-             <Image
-              
-              src={jackson}
-              alt="Picture of the author"
-              width={200}
-              height={200}
-              style={{ mixBlendMode: 'plus-lighter' }}
-            />
-            <p className={classes.sideimgp}> Michael Jackson</p>
-            </div>
+        <div className={classes.sideimg}>
+          <Image
+
+            src={jackson}
+            alt="Picture of the author"
+            width={200}
+            height={200}
+            style={{ mixBlendMode: 'plus-lighter' }}
+          />
+          <p className={classes.sideimgp}> Michael Jackson</p>
+        </div>
         <div className={classes.FormContainer}>
-       
+
           <div className={classes.ImgContainer}>
             <Image
               src={Logo}
@@ -271,8 +271,8 @@ const SignIn = () => {
           </div>
           <div className={classes.innerContainer}>
             <div>
-              <h1 style={{ color: "#fff" , margin: "0px", textAlign: "center"}}>Welcome!
-              <br/>  Sign in to access your account</h1>
+              <h1 style={{ color: "#fff", margin: "0px", textAlign: "center" }}>Welcome!
+                <br />  Sign in to access your account</h1>
             </div>
             {/* <div>
               <h3 style={{ color: "#fff" , margin: "10px 0px" }} className={classes.typo_one}>
@@ -321,8 +321,8 @@ const SignIn = () => {
               }) => (
                 <form id="my-form">
                   <div className={classes.songBox}>
-                    <Grid container spacing={1} style={{ height: "max-content", gap: "25px" , marginTop: "20px" }}>
-                      <Grid item md={12} xs={12} style={{ position: "relative" , display: "flex" , justifyContent: "center" }}>
+                    <Grid container spacing={1} style={{ height: "max-content", gap: "25px", marginTop: "20px" }}>
+                      <Grid item md={12} xs={12} style={{ position: "relative", display: "flex", justifyContent: "center" }}>
                         <TextField
                           required
                           id="email"
@@ -336,7 +336,7 @@ const SignIn = () => {
                           size="small"
                         />
                       </Grid>
-                      <Grid item md={12} xs={12} style={{ position: "relative" , display: "flex" , justifyContent: "center" }}>
+                      <Grid item md={12} xs={12} style={{ position: "relative", display: "flex", justifyContent: "center" }}>
                         <TextField
                           required
                           id="password"
@@ -349,26 +349,26 @@ const SignIn = () => {
                           name="password"
                           size="small"
                         />
-                        
+
                       </Grid>
-                      <Grid item md={12} xs={12} style={{ position: "relative" , display: "flex" , justifyContent: "center" }}>
+                      <Grid item md={12} xs={12} style={{ position: "relative", display: "flex", justifyContent: "center" }}>
                         {/* <div> */}
-                      <Button
-                      className={classes.typo_design}
-                      style={{ width: "75%", marginTop: "12px" }}
-                      onClick={LoginAccountSubmit}
-                    >
-                      LOGIN
-                    </Button>
-                    {/* </div> */}
-                    </Grid>
-                    <Grid item md={12} xs={12} style={{ position: "relative" , display: "flex" , justifyContent: "center"}}>
-                    {/* <div>
+                        <Button
+                          className={classes.typo_design}
+                          style={{ width: "75%", marginTop: "12px" }}
+                          onClick={LoginAccountSubmit}
+                        >
+                          LOGIN
+                        </Button>
+                        {/* </div> */}
+                      </Grid>
+                      <Grid item md={12} xs={12} style={{ position: "relative", display: "flex", justifyContent: "center" }}>
+                        {/* <div>
                     <h3 style={{ color: "#fff" }} className={classes.typo_one}>
                       Dont have an account?&nbsp;<a href='/SignupPage' className={classes.typo_one_link}>Sign Up</a>
                     </h3>
                   </div> */}
-                  </Grid>
+                      </Grid>
                     </Grid>
                   </div>
                 </form>
@@ -377,16 +377,16 @@ const SignIn = () => {
           </div>
         </div>
         <div className={classes.sideimg}>
-             <Image
-              
-              src={john}
-              alt="Picture of the author"
-              width={200}
-              height={200}
-              style={{ mixBlendMode: 'plus-lighter' }}
-            />
-            <p className={classes.sideimgp}>Elton John</p>
-            </div>
+          <Image
+
+            src={john}
+            alt="Picture of the author"
+            width={200}
+            height={200}
+            style={{ mixBlendMode: 'plus-lighter' }}
+          />
+          <p className={classes.sideimgp}>Elton John</p>
+        </div>
       </div>
       :
       <Loader />

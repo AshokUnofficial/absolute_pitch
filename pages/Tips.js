@@ -16,8 +16,8 @@ const useStyles = makeStyles({
   root: {
     position: "relative",
     maxWidth: "100%",
-    
-  
+
+
   },
   mainContainer: {
     height: "100%",
@@ -25,7 +25,7 @@ const useStyles = makeStyles({
   },
   LibraryBoxs: {
     border: "1px solid gray",
-    gap : "10px",
+    gap: "10px",
     height: "auto",
     // height: "100vh",
     padding: "20px",
@@ -64,7 +64,7 @@ const useStyles = makeStyles({
     color: "#333",
     textAlign: "center",
 
-    
+
   },
   headingStyle2: {
     fontSize: "25px",
@@ -103,16 +103,16 @@ const useStyles = makeStyles({
   },
   cardTitle: {
     height: "auto",
-whiteSpace: "pre-wrap",
+    whiteSpace: "pre-wrap",
     margin: "4px",
-  fontSize: "14px",
-  fontWeight: "bold",
- 
+    fontSize: "14px",
+    fontWeight: "bold",
+
   },
 });
 
 const Library = () => {
-  
+
   const [data, setData] = useState(null);
 
   useEffect(() => {
@@ -128,7 +128,7 @@ const Library = () => {
       .catch((error) => {
         console.error('Error fetching data:', error);
       });
-  }, []); 
+  }, []);
 
   let path = "https://absolutepitch.website/note-sound/Am.wav";
   const [audio] = useState(typeof Audio !== "undefined" && new Audio(path));
@@ -141,120 +141,120 @@ const Library = () => {
   return (
     <>
 
-<div className={classes.mainContainer}>
-    <Grid container spacing={0} >
-      <Grid
-        item
-        // xs={12}
-        // md={4}
-        // sm={12}
-        // sx={12}
-        className={classes.LibraryBoxs}
-        style={{ background: "#fff" }}
-      >
-        <p className={classes.headingStyle}>Tips for Absolute Pitch</p>
+      <div className={classes.mainContainer}>
+        <Grid container spacing={0} >
+          <Grid
+            item
+            // xs={12}
+            // md={4}
+            // sm={12}
+            // sx={12}
+            className={classes.LibraryBoxs}
+            style={{ background: "#fff" }}
+          >
+            <p className={classes.headingStyle}>Tips for Absolute Pitch</p>
 
-        <div className={classes.cardContainer}>
-        {data ? (
-        // Render data in cards when it's available
-        data.map((item, index) => (
-          <div className={classes.card}>
-          <div className={classes.cardBody}>
-            <p className={classes.cardTitle}>
-            {item.title}
-            </p>
-            </div>
-            <iFrame
-                width="420px"
-                height="260px"
-                src={item.youtube_link}
-                title={item.title}
-                
-                allowFullScreen
-              ></iFrame>
-            {/* <p className={classes.cardDescription}>
+            <div className={classes.cardContainer}>
+              {data ? (
+                // Render data in cards when it's available
+                data.map((item, index) => (
+                  <div className={classes.card}>
+                    <div className={classes.cardBody}>
+                      <p className={classes.cardTitle}>
+                        {item.title}
+                      </p>
+                    </div>
+                    <iFrame
+                      width="420px"
+                      height="260px"
+                      src={item.youtube_link}
+                      title={item.title}
+
+                      allowFullScreen
+                    ></iFrame>
+                    {/* <p className={classes.cardDescription}>
             {item.description}
             </p> */}
-          </div>
-         
-        ))
-      ) : (
+                  </div>
 
-        <p>Loading...</p>
-      )}
-          </div>
-        <div className={classes.content}>
-          <Modal
-            open={openModel}
-            onClose={handleClose}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-          >
-            <Box>
-              <div className={classes.cp_modal_body}>
-                <div className="d-flex justify-content-center">
-                  <div>
-                    <span className={classes.spanBox}>
-                      <Iframe
-                        url="https://www.sdrive.app/embed/1ptBQD"
-                        width="125px"
-                        height="125px"
-                        id=""
-                        className=""
-                        display="block"
-                        position="relative"
-                        onClick={(e)=>setOpenModel(true)}
-                      />
-                    </span>
-                    <div
-                      className="row justify-content-center p-4"
-                      style={{ marginBottom: "10%" }}
-                    >
-                      <div
-                        className="col-md-5"
-                        style={{ marginRight: "25px", marginBottom: "10%" }}
-                      >
-                        <Button
-                          style={{
-                            width: "100%",
-                            height: "45px",
-                            fontFamily: "Nunito Sans",
-                            fontSize: "20px",
-                            fontWeight: "40",
-                            color: "#212427",
-                            backgroundColor: "#fff",
-                            borderRadius: "20px",
-                            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.25)",
-                            transition: "all 0.3s ease 0s",
-                            cursor: "pointer",
-                          }}
-                          onClick={() => {
-                            handleClose("create");
-                          }}
+                ))
+              ) : (
+
+                <p>Loading...</p>
+              )}
+            </div>
+            <div className={classes.content}>
+              <Modal
+                open={openModel}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+              >
+                <Box>
+                  <div className={classes.cp_modal_body}>
+                    <div className="d-flex justify-content-center">
+                      <div>
+                        <span className={classes.spanBox}>
+                          <Iframe
+                            url="https://www.sdrive.app/embed/1ptBQD"
+                            width="125px"
+                            height="125px"
+                            id=""
+                            className=""
+                            display="block"
+                            position="relative"
+                            onClick={(e) => setOpenModel(true)}
+                          />
+                        </span>
+                        <div
+                          className="row justify-content-center p-4"
+                          style={{ marginBottom: "10%" }}
                         >
-                          close
-                        </Button>
+                          <div
+                            className="col-md-5"
+                            style={{ marginRight: "25px", marginBottom: "10%" }}
+                          >
+                            <Button
+                              style={{
+                                width: "100%",
+                                height: "45px",
+                                fontFamily: "Nunito Sans",
+                                fontSize: "20px",
+                                fontWeight: "40",
+                                color: "#212427",
+                                backgroundColor: "#fff",
+                                borderRadius: "20px",
+                                boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.25)",
+                                transition: "all 0.3s ease 0s",
+                                cursor: "pointer",
+                              }}
+                              onClick={() => {
+                                handleClose("create");
+                              }}
+                            >
+                              close
+                            </Button>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
-              <div
-                style={{
-                  position: "absolute",
-                  bottom: "0",
-                  width: "100%",
-                  height: "30px",
-                  marginLeft: "0px",
-                  background: "#FAA61A",
-                }}
-              ></div>
-            </Box>
-          </Modal>
-        </div>
-      </Grid>
-    </Grid>
-    </div>
+                  <div
+                    style={{
+                      position: "absolute",
+                      bottom: "0",
+                      width: "100%",
+                      height: "30px",
+                      marginLeft: "0px",
+                      background: "#FAA61A",
+                    }}
+                  ></div>
+                </Box>
+              </Modal>
+            </div>
+          </Grid>
+        </Grid>
+      </div>
     </>
 
   );

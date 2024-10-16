@@ -19,9 +19,9 @@ const useStyles = makeStyles({
   root: {
     position: "relative",
     maxWidth: "100%",
-    
-  
-    
+
+
+
   },
   mainContainer: {
     height: "100%",
@@ -29,7 +29,7 @@ const useStyles = makeStyles({
   },
   LibraryBoxs: {
     border: "1px solid gray",
-    gap : "10px",
+    gap: "10px",
     height: "auto",
     // height: "100vh",
     padding: "20px",
@@ -68,7 +68,7 @@ const useStyles = makeStyles({
     color: "#333",
     textAlign: "center",
 
-    
+
   },
   headingStyle2: {
     fontSize: "25px",
@@ -128,11 +128,11 @@ const useStyles = makeStyles({
   },
   cardTitle: {
     height: "auto",
-whiteSpace: "wrap",
+    whiteSpace: "wrap",
     margin: "4px",
-  fontSize: "14px",
-  fontWeight: "bold",
- 
+    fontSize: "14px",
+    fontWeight: "bold",
+
   },
   cardImage: {
     display: "flex",
@@ -144,12 +144,12 @@ whiteSpace: "wrap",
     width: "100px",
   },
   cardBody1: {
-  width: "300px",
+    width: "300px",
   },
 });
 
 const Library = () => {
-  
+
   const [data, setData] = useState(null);
 
   useEffect(() => {
@@ -165,9 +165,9 @@ const Library = () => {
       .catch((error) => {
         console.error('Error fetching data:', error);
       });
-  }, []); 
-  
-  
+  }, []);
+
+
 
 
 
@@ -181,7 +181,7 @@ const Library = () => {
   };
   return (
     <>
-    {/* <div className="container">
+      {/* <div className="container">
     <h1>Video Cards</h1>
     <div className="row">
       {data.map((item) => (
@@ -205,53 +205,53 @@ const Library = () => {
     </div>
   </div> */}
 
-<div className={classes.mainContainer}>
-    <Grid container spacing={0} >
-      <Grid
-        item
-        xs={12}
-        md={4}
-        sm={12}
-        sx={12}
-        className={classes.LibraryBoxs}
-        style={{ background: "#fff" }}
-      >
-        <p className={classes.headingStyle}>Media</p>
-        {/* <p className={classes.headingStyle2}>YoutUbe/Rumble Links Thumbnail</p> */}
+      <div className={classes.mainContainer}>
+        <Grid container spacing={0} >
+          <Grid
+            item
+            xs={12}
+            md={4}
+            sm={12}
+            sx={12}
+            className={classes.LibraryBoxs}
+            style={{ background: "#fff" }}
+          >
+            <p className={classes.headingStyle}>Media</p>
+            {/* <p className={classes.headingStyle2}>YoutUbe/Rumble Links Thumbnail</p> */}
 
 
-        <div className={classes.cardContainer}>
-        {data ? (
-        // Render data in cards when it's available
-        data.data.video.map((item, index) => (
-          <div className={classes.card}>
-          <div className={classes.cardBody}>
-            <p className={classes.cardTitle}>
-            {item.title}
-            </p>
-            {/* <p className={classes.cardDescription}>
+            <div className={classes.cardContainer}>
+              {data ? (
+                // Render data in cards when it's available
+                data.data.video.map((item, index) => (
+                  <div className={classes.card}>
+                    <div className={classes.cardBody}>
+                      <p className={classes.cardTitle}>
+                        {item.title}
+                      </p>
+                      {/* <p className={classes.cardDescription}>
             {item.description}
             </p> */}
-            </div>
-            <iFrame
-                width="420px"
-                height="260px"
-                src={item.youtube_link}
-                title={item.title}
-                
-                allowFullScreen
-              ></iFrame>
-          </div>
-         
-        ))
-      ) : (
-        // Display a loading indicator or message when data is null
-        <p>Loading...</p>
-      )}
-    
+                    </div>
+                    <iFrame
+                      width="420px"
+                      height="260px"
+                      src={item.youtube_link}
+                      title={item.title}
 
-          
-          {/* {dataTemp.map((item) => (
+                      allowFullScreen
+                    ></iFrame>
+                  </div>
+
+                ))
+              ) : (
+                // Display a loading indicator or message when data is null
+                <p>Loading...</p>
+              )}
+
+
+
+              {/* {dataTemp.map((item) => (
           <div className={classes.card}>
           <div className={classes.cardBody}>
             <p className={classes.cardTitle}>
@@ -269,174 +269,174 @@ const Library = () => {
               ></iFrame>
           </div>
           ))} */}
-          </div>
-        <div className={classes.content}>
-          <Modal
-            open={openModel}
-            onClose={handleClose}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-          >
-            <Box>
-              <div className={classes.cp_modal_body}>
-                <div className="d-flex justify-content-center">
-                  <div>
-                    <span className={classes.spanBox}>
-                      <Iframe
-                        url="https://www.sdrive.app/embed/1ptBQD"
-                        width="125px"
-                        height="125px"
-                        id=""
-                        className=""
-                        display="block"
-                        position="relative"
-                        onClick={(e)=>setOpenModel(true)}
-                      />
-                    </span>
-                    <div
-                      className="row justify-content-center p-4"
-                      style={{ marginBottom: "10%" }}
-                    >
-                      <div
-                        className="col-md-5"
-                        style={{ marginRight: "25px", marginBottom: "10%" }}
-                      >
-                        <Button
-                          style={{
-                            width: "100%",
-                            height: "45px",
-                            fontFamily: "Nunito Sans",
-                            fontSize: "20px",
-                            fontWeight: "40",
-                            color: "#212427",
-                            backgroundColor: "#fff",
-                            borderRadius: "20px",
-                            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.25)",
-                            transition: "all 0.3s ease 0s",
-                            cursor: "pointer",
-                          }}
-                          onClick={() => {
-                            handleClose("create");
-                          }}
+            </div>
+            <div className={classes.content}>
+              <Modal
+                open={openModel}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+              >
+                <Box>
+                  <div className={classes.cp_modal_body}>
+                    <div className="d-flex justify-content-center">
+                      <div>
+                        <span className={classes.spanBox}>
+                          <Iframe
+                            url="https://www.sdrive.app/embed/1ptBQD"
+                            width="125px"
+                            height="125px"
+                            id=""
+                            className=""
+                            display="block"
+                            position="relative"
+                            onClick={(e) => setOpenModel(true)}
+                          />
+                        </span>
+                        <div
+                          className="row justify-content-center p-4"
+                          style={{ marginBottom: "10%" }}
                         >
-                          close
-                        </Button>
+                          <div
+                            className="col-md-5"
+                            style={{ marginRight: "25px", marginBottom: "10%" }}
+                          >
+                            <Button
+                              style={{
+                                width: "100%",
+                                height: "45px",
+                                fontFamily: "Nunito Sans",
+                                fontSize: "20px",
+                                fontWeight: "40",
+                                color: "#212427",
+                                backgroundColor: "#fff",
+                                borderRadius: "20px",
+                                boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.25)",
+                                transition: "all 0.3s ease 0s",
+                                cursor: "pointer",
+                              }}
+                              onClick={() => {
+                                handleClose("create");
+                              }}
+                            >
+                              close
+                            </Button>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
-              <div
-                style={{
-                  position: "absolute",
-                  bottom: "0",
-                  width: "100%",
-                  height: "30px",
-                  marginLeft: "0px",
-                  background: "#FAA61A",
-                }}
-              ></div>
-            </Box>
-          </Modal>
-                
-       
-        </div>
-        
+                  <div
+                    style={{
+                      position: "absolute",
+                      bottom: "0",
+                      width: "100%",
+                      height: "30px",
+                      marginLeft: "0px",
+                      background: "#FAA61A",
+                    }}
+                  ></div>
+                </Box>
+              </Modal>
 
-      </Grid>
-      <Grid
-        item
-        xs={12}
-        md={4}
-        sm={12}
-        sx={12}
-        className={classes.LibraryBoxs}
-        style={{ background: "#fff" }}
-      >
-        {/* <p className={classes.headingStyle} style={{ color: "#fff" }}>
+
+            </div>
+
+
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            md={4}
+            sm={12}
+            sx={12}
+            className={classes.LibraryBoxs}
+            style={{ background: "#fff" }}
+          >
+            {/* <p className={classes.headingStyle} style={{ color: "#fff" }}>
           Media
         </p> */}
-        <p className={classes.headingStyle}>Research</p>
-        {/* <p className={classes.headingStyle2}>MP3/MP4 I Produce Thumbnail</p> */}
-        <div className={classes.cardContainer}>
-          {console.log(data)}
-        {data ? (
-        // Render data in cards when it's available
-        data.data.libraries.map((item, index) => (
-          <div className={classes.card}>
-          <div className={classes.cardBody}>
-            <p className={classes.cardTitle}>
-            {item.song_title}
-            </p>
-            {/* <p className={classes.cardDescription}>
+            <p className={classes.headingStyle}>Research</p>
+            {/* <p className={classes.headingStyle2}>MP3/MP4 I Produce Thumbnail</p> */}
+            <div className={classes.cardContainer}>
+              {console.log(data)}
+              {data ? (
+                // Render data in cards when it's available
+                data.data.libraries.map((item, index) => (
+                  <div className={classes.card}>
+                    <div className={classes.cardBody}>
+                      <p className={classes.cardTitle}>
+                        {item.song_title}
+                      </p>
+                      {/* <p className={classes.cardDescription}>
             {item.description}
             </p> */}
-            </div>
-            <iFrame
-                width="420px"
-                height="260px"
-                src={item.song_name}
-                title={item.song_title}
-                
-                allowFullScreen
-              ></iFrame>
-          </div>
-         
-        ))
-      ) : (
-        // Display a loading indicator or message when data is null
-        <p>Loading...</p>
-      )}
-      </div>
-      
-      
-      </Grid>
-      <Grid
-        item
-        xs={12}
-        md={4}
-        sm={12}
-        sx={12}
-        className={classes.LibraryBoxs}
-        style={{ background: "#fff" }}
-      >
-        <p className={classes.headingStyle}>Articles</p>
-        {/* <p className={classes.headingStyle2}>MP3/MP4 I Produce Thumbnail</p> */}
-        <div className={classes.cardContainer1}>
-        {data ? (
-        // Render data in cards when it's available
-        data.data.articles.map((item, index) => (
-          <a target={"_blank"} style={{textDecoration: "none", color: "black"}} href={item.article_link}>
+                    </div>
+                    <iFrame
+                      width="420px"
+                      height="260px"
+                      src={item.song_name}
+                      title={item.song_title}
 
-          <div className={classes.card1}>
-          <div className={classes.cardBody1}>
-            <p className={classes.cardTitle}>
-            {item.title}
-            </p>
-            {/* <p className={classes.cardDescription}>
+                      allowFullScreen
+                    ></iFrame>
+                  </div>
+
+                ))
+              ) : (
+                // Display a loading indicator or message when data is null
+                <p>Loading...</p>
+              )}
+            </div>
+
+
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            md={4}
+            sm={12}
+            sx={12}
+            className={classes.LibraryBoxs}
+            style={{ background: "#fff" }}
+          >
+            <p className={classes.headingStyle}>Articles</p>
+            {/* <p className={classes.headingStyle2}>MP3/MP4 I Produce Thumbnail</p> */}
+            <div className={classes.cardContainer1}>
+              {data ? (
+                // Render data in cards when it's available
+                data.data.articles.map((item, index) => (
+                  <a target={"_blank"} style={{ textDecoration: "none", color: "black" }} href={item.article_link}>
+
+                    <div className={classes.card1}>
+                      <div className={classes.cardBody1}>
+                        <p className={classes.cardTitle}>
+                          {item.title}
+                        </p>
+                        {/* <p className={classes.cardDescription}>
             {item.description}
             </p> */}
-            </div>
-            <div className={classes.cardImage1}>
-            <Image
-            width={100}
-            height={100}
-              loader={myLoader}
-              src={item.image}
-              alt={item.title}
-             />
-             </div>
-          </div>
-          </a>
+                      </div>
+                      <div className={classes.cardImage1}>
+                        <Image
+                          width={100}
+                          height={100}
+                          loader={myLoader}
+                          src={item.image}
+                          alt={item.title}
+                        />
+                      </div>
+                    </div>
+                  </a>
 
-         
-        ))
-      ) : (
-        // Display a loading indicator or message when data is null
-        <p>Loading...</p>
-      )}
-      </div>
-        {/* <div className={classes.content}>
+
+                ))
+              ) : (
+                // Display a loading indicator or message when data is null
+                <p>Loading...</p>
+              )}
+            </div>
+            {/* <div className={classes.content}>
           <span className={classes.spanBox}>
             <Image
               loader={myLoader}
@@ -488,7 +488,7 @@ const Library = () => {
             />
           </span>
         </div> */}
-        {/* <div className={classes.content}>
+            {/* <div className={classes.content}>
           <span className={classes.spanBox}>
             <Image
               loader={myLoader}
@@ -696,9 +696,9 @@ const Library = () => {
             />
           </span>
         </div> */}
-      </Grid>
-    </Grid>
-    </div>
+          </Grid>
+        </Grid>
+      </div>
     </>
 
   );

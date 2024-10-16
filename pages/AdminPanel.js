@@ -61,10 +61,10 @@ const style = {
     width: 'max-content',
   },
   button_container_box: {
-  width: 'max-content',
+    width: 'max-content',
   },
 
-  menu_link:{
+  menu_link: {
     padding: '10px'
   }
 };
@@ -115,16 +115,16 @@ const AdminPanel = () => {
         </div>
         <div className={styles.rightSection}>
           <div className={styles.button_container_box}>
-          <Link href='/'>
-              <button className={styles.buttons_pill}   style={{
-    background: "#4aff4a",
-    border: "1px solid white",
-  }}>
+            <Link href='/'>
+              <button className={styles.buttons_pill} style={{
+                background: "#4aff4a",
+                border: "1px solid white",
+              }}>
                 <Image src={EditIcon} alt="button Icon" />
                 <span className={styles.button_text}>Go To Player</span>
               </button>
             </Link>
-          <Link href='/whitepaper'>
+            <Link href='/whitepaper'>
               <button className={styles.buttons_pill}>
                 <Image src={PlusIcon} alt="button Icon" />
                 <span className={styles.button_text}>White Paper</span>
@@ -173,15 +173,15 @@ const AdminPanel = () => {
               MenuListProps={{
                 'aria-labelledby': 'basic-button',
               }}
-              
+
             >
               <div
-                            style={{display: 'flex', flexDirection: 'column', paddingLeft: '10px', paddingRight: '10px'}}
-                            >
+                style={{ display: 'flex', flexDirection: 'column', paddingLeft: '10px', paddingRight: '10px' }}
+              >
 
-              <MenuItem className={styles.menu_link} LinkComponent={'span'} onClick={handleClose}>Profile</MenuItem>
-              <MenuItem className={styles.menu_link} LinkComponent={'span'} onClick={handleClose}>My account</MenuItem>
-              <MenuItem className={styles.menu_link} LinkComponent={'span'} onClick={handleLogout}>Logout</MenuItem>
+                <MenuItem className={styles.menu_link} LinkComponent={'span'} onClick={handleClose}>Profile</MenuItem>
+                <MenuItem className={styles.menu_link} LinkComponent={'span'} onClick={handleClose}>My account</MenuItem>
+                <MenuItem className={styles.menu_link} LinkComponent={'span'} onClick={handleLogout}>Logout</MenuItem>
               </div>
 
             </Menu>
@@ -194,7 +194,7 @@ const AdminPanel = () => {
           <div className={styles.graph_container}>
             <NewChart />
           </div>
-          <p style={{backgroundColor:"white", padding:"10px", borderRadius:"10px" , margin:"0px"}}>US Patent Pending #18-121-784  A Method For Uploading Musical Pitch In The Brain</p>
+          <p style={{ backgroundColor: "white", padding: "10px", borderRadius: "10px", margin: "0px" }}>US Patent Pending #18-121-784  A Method For Uploading Musical Pitch In The Brain</p>
 
         </div>
         <Modal

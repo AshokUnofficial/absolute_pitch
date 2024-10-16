@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export const PricingCardDemo = React.memo(function PricingCard () {
+export const PricingCardDemo = React.memo(function PricingCard() {
     const classes = useStyles();
     return (
         <div style={{ display: "flex", justifyContent: "center", height: "100%", gap: "20px", padding: "50px", alignItems: "center" }}>

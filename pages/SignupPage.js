@@ -38,7 +38,7 @@ const useStyles = makeStyles({
     justifyContent: "space-evenly",
     alignItems: "center",
     display: "flex",
-       // padding: "10px",
+    // padding: "10px",
     // border: "2px solid red",
   },
   FormContainer: {
@@ -57,7 +57,7 @@ const useStyles = makeStyles({
     //  border:'2px solid black'
   },
   innerContainer: {
-   
+
     height: '535px',
     display: "block",
     border: "4px solid #fff",
@@ -265,17 +265,17 @@ const SignUp = () => {
     !isLoading ?
       <div className={classes.root}>
         <div className={classes.sideimg}>
-             <Image
-              
-              src={jackson}
-              alt="Picture of the author"
-              width={200}
-              height={200}
-              style={{ mixBlendMode: 'plus-lighter' }}
-              loop={false}
-            />
-            <p className={classes.sideimgp}> Michael Jackson</p>
-            </div>
+          <Image
+
+            src={jackson}
+            alt="Picture of the author"
+            width={200}
+            height={200}
+            style={{ mixBlendMode: 'plus-lighter' }}
+            loop={false}
+          />
+          <p className={classes.sideimgp}> Michael Jackson</p>
+        </div>
         <div className={classes.FormContainer}>
           <div className={classes.ImgContainer}>
             <Image
@@ -288,10 +288,10 @@ const SignUp = () => {
           </div>
           <div className={classes.innerContainer}>
             <div>
-              <h1 style={{ color: "#fff" , margin: "0px" }}>Welcome!  Sign up to access your account</h1>
+              <h1 style={{ color: "#fff", margin: "0px" }}>Welcome!  Sign up to access your account</h1>
             </div>
             <div>
-              <h3 style={{ color: "#fff" , margin: "10px 0px" }} className={classes.typo_one}>
+              <h3 style={{ color: "#fff", margin: "10px 0px" }} className={classes.typo_one}>
                 Hey,Enter your details to get signup to you account
               </h3>
             </div>
@@ -300,8 +300,8 @@ const SignUp = () => {
                 email: "",
                 passsword: "",
                 cpasssword: "",
-                dob: "",      
-                gender: "", 
+                dob: "",
+                gender: "",
               }}
               validationSchema={Yup.object().shape({
                 email: Yup.string()
@@ -322,10 +322,10 @@ const SignUp = () => {
                     /[a-zA-Z]/,
                     "Password can only contain Latin letters."
                   ),
-                  dob: Yup.string()
-      .required("Date of Birth is required."),
-    gender: Yup.string()
-      .required("Gender is required."),
+                dob: Yup.string()
+                  .required("Date of Birth is required."),
+                gender: Yup.string()
+                  .required("Gender is required."),
               })}
               onSubmit={async (values, { setSubmitting }) => {
                 const result = RagisterAccountSubmit(values, null, 2);
@@ -344,142 +344,142 @@ const SignUp = () => {
                 <form id="my-form" onSubmit={handleSubmit}>
                   <div className={classes.songBox}>
                     <Grid container spacing={1} style={{ height: "max-content", gap: "10px" }}>
-               
-                    <Grid item md={12} xs={12} style={{ position: "relative" , display: "flex" , justifyContent: "center"  }}>
-                      <TextField
-                        required
-                        id="name"
-                        type="text"
-                        className={classes.inputField}
-                        error={Boolean(
-                          touched.name && errors.name
-                        )}
-                        helperText={
-                          touched.name && errors.name
-                        }
-                        label="Name"
-                        value={name}
-                        variant="filled"
-                        onChange={(e) => setName(e.target.value)}
-                        name="name"
-                        size="small"
-                      />
-                    </Grid>
-                    <Grid item md={12} xs={12} style={{ position: "relative" , display: "flex" , justifyContent: "center", }}>
-                      <TextField
-                        required
-                        id="email"
-                        type="email"
-                        className={classes.inputField}
-                        label="Email"
-                        value={email}
-                        variant="filled"
-                        onChange={(e) => setEmail(e.target.value)}
-                        name="email"
-                        size="small"
-                      />
-                    </Grid>
-                    <Grid item md={12} xs={12} style={{ position: "relative"  , display: "flex" , justifyContent: "center" }}>
-                      <TextField
-                        required
-                        id="passsword"
-                        type="password"
-                        className={classes.inputField}
-                        label="Password"
-                        value={pass}
-                        variant="filled"
-                        onChange={(e) => setPass(e.target.value)}
-                        name="passsword"
-                        size="small"
-                      />
 
-                    </Grid>
-                    <Grid item md={12} xs={12} style={{ position: "relative", display: "flex", justifyContent: "center" }}>
-  <TextField
-    required
-    id="dob"
-    type="date"   // Use type="date" for Date of Birth
-    className={classes.inputField}
-    label=""
-    value={dob}
-    variant="filled"
-    onChange={(e) => setDob(e.target.value)}
-    name="dob"
-    size="small"
-  />
-</Grid>
+                      <Grid item md={12} xs={12} style={{ position: "relative", display: "flex", justifyContent: "center" }}>
+                        <TextField
+                          required
+                          id="name"
+                          type="text"
+                          className={classes.inputField}
+                          error={Boolean(
+                            touched.name && errors.name
+                          )}
+                          helperText={
+                            touched.name && errors.name
+                          }
+                          label="Name"
+                          value={name}
+                          variant="filled"
+                          onChange={(e) => setName(e.target.value)}
+                          name="name"
+                          size="small"
+                        />
+                      </Grid>
+                      <Grid item md={12} xs={12} style={{ position: "relative", display: "flex", justifyContent: "center", }}>
+                        <TextField
+                          required
+                          id="email"
+                          type="email"
+                          className={classes.inputField}
+                          label="Email"
+                          value={email}
+                          variant="filled"
+                          onChange={(e) => setEmail(e.target.value)}
+                          name="email"
+                          size="small"
+                        />
+                      </Grid>
+                      <Grid item md={12} xs={12} style={{ position: "relative", display: "flex", justifyContent: "center" }}>
+                        <TextField
+                          required
+                          id="passsword"
+                          type="password"
+                          className={classes.inputField}
+                          label="Password"
+                          value={pass}
+                          variant="filled"
+                          onChange={(e) => setPass(e.target.value)}
+                          name="passsword"
+                          size="small"
+                        />
 
-<Grid item md={12} xs={12} style={{ position: "relative", display: "flex", justifyContent: "space-evenly" , color: 'white' }}>
-  <label>Gender:</label>
-  <div>
-    <input
-      type="radio"
-      id="male"
-      name="gender"
-      value="male"
-      checked={gender === "male"}
-      onChange={() => setGender("male")}
-    />
-    <label htmlFor="male">Male</label>
-  </div>
-  <div>
-    <input
-      type="radio"
-      id="female"
-      name="gender"
-      value="female"
-      checked={gender === "female"}
-      onChange={() => setGender("female")}
-    />
-    <label htmlFor="female">Female</label>
-  </div>
-</Grid>
-                    <Grid item md={12} xs={12} style={{ position: "relative" , display: "flex" , justifyContent: "center" }}>
-                  {/* <div> */}
-                    <Button
-                      className={classes.typo_design}
-                      style={{ width: "75%", marginTop: "12px" }}
-                      onClick={RagisterAccountSubmit}
-                      disabled={name === "" || pass === '' || email === '' || !validateEmail(email)}
-                      title={(name === "" || pass === '' || email === '' || !validateEmail(email)) ? "Please fill all the required field." : "Register"}
-                    >
-                      SIGN UP
-                    </Button>
-                  {/* </div> */}
-                  </Grid>
-                  <Grid item md={12} xs={12} style={{ position: "relative" , display: "flex" , justifyContent: "center"}}>
-                  {/* <div>
+                      </Grid>
+                      <Grid item md={12} xs={12} style={{ position: "relative", display: "flex", justifyContent: "center" }}>
+                        <TextField
+                          required
+                          id="dob"
+                          type="date"   // Use type="date" for Date of Birth
+                          className={classes.inputField}
+                          label=""
+                          value={dob}
+                          variant="filled"
+                          onChange={(e) => setDob(e.target.value)}
+                          name="dob"
+                          size="small"
+                        />
+                      </Grid>
+
+                      <Grid item md={12} xs={12} style={{ position: "relative", display: "flex", justifyContent: "space-evenly", color: 'white' }}>
+                        <label>Gender:</label>
+                        <div>
+                          <input
+                            type="radio"
+                            id="male"
+                            name="gender"
+                            value="male"
+                            checked={gender === "male"}
+                            onChange={() => setGender("male")}
+                          />
+                          <label htmlFor="male">Male</label>
+                        </div>
+                        <div>
+                          <input
+                            type="radio"
+                            id="female"
+                            name="gender"
+                            value="female"
+                            checked={gender === "female"}
+                            onChange={() => setGender("female")}
+                          />
+                          <label htmlFor="female">Female</label>
+                        </div>
+                      </Grid>
+                      <Grid item md={12} xs={12} style={{ position: "relative", display: "flex", justifyContent: "center" }}>
+                        {/* <div> */}
+                        <Button
+                          className={classes.typo_design}
+                          style={{ width: "75%", marginTop: "12px" }}
+                          onClick={RagisterAccountSubmit}
+                          disabled={name === "" || pass === '' || email === '' || !validateEmail(email)}
+                          title={(name === "" || pass === '' || email === '' || !validateEmail(email)) ? "Please fill all the required field." : "Register"}
+                        >
+                          SIGN UP
+                        </Button>
+                        {/* </div> */}
+                      </Grid>
+                      <Grid item md={12} xs={12} style={{ position: "relative", display: "flex", justifyContent: "center" }}>
+                        {/* <div>
                   
                     <h3 style={{ color: "#fff", margin: "0px", paddingTop: '10px' }} className={classes.typo_one}>
                       Dont have an account?<a href='/SigninPage' className={classes.typo_one_link}>Sign In</a>
                     </h3>
                     
                   </div> */}
-                    </Grid>
+                      </Grid>
                     </Grid>
                   </div>
 
-       
-                 
-                  
-                  
-                  
+
+
+
+
+
                 </form>
               )}
             </Formik>
           </div>
         </div>
         <div className={classes.sideimg}>
-             <Image
-              
-              src={john}
-              alt="Picture of the author"
-              width={200}
-              height={200}
-              style={{ mixBlendMode: 'plus-lighter' }}
-            />
-            <p className={classes.sideimgp}>Elton John</p>
-            </div>
+          <Image
+
+            src={john}
+            alt="Picture of the author"
+            width={200}
+            height={200}
+            style={{ mixBlendMode: 'plus-lighter' }}
+          />
+          <p className={classes.sideimgp}>Elton John</p>
+        </div>
       </div>
       :
       <Loader />
